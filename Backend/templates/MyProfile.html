@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% extends 'Dashboard.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header"><small>My</small><strong> Profile</strong></div>
+                            <div class="card-body card-block">
+                                <form method="post" action="{% url 'update_user' dataid=user.id %}" enctype="multipart/form-data">
+                                    {% csrf_token %}
+
+                                        <div class="form-group"><label class=" form-control-label">Username</label>
+                                            <input type="text" id="username" name="username" value="{{user.username}}" class="form-control" readonly>
+                                        </div>
+                                        <div class="form-group"><label class="form-control-label">Firstname</label>
+                                            <input name="fname" id="fname" value="{{user.first_name}}" class="form-control" required></input>
+                                        </div>
+                                        <div class="form-group"><label class="form-control-label">Lastname</label>
+                                            <input name="lname" id="lname" value="{{user.last_name}}" class="form-control" required></input>
+                                        </div>
+                                        <div class="form-group"><label class=" form-control-label">Contact Number</label>
+                                            <input type="tel" id="contact" name="contact" value="{{user.phone_number}}" class="form-control" required>
+                                        </div>
+                                        <div class="form-group"><label  class=" form-control-label">Email</label>
+                                            <input type="text" id="email" name="email" value="{{user.email}}" class="form-control" required>
+                                        </div>
+                                        <div class="form-group"><label class=" form-control-label">Image</label><br>
+                                            <img src="{{user.profile_image.url}}" alt="Image" width="100px" height="100px" >
+                                            <input type="file" id="img" name="img" >
+                                        </div>
+
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+
+</div>
+{% block breadcrumbs_js %}
+    <!-- Call the function to update breadcrumbs with the specific menu and submenu names -->
+    <script>
+        currentMenu = 'Dashboard';
+        currentSubmenu = 'My Profile';
+        updateBreadcrumbs();
+    </script>
+{% endblock %}
+</body>
+</html>
+{% endblock %}
