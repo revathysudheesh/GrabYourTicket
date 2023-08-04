@@ -73,13 +73,13 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa  fa-users"></i>Manage Admins</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-arrow-circle-right"></i><a href="tables-data.html">Add Admins</a></li>
-                            <li><i class="fa fa-arrow-circle-right"></i><a href="tables-data.html">List Admins</a></li>
+                            <li><i class="fa fa-arrow-circle-right"></i><a href="{% url 'add_admin' %}">Add Admins</a></li>
+                            <li><i class="fa fa-arrow-circle-right"></i><a href="{% url 'list_admin' %}">List Admins</a></li>
                         </ul>
                     </li>
                     {% endif %}
                     <li>
-                        <a href="widgets.html"> <i class="menu-icon fa  fa-video-camera"></i>Manage Theatre </a>
+                        <a href="{% url 'theatre_details' %}"> <i class="menu-icon fa  fa-video-camera"></i>Manage Theatre </a>
                     </li>
 
                     <li class="menu-item-has-children dropdown">
@@ -344,6 +344,26 @@
             });
         })(jQuery);
     </script>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    {% if messages %}
+      {% for i in messages %}
+           {% if i.tags == 'warning' %}
+               <script>
+                    swal('{{i}}','','warning');
+               </script>
+           {% elif i.tags == 'error' %}
+               <script>
+                    swal('{{i}}','','error');
+               </script>
+           {% else %}
+               <script>
+                    swal('{{i}}','','success');
+               </script>
+           {% endif %}
+        {% endfor %}
+    {% endif %}
         </div>
 </body>
 

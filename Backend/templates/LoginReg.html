@@ -152,6 +152,8 @@ button:hover {
 
 function validateSignUpForm() {
   var username = document.getElementById("signup-username").value;
+  var firstname = document.getElementById("signup-firstname").value;
+  var lastname = document.getElementById("signup-lastname").value;
   var email = document.getElementById("signup-email").value;
   var password = document.getElementById("signup-password").value;
   var repeatPassword = document.getElementById("signup-repeat-password").value;
@@ -160,6 +162,14 @@ function validateSignUpForm() {
 
   if (username.trim() === "") {
     alert("Please enter a username.");
+    return false;
+  }
+  if (firstname.trim() === "") {
+    alert("Please enter firstname.");
+    return false;
+  }
+  if (lastname.trim() === "") {
+    alert("Please enter lastname.");
     return false;
   }
 
@@ -215,5 +225,24 @@ function emailIsValid(email) {
 function mobileNumberIsValid(mobileNumber) {
   return /^[0-9]{10}$/.test(mobileNumber);
 }</script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if messages %}
+      {% for i in messages %}
+           {% if i.tags == 'warning' %}
+               <script>
+                    swal('{{i}}','','warning');
+               </script>
+           {% elif i.tags == 'error' %}
+               <script>
+                    swal('{{i}}','','error');
+               </script>
+           {% else %}
+               <script>
+                    swal('{{i}}','','success');
+               </script>
+           {% endif %}
+        {% endfor %}
+    {% endif %}
 </body>
 </html>

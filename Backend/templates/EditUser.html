@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% extends 'Dashboard.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header"><small>My</small><strong> Profile</strong></div>
+                            <div class="card-body card-block">
+                                <form method="post" action="{% url 'update_user' dataid=userr.id %}" >
+                                    {% csrf_token %}
+
+                                        <div class="form-group"><label class=" form-control-label">Username</label>
+                                            <input type="text" id="username" name="username" value="{{userr.username}}" class="form-control" readonly>
+                                        </div>
+                                        <div class="form-group"><label class="form-control-label">Firstname</label>
+                                            <input name="fname" id="fname" value="{{userr.first_name}}" class="form-control" required></input>
+                                        </div>
+                                        <div class="form-group"><label class="form-control-label">Lastname</label>
+                                            <input name="lname" id="lname" value="{{userr.last_name}}" class="form-control" required></input>
+                                        </div>
+                                        <div class="form-group"><label class=" form-control-label">Contact Number</label>
+                                            <input type="tel" id="contact" name="contact" value="{{userr.phone_number}}" class="form-control" required>
+                                        </div>
+                                        <div class="form-group"><label  class=" form-control-label">Email</label>
+                                            <input type="text" id="email" name="email" value="{{userr.email}}" class="form-control" required>
+                                        </div>
+                                        <div class="form-group"><label class=" form-control-label">Image</label><br>
+                                            <img src="{{userr.profile_image.url}}" alt="Image" width="100px" height="100px" >
+                                            <input type="file" id="img" name="img" >
+                                        </div>
+
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+
+</div>
+{% block breadcrumbs_js %}
+    <!-- Call the function to update breadcrumbs with the specific menu and submenu names -->
+    <script>
+        currentMenu = 'Manage Admin';
+        currentSubmenu = 'Edit Admins';
+        updateBreadcrumbs();
+    </script>
+{% endblock %}
+{% if messages %}
+      {% for i in messages %}
+           {% if i.tags == 'warning' %}
+               <script>
+                    swal('{{i}}','','warning');
+               </script>
+           {% elif i.tags == 'error' %}
+               <script>
+                    swal('{{i}}','','error');
+               </script>
+           {% else %}
+               <script>
+                    swal('{{i}}','','success');
+               </script>
+           {% endif %}
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
+{% endblock %}
