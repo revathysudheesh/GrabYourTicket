@@ -15,5 +15,54 @@ class TheatreDB(models.Model):
     TheatreCapacity = models.IntegerField(null=True, blank=True)
     TheatreScreen = models.IntegerField(null=True, blank=True)
     TheatreStatus = models.CharField(max_length=200, null=True, blank=True)
-    TheatreImage=models.ImageField(upload_to='TheatreImages', null=True, blank=True)
+    TheatreImage = models.ImageField(upload_to='TheatreImages', null=True, blank=True)
+
+class ScreenDB(models.Model):
+    ScreenName = models.CharField(max_length=200, null=True, blank=True)
+    ScreenCapacity = models.IntegerField(null=True, blank=True)
+    SeatAvail= models.IntegerField(null=True, blank=True)
+class MovieDB(models.Model):
+    MovieName = models.CharField(max_length=200, null=True, blank=True)
+    MovieLanguage = models.CharField(max_length=200, null=True, blank=True)
+    MovieGenre = models.CharField(max_length=200, null=True, blank=True)
+    MoviePoster = models.ImageField(upload_to='MoviePoster', null=True, blank=True)
+    MovieType = models.CharField(max_length=2, null=True, blank=True)
+    MovieSynopsis = models.CharField(max_length=500, null=True, blank=True)
+    MovieDuration= models.CharField(max_length=10, null=True, blank=True)
+    MovieRelease = models.DateField(max_length=10, null=True, blank=True)
+    MovieActor1Name=models.CharField(max_length=30, null=True, blank=True)
+    MovieActor1Image = models.ImageField(upload_to='Actors', null=True, blank=True)
+    MovieActor2Name = models.CharField(max_length=30, null=True, blank=True)
+    MovieActor2Image = models.ImageField(upload_to='Actors', null=True, blank=True)
+    MovieActor3Name = models.CharField(max_length=30, null=True, blank=True)
+    MovieActor3Image = models.ImageField(upload_to='Actors', null=True, blank=True)
+    MovieActor4Name = models.CharField(max_length=30, null=True, blank=True)
+    MovieActor4Image = models.ImageField(upload_to='Actors', null=True, blank=True)
+    MovieActor5Name = models.CharField(max_length=30, null=True, blank=True)
+    MovieActor5Image = models.ImageField(upload_to='Actors', null=True, blank=True)
+    MovieCrew1Name = models.CharField(max_length=30, null=True, blank=True)
+    MovieCrew1Role = models.CharField(max_length=30, null=True, blank=True)
+    MovieCrew1Image = models.ImageField(upload_to='Crew', null=True, blank=True)
+    MovieCrew2Name = models.CharField(max_length=30, null=True, blank=True)
+    MovieCrew2Role = models.CharField(max_length=30, null=True, blank=True)
+    MovieCrew2Image = models.ImageField(upload_to='Crew', null=True, blank=True)
+    MovieCrew3Name = models.CharField(max_length=30, null=True, blank=True)
+    MovieCrew3Role = models.CharField(max_length=30, null=True, blank=True)
+    MovieCrew3Image = models.ImageField(upload_to='Crew', null=True, blank=True)
+    MovieCrew4Name = models.CharField(max_length=30, null=True, blank=True)
+    MovieCrew4Role = models.CharField(max_length=30, null=True, blank=True)
+    MovieCrew4Image = models.ImageField(upload_to='Crew', null=True, blank=True)
+    MovieCrew5Name = models.CharField(max_length=30, null=True, blank=True)
+    MovieCrew5Role = models.CharField(max_length=30, null=True, blank=True)
+    MovieCrew5Image = models.ImageField(upload_to='Crew', null=True, blank=True)
+
+
+
+
+
+
+
+
+
+
 

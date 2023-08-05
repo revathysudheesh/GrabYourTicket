@@ -19,5 +19,12 @@ urlpatterns=[path('admin_home/', views.admin_home, name='admin_home'),
              path('theatre_details/', views.theatre_details, name='theatre_details'),
              path('edit_theatre/<int:dataid>/', views.edit_theatre, name='edit_theatre'),
              path('update_theatre/<int:dataid>/', views.update_theatre, name='update_theatre'),
+             path('add_screen/', views.add_screen, name='add_screen'),
+             path('list_screen/', views.list_screen, name='list_screen'),
+             path('submit_screen/', views.submit_screen, name='submit_screen'),
+             path('edit_screen/<int:dataid>/', views.edit_screen, name='edit_screen'),
+             path('update_screen/<int:dataid>/', views.update_screen, name='update_screen'),
+             path('add_movie/', views.add_movie, name='add_movie'),
+             path('submit_movie/', views.submit_movie, name='submit_movie'),
 
              ]
