@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+{% extends 'Dashboard.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bs-stepper@1.7.0/dist/css/bs-stepper.min.css">
+
+</head>
+<body>
+<div class="col-lg-12">
+  <div class="card">
+    <div class="card-header"><small>Edit</small><strong> Movie</strong></div>
+    <div class="card-body card-block">
+    <form id="myForm" method="post" action="{% url 'update_movie' dataid=movie.id %}" enctype="multipart/form-data">
+      {%csrf_token%}
+        <!-- Step Container -->
+        <div id="stepper" class="bs-stepper">
+          <div class="bs-stepper-header" role="tablist">
+            <!-- Step 1 -->
+            <div class="step" data-target="#step-1">
+              <button type="button" class="step-trigger" role="tab" aria-controls="step-1" id="step-1-trigger">
+                <span class="bs-stepper-circle">1</span>
+                <span class="bs-stepper-label">Add Movie Details</span>
+              </button>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step" data-target="#step-2">
+              <button type="button" class="step-trigger" role="tab" aria-controls="step-2" id="step-2-trigger">
+                <span class="bs-stepper-circle">2</span>
+                <span class="bs-stepper-label">Add Actor Details</span>
+              </button>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step" data-target="#step-3">
+              <button type="button" class="step-trigger" role="tab" aria-controls="step-3" id="step-3-trigger">
+                <span class="bs-stepper-circle">3</span>
+                <span class="bs-stepper-label">Add Crew Details</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="bs-stepper-content">
+            <!-- Step 1 Content -->
+            <div id="step-1" class="content" role="tabpanel" aria-labelledby="step-1-trigger">
+              <div class="form-group">
+                <label >Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{movie.MovieName}}" required>
+              </div>
+              <div class="form-group">
+                <label >Synopsis</label>
+                <textarea name="synopsis" id="synopsis" rows="4"  class="form-control" required>{{movie.MovieSynopsis}}</textarea>
+              </div>
+              <div class="form-group">
+                <label>Language</label>
+                <select name="lang" id="lang" class="form-control" required>
+                  <option value="{{movie.MovieLanguage}}">{{movie.MovieLanguage}}</option>
+                  <option value="English">English</option>
+                  <option value="Malayalam">Malayalam</option>
+                  <option value="Tamil">Tamil</option>
+                  <option value="Hindi">Hindi</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label >Genre</label>
+                <select name="genre" id="genre" class="form-control" required>
+                  <option value="{{movie.MovieGenre}}">{{movie.MovieGenre}}</option>
+                  <option value="Comedy">Comedy</option>
+                  <option value="Thriller">Thriller</option>
+                  <option value="Horror">Horror</option>
+                </select>
+              </div>
+              <label >Movie Poster</label><br>
+              <img src="{{movie.MoviePoster.url}}" width="100px" height="100px"><br>
+              <div>
+                 <input type="file" name="poster" id="poster" class="form-control"  >
+              </div>
+              <div class="form-group">
+                <label >Type</label>
+                <select name="type" id="type" class="form-control" required>
+                  <option value="{{movie.MovieType}}">{{movie.MovieType}}</option>
+                  <option value="2D">2D</option>
+                  <option value="3D">3D</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label >Release Date</label>
+                <input type="date" id="date" name="date"  value="{{movie.MovieRelease|date:'Y-m-d'}}" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label >Duration</label>
+                <input type="text" id="duration" name="duration"  value="{{movie.MovieDuration}}" class="form-control" required>
+              </div>
+              <button type="button" class="btn btn-primary" onclick="stepper.next()">Next</button>
+            </div>
+
+            <!-- Step 2 Content -->
+            <div id="step-2" class="content" role="tabpanel" aria-labelledby="step-2-trigger">
+              <div class="row">
+                <div class="col-4">
+                  <div class="form-group">
+                   <label>Actor-1 Name</label>
+                    <input type="text" class="form-control" id="actor1name" name="actor1name" value="{{movie.MovieActor1Name}}" required>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <label >Actor-1 Image</label>
+                    <input type="file" name="actor1image" id="actor1image" class="form-control"  >
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+
+                    <img src="{{movie.MovieActor1Image.url}}" width="100px" height="100px">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-4">
+                    <div class="form-group">
+                     <label>Actor-2 Name</label>
+                      <input type="text" class="form-control" id="actor2name" name="actor2name" value="{{movie.MovieActor2Name}}"required>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label >Actor-2 Image</label>
+                      <input type="file" name="actor2image" id="actor2image" class="form-control"  >
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+
+                      <img src="{{movie.MovieActor2Image.url}}" width="100px" height="100px">
+                    </div>
+                  </div>
+                </div>
+              <div class="row">
+                  <div class="col-4">
+                    <div class="form-group">
+                     <label>Actor-3 Name</label>
+                      <input type="text" class="form-control" id="actor3name" name="actor3name" value="{{movie.MovieActor3Name}}" required>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label >Actor-3 Image</label>
+                      <input type="file" name="actor3image" id="actor3image" class="form-control"  >
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+
+                      <img src="{{movie.MovieActor3Image.url}}" width="100px" height="100px">
+                    </div>
+                  </div>
+               </div>
+              <div class="row">
+                <div class="col-4">
+                  <div class="form-group">
+                   <label>Actor-4 Name</label>
+                    <input type="text" class="form-control" id="actor4name" name="actor4name" value="{{movie.MovieActor4Name}}" required>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <label >Actor-4 Image</label>
+                    <input type="file" name="actor4image" id="actor4image" class="form-control"  >
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+
+                    <img src="{{movie.MovieActor4Image.url}}" width="100px" height="100px">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-4">
+                    <div class="form-group">
+                     <label>Actor-5 Name</label>
+                      <input type="text" class="form-control" id="actor5name" name="actor5name" value="{{movie.MovieActor5Name}}" required>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label >Actor-5 Image</label>
+                      <input type="file" name="actor5image" id="actor5image" class="form-control"  >
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+
+                      <img src="{{movie.MovieActor5Image.url}}" width="100px" height="100px">
+                    </div>
+                  </div>
+              </div>
+              <button type="button" class="btn btn-primary" onclick="stepper.previous()">Previous</button>
+              <button type="button" class="btn btn-primary" onclick="stepper.next()">Next</button>
+            </div>
+              <!-- Step 3 Content -->
+            <div id="step-3" class="content" role="tabpanel" aria-labelledby="step-3-trigger">
+              <div class="row">
+                <div class="col-3">
+                  <div class="form-group">
+                   <label>Crew-1 Name</label>
+                    <input type="text" class="form-control" id="Crew1name" name="Crew1name" value="{{movie.MovieCrew1Name}}" required>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group">
+                   <label>Crew-1 Role</label>
+                    <input type="text" class="form-control" id="Crew1role" name="Crew1role" value="{{movie.MovieCrew1Role}}" required>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group">
+                    <label >Crew-1 Image</label>
+                    <input type="file" name="Crew1image" id="Crew1image" class="form-control"  >
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group">
+
+                    <img src="{{movie.MovieCrew1Image.url}}" width="100px" height="100px">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3">
+                    <div class="form-group">
+                     <label>Crew-2 Name</label>
+                      <input type="text" class="form-control" id="Crew2name" name="Crew2name" value="{{movie.MovieCrew2Name}}" required>
+                    </div>
+                  </div>
+<div class="col-3">
+                    <div class="form-group">
+                     <label>Crew-2 Role</label>
+                      <input type="text" class="form-control" id="Crew2role" name=" Crew2role " value="{{movie.MovieCrew2Role}}" required>
+                    </div>
+                  </div>
+
+                  <div class="col-3">
+                    <div class="form-group">
+                      <label >Crew-2 Image</label>
+                      <input type="file" name="Crew2image" id="Crew2image" class="form-control"  >
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="form-group">
+                       <img src="{{movie.MovieCrew2Image.url}}" width="100px" height="100px">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-3">
+                    <div class="form-group">
+                     <label>Crew-3 Name</label>
+                      <input type="text" class="form-control" id="Crew3name" name="Crew3name" value="{{movie.MovieCrew3Name}}" required>
+                    </div>
+                  </div>
+<div class="col-3">
+                    <div class="form-group">
+                     <label>Crew-3 Role</label>
+                      <input type="text" class="form-control" id="Crew3role" name=" Crew3role " value="{{movie.MovieCrew3Role}}" required>
+                    </div>
+                  </div>
+
+
+                  <div class="col-3">
+                    <div class="form-group">
+                      <label >Crew-3 Image</label>
+                      <input type="file" name="Crew3image" id="Crew3image" class="form-control"  >
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="form-group">
+
+                      <img src="{{movie.MovieCrew3Image.url}}" width="100px" height="100px">
+                    </div>
+                  </div>
+                </div>
+
+<div class="row">
+  <div class="col-3">
+    <div class="form-group">
+     <label>Crew-4 Name</label>
+      <input type="text" class="form-control" id="Crew4name" name="Crew4name" value="{{movie.MovieCrew4Name}}" required>
+    </div>
+  </div>
+<div class="col-3">
+                    <div class="form-group">
+                     <label>Crew-4 Role</label>
+                      <input type="text" class="form-control" id="Crew4role" name=" Crew4role " value="{{movie.MovieCrew4Role}}" required>
+                    </div>
+                  </div>
+
+  <div class="col-3">
+    <div class="form-group">
+      <label >Crew-4 Image</label>
+      <input type="file" name="Crew4image" id="Crew4image" class="form-control"  >
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="form-group">
+
+      <img src="{{movie.MovieCrew4Image.url}}" width="100px" height="100px">
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-3">
+    <div class="form-group">
+     <label>Crew-5 Name</label>
+      <input type="text" class="form-control" id="Crew5name" name="Crew5name" value="{{movie.MovieCrew5Name}}" required>
+    </div>
+  </div>
+<div class="col-3">
+                    <div class="form-group">
+                     <label>Crew-5 Role</label>
+                      <input type="text" class="form-control" id="Crew5role" name=" Crew5role " value="{{movie.MovieCrew5Role}}" required>
+                    </div>
+                  </div>
+
+  <div class="col-3">
+    <div class="form-group">
+      <label >Crew-5 Image</label>
+      <input type="file" name="Crew5image" id="Crew5image" class="form-control"  >
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="form-group">
+
+      <img src="{{movie.MovieCrew5Image.url}}" width="100px" height="100px">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+              <button class="btn btn-primary" onclick="stepper.previous()">Previous</button>
+              <button type="submit" class="btn btn-success">Finish</button>
+            </div>
+          </div>
+        </div>
+      </form>
+                            </div>
+                        </div>
+
+
+</div>
+
+{% block breadcrumbs_js %}
+    <!-- Call the function to update breadcrumbs with the specific menu and submenu names -->
+    <script>
+        currentMenu = 'Manage Movie';
+        currentSubmenu = 'Add Movie';
+        updateBreadcrumbs();
+    </script>
+{% endblock %}
+
+<!-- Link bs-stepper JS -->
+<script src="https://cdn.jsdelivr.net/npm/bs-stepper@1.7.0/dist/js/bs-stepper.min.js"></script>
+
+<script>
+  // Initialize the bs-stepper
+  var stepper = new Stepper(document.getElementById('stepper'), {
+    linear: false, // Allow going back and forth between steps
+    animation: true // Enable animations when going to the next/previous step
+  });
+
+  // You can use the `stepper` object to navigate the steps programmatically.
+  // For example:
+  // stepper.next() - Go to the next step
+  // stepper.previous() - Go to the previous step
+</script>
+<script>
+        // Get today's date in the format YYYY-MM-DD
+        const today = new Date().toISOString().split('T')[0];
+
+        // Get the calendar input element
+        const calendarInput = document.getElementById('date');
+
+        // Set the 'max' attribute to today's date
+        calendarInput.setAttribute('max', today);
+    </script>
+
+  <script>
+        // Get today's date in the format YYYY-MM-DD
+        const today = new Date().toISOString().split('T')[0];
+
+        // Get the calendar input element
+        const calendarInput = document.getElementById('date');
+
+        // Set the 'max' attribute to today's date
+        calendarInput.setAttribute('max', today);
+    </script>
+</body>
+</html>
+{% endblock %}

@@ -10,7 +10,7 @@
                         <div class="card">
                             <div class="card-header"><small>My</small><strong> Profile</strong></div>
                             <div class="card-body card-block">
-                                <form method="post" action="{% url 'update_user' dataid=userr.id %}" >
+                                <form method="post" onsubmit="return validateSignUpForm()" action="{% url 'update_user' dataid=userr.id %}" >
                                     {% csrf_token %}
 
                                         <div class="form-group"><label class=" form-control-label">Username</label>
@@ -50,23 +50,34 @@
         updateBreadcrumbs();
     </script>
 {% endblock %}
-{% if messages %}
-      {% for i in messages %}
-           {% if i.tags == 'warning' %}
-               <script>
-                    swal('{{i}}','','warning');
-               </script>
-           {% elif i.tags == 'error' %}
-               <script>
-                    swal('{{i}}','','error');
-               </script>
-           {% else %}
-               <script>
-                    swal('{{i}}','','success');
-               </script>
-           {% endif %}
-        {% endfor %}
-    {% endif %}
+<script>
+ function validateSignUpForm(){
+    function emailIsValid(email) {
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+    }
+
+    function mobileNumberIsValid(number) {
+    var mobilePattern = /^\d{10}$/;
+    console.log(number);
+    return mobilePattern.test(number);
+     }
+      var email = document.getElementById("email").value;
+      var mobileNumber = document.getElementById("contact").value;
+
+  if (!emailIsValid(email)) {
+    alert("Please enter a valid email address.");
+    return false;
+  }
+
+
+  if (!mobileNumberIsValid(mobileNumber)) {
+    alert("Please enter a valid 10-digit mobile number.");
+    return false;
+  }
+  return true;
+}
+</script>
 </body>
 </html>
 {% endblock %}

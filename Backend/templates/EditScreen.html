@@ -16,10 +16,18 @@
                                             <input type="text" value="{{screen.ScreenName}}" name="screen-name" id="screen-name" class="form-control" required>
                                         </div>
                                         <div class="form-group"><label class="form-control-label">Capacity</label>
-                                            <input type="text" value="{{screen.ScreenCapacity}}" name="screen-capacity" id="screen-capacity" class="form-control"readonly></input>
+                                            <input type="number" value="{{screen.ScreenCapacity}}" name="screen-capacity" id="screen-capacity" class="form-control"readonly></input>
                                         </div>
                                         <div class="form-group"><label class=" form-control-label">Available Seats</label>
-                                            <input type="tel" value="{{screen.SeatAvail}}" name="available-seats" id="available-seats" class="form-control" readonly>
+                                            <input type="number" value="{{screen.SeatAvail}}" name="available-seats" id="available-seats" class="form-control" readonly>
+                                        </div>
+                                        <div class="form-group"><label class=" form-control-label">Status</label>
+                                            <select name="status" id="status" class="form-control" required>
+                                              <option value="{{screen.ScreenStatus}}" >{{screen.ScreenStatus}}</option>
+                                              <option value="Active" >Active</option>
+                                              <option value="Not Activ" >Not active</option>
+                                           </select>
+
                                         </div>
 
 

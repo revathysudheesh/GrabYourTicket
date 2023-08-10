@@ -77,7 +77,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">List of Theatre Screens</strong>
+                                <strong class="card-title">List of Movies{{i.MovieCrew1Role}}</strong>
                             </div>
                             <div class="card-body">
                                 <div id="bootstrap-data-table-export_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -104,27 +104,57 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <table id="bootstrap-data-table-export" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="bootstrap-data-table-export_info">
-                                                <thead>
+                                            <table style="width:100%;overflow-x:auto;" id="bootstrap-data-table-export" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="bootstrap-data-table-export_info">
+                                                <thead style="text-align:center;">
                                                     <tr role="row">
-                                                        <th>Screen Name</th>
-                                                        <th>Total Seats</th>
-                                                        <th>Available Seats</th>
-                                                        <th>Status</th>
+                                                        <th>Name</th>
+                                                        <th>Language</th>
+                                                        <th>Genre</th>
+                                                        <th style="width:40%">Synopsis</th>
+                                                        <th>Type</th>
+                                                        <th>Duration</th>
+                                                        <th>Release Date</th>
+                                                        <th>Poster</th>
+                                                        <th>Actors</th>
+                                                        <th>Crew</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                {% for i in screen %}
-                                                <tr>
-                                                    <td>{{i.ScreenName}}</td>
-                                                <td>{{i.ScreenCapacity}}</td>
-                                                <td>{{i.SeatAvail}}</td>
-                                                <td>{{i.ScreenStatus}}</td>
+                                                {% for i in movie %}
+                                                <td>{{i.MovieName}}</td>
+                                                <td>{{i.MovieLanguage}}</td>
+                                                <td>{{i.MovieGenre}}</td>
+                                                <td>{{i.MovieSynopsis}}</td>
+                                                <td>{{i.MovieType}}</td>
+                                                <td>{{i.MovieDuration}}</td>
+                                                <td>{{i.MovieRelease|date:"Y-m-d" }}</td>
                                                 <td>
-                                                <a href="{% url 'edit_screen' dataid=i.id %}"><i class="menu-icon fa fa-edit"></i></a>
+                                                    <img src="{{i.MoviePoster.url}}" width="100px" height="100px" alt="poster">
                                                 </td>
-                                                </tr>
+                                                <td>{{i.MovieActor1Name}}- <img src="{{i.MovieActor1Image.url}}" width="100px" height="100px" >
+                                                    <br>{{i.MovieActor2Name}}- <img src="{{i.MovieActor2Image.url}}" width="100px" height="100px">
+                                                    <br>{{i.MovieActor3Name}}- <img src="{{i.MovieActor3Image.url}}" width="100px" height="100px">
+                                                    <br>{{i.MovieActor4Name}}- <img src="{{i.MovieActor4Image.url}}" width="100px" height="100px">
+                                                    <br>{{i.MovieActor5Name}}- <img src="{{i.MovieActor5Image.url}}" width="100px" height="100px">
+                                                </td>
+                                                <td>
+                                                        {{i.MovieCrew1Name}}-{{i.MovieCrew1Role}} <img src="{{i.MovieCrew1Image.url}}" width="100px" height="100px" >
+                                                    <br>{{i.MovieCrew2Name}}-{{i.MovieCrew2Role}} <img src="{{i.MovieCrew2Image.url}}" width="100px" height="100px" alt="poster">
+                                                    <br>{{i.MovieCrew3Name}}-{{i.MovieCrew3Role}} <img src="{{i.MovieCrew1Image.url}}" width="100px" height="100px" alt="poster">
+                                                    <br>{{i.MovieCrew4Name}}-{{i.MovieCrew4Role}} <img src="{{i.MovieCrew1Image.url}}" width="100px" height="100px" alt="poster">
+                                                    <br>{{i.MovieCrew5Name}}-{{i.MovieCrew5Role}} <img src="{{i.MovieCrew1Image.url}}" width="100px" height="100px" alt="poster">
+                                                </td>
+                                                <td>
+                                                    <a href="{% url 'edit_movie' dataid=i.id %}"><i class="menu-icon fa fa-edit"></i></a>
+                                                    <a href="{% url 'delete_movie' dataid=i.id %}"><i class="menu-icon fa fa-trash"></i></a>
+
+                                                </td>
+
+
+
+
+
 
                                                 {% endfor %}
                                                 </tbody>
@@ -178,51 +208,10 @@
 {% block breadcrumbs_js %}
     <!-- Call the function to update breadcrumbs with the specific menu and submenu names -->
     <script>
-        currentMenu = 'Manage Admins';
-        currentSubmenu = 'List Admins';
+        currentMenu = 'Manage Movies';
+        currentSubmenu = 'List Movies';
         updateBreadcrumbs();
     </script>
-<script>
-  function showScaledImage() {
-    // Get the image element
-    const image = document.getElementById('scaling-image');
-
-    // Get the modal dialog and its content
-    const modal = document.createElement('div');
-    modal.classList.add('modal');
-    const modalContent = document.createElement('div');
-    modalContent.classList.add('modal-content');
-
-    // Create an image element to display the scaled image
-    const scaledImage = document.createElement('img');
-    scaledImage.src = image.src;
-    scaledImage.style.width = '100%';
-    scaledImage.alt = 'Scaled Image';
-
-    // Add the scaled image to the modal content
-    modalContent.appendChild(scaledImage);
-
-    // Add a close button to the modal
-    const closeButton = document.createElement('span');
-    closeButton.classList.add('close');
-    closeButton.innerHTML = '&times;';
-
-    // Function to close the modal when the close button is clicked
-    closeButton.onclick = function() {
-      modal.style.display = 'none';
-    };
-
-    // Add the close button to the modal content
-    modalContent.appendChild(closeButton);
-
-    // Add the modal content to the modal dialog
-    modal.appendChild(modalContent);
-
-    // Show the modal
-    document.body.appendChild(modal);
-    modal.style.display = 'block';
-  }
-</script>
 
 
 {% endblock %}

@@ -95,13 +95,13 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-film"></i>Manage Movies</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-arrow-circle-right"></i><a href="{% url 'add_movie' %}">Add New Movie</a></li>
-                            <li><i class="menu-icon fa fa-arrow-circle-right"></i><a href="">List Movies</a></li>
+                            <li><i class="menu-icon fa fa-arrow-circle-right"></i><a href="{% url 'list_movie' %}">List Movies</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa-solid fa-clock"></i>Manage Show Times</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-arrow-circle-right"></i><a href="">Add Show Time</a></li>
+                            <li><i class="menu-icon fa fa-arrow-circle-right"></i><a href="{% url 'add_show_time' %}">Add Show Time</a></li>
                             <li><i class="menu-icon fa fa-arrow-circle-right"></i><a href="">List Show Time</a></li>
                         </ul>
                     </li>

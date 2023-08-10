@@ -50,23 +50,6 @@
         updateBreadcrumbs();
     </script>
 {% endblock %}
-{% if messages %}
-      {% for i in messages %}
-           {% if i.tags == 'warning' %}
-               <script>
-                    swal('{{i}}','','warning');
-               </script>
-           {% elif i.tags == 'error' %}
-               <script>
-                    swal('{{i}}','','error');
-               </script>
-           {% else %}
-               <script>
-                    swal('{{i}}','','success');
-               </script>
-           {% endif %}
-        {% endfor %}
-    {% endif %}
 <script>
  function validateSignUpForm() {
   var firstname = document.getElementById("fname").value;
@@ -75,7 +58,15 @@
   var mobileNumber = document.getElementById("contact").value;
   var profilePhoto = document.getElementById("img").value;
 
-  if (username.trim() === "") {
+  function emailIsValid(email) {
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+  function mobileNumberIsValid(mobileNumber) {
+    var phoneRegex = /^\d{10}$/;
+    return phoneRegex.test(mobileNumber);
+  }
+    if (username.trim() === "") {
     alert("Please enter a username.");
     return false;
   }

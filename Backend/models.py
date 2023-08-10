@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class CustomUser(AbstractUser):
-    phone_number=models.CharField(max_length=15,blank=True, null=True)
+    phone_number=models.IntegerField(blank=True, null=True)
     profile_image=models.ImageField(upload_to='ProfileImages', null=True, blank=True)
 class TheatreDB(models.Model):
     TheatreName = models.CharField(max_length=200, null=True, blank=True)
@@ -21,6 +21,7 @@ class ScreenDB(models.Model):
     ScreenName = models.CharField(max_length=200, null=True, blank=True)
     ScreenCapacity = models.IntegerField(null=True, blank=True)
     SeatAvail= models.IntegerField(null=True, blank=True)
+    ScreenStatus= models.CharField(max_length=200, null=True, blank=True)
 class MovieDB(models.Model):
     MovieName = models.CharField(max_length=200, null=True, blank=True)
     MovieLanguage = models.CharField(max_length=200, null=True, blank=True)
@@ -55,6 +56,23 @@ class MovieDB(models.Model):
     MovieCrew5Name = models.CharField(max_length=30, null=True, blank=True)
     MovieCrew5Role = models.CharField(max_length=30, null=True, blank=True)
     MovieCrew5Image = models.ImageField(upload_to='Crew', null=True, blank=True)
+
+class ShowTimeDB(models.Model):
+    MovieName = models.CharField(max_length=200, null=True, blank=True)
+    ScreenName = models.CharField(max_length=200, null=True, blank=True)
+    StartTime= models.TimeField(null=True, blank=True)
+    EndTime= models.TimeField(null=True, blank=True)
+    Date = models.DateField(null=True, blank=True)
+    PriceStandard= models.IntegerField(null=True, blank=True)
+    TotalStandardTickets= models.IntegerField(null=True, blank=True)
+    AvailableStandardTickets=models.IntegerField(null=True, blank=True)
+    PricePremium = models.IntegerField(null=True, blank=True)
+    TotalPremiumTickets = models.IntegerField(null=True, blank=True)
+    AvailablePremiumTickets = models.IntegerField(null=True, blank=True)
+    Status = models.CharField(max_length=200, null=True, blank=True)
+
+# class SeatingDB(models.Model):
+#     ShowTime=
 
 
 

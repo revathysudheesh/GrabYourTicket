@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
-from Backend.models import CustomUser,TheatreDB, ScreenDB, MovieDB
+from Backend.models import CustomUser,TheatreDB, ScreenDB, MovieDB, ShowTimeDB
 from django.core.files.storage import FileSystemStorage
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth.models import User
@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib import messages
-
+from datetime import datetime
 # Create your views here.
 
 def admin_home(request):
@@ -99,9 +99,15 @@ def update_user(request, dataid):
             file = fs.save(im.name, im)
         except MultiValueDictKeyError:
             file = CustomUser.objects.get(id=dataid).profile_image
-        CustomUser.objects.filter(id=dataid).update(first_name=fn,last_name=ln,email=em,phone_number=pn,profile_image=file)
-        messages.success(request, "Profile updated successfully")
-        return redirect(admin_home)
+        user = CustomUser.objects.get(id=dataid)
+        existing_user_with_phone = CustomUser.objects.filter(phone_number=pn).exclude(id=user.id).first()
+        if existing_user_with_phone:
+            messages.error(request, "Mobile Number already exists")
+            return redirect(list_admin)
+        else:
+            CustomUser.objects.filter(id=dataid).update(first_name=fn,last_name=ln,email=em,phone_number=pn,profile_image=file)
+            messages.success(request, "Admin details updated successfully")
+            return redirect(list_admin)
 
 def change_password(request):
     if request.user.is_authenticated:
@@ -137,6 +143,34 @@ def add_admin(request):
     else:
         return redirect('login_reg')
 
+def submit_admin(request):
+    if request.method == "POST":
+        un=request.POST.get("signup-username")
+        fn=request.POST.get("signup-firstname")
+        ln=request.POST.get("signup-lastname")
+        em=request.POST.get("signup-email")
+        mo=request.POST.get("signup-mobile")
+        pw=request.POST.get("signup-password")
+        cpw=request.POST.get("signup-repeat-password")
+        im = request.FILES['signup-profile-photo']
+        flag = 0
+        if CustomUser.objects.filter(username=un).exists():
+            flag = 1
+        elif CustomUser.objects.filter(phone_number=mo).exists():
+            flag = 2
+        if(flag == 0):
+            custom_user=CustomUser.objects.create_user(username=un, first_name=fn,last_name=ln,
+                                                           email=em,password=pw,is_staff=False, is_active=True,
+                                                           is_superuser=False,phone_number=mo,profile_image=im)
+            messages.success(request, "Admin added successfully")
+            return redirect('list_admin')
+        elif(flag==1):
+            messages.error(request, "Username already exists in the system")
+            return redirect('add_admin')
+        else:
+            messages.error(request, "Phone number already exists in the system")
+            return redirect('add_admin')
+
 def list_admin(request):
     if request.user.is_authenticated:
         first_name=request.user.first_name
@@ -159,7 +193,7 @@ def delete_admin(request, dataid):
     userr=CustomUser.objects.filter(id=dataid)
     userr.delete()
     messages.success(request, "User successfully removed from the system..!")
-    return redirect('list_admin')
+    return redirect('listF_admin')
 
 def change_password_admin(request, dataid):
     if request.user.is_authenticated:
@@ -219,6 +253,7 @@ def update_theatre(request, dataid):
             file = TheatreDB.objects.get(id=dataid).TheatreImage
         TheatreDB.objects.filter(id=dataid).update(TheatreName=na,TheatreAddress=ad,TheatreContact=con, TheatreWebsite=we, TheatreEmail=em,TheatreCapacity=cp,TheatreScreen=sc, TheatreStatus=sta,
                       TheatreImage=file)
+        messages.success(request, "Theatre details updated successfully")
         return redirect('theatre_details')
 
 def add_screen(request):
@@ -239,12 +274,22 @@ def list_screen(request):
 def submit_screen(request):
     if request.method == "POST":
         sn=request.POST.get("screen-name")
-        sc=request.POST.get("screen-capacity")
-        sa=request.POST.get("available-seats")
-        obj = ScreenDB(ScreenName=sn, ScreenCapacity=sc,SeatAvail=sa)
-        obj.save()
-        messages.success(request, "Screen Added")
+        sc=int(request.POST.get("screen-capacity"))
+        sa=int(request.POST.get("available-seats"))
+        if(sc>=sa):
+            obj = ScreenDB(ScreenName=sn, ScreenCapacity=sc,SeatAvail=sa, ScreenStatus="active")
+            obj.save()
+            screens_count=ScreenDB.objects.count()
+            TheatreDB.objects.filter(id=1).update(TheatreScreen=screens_count)
+            theater = TheatreDB.objects.get(id=1)
+            theater.TheatreCapacity += sc
+            theater.save()
+            messages.success(request, "Screen Added")
+        else:
+            messages.error(request, "Capacity is less than available seats")
         return redirect('list_screen')
+
+
 
 def edit_screen(request, dataid):
     if request.user.is_authenticated:
@@ -258,9 +303,9 @@ def edit_screen(request, dataid):
 def update_screen(request, dataid):
     if request.method=="POST":
         sn = request.POST.get("screen-name")
-        sc = request.POST.get("screen-capacity")
-        sa = request.POST.get("available-seats")
-        ScreenDB.objects.filter(id=dataid).update(ScreenName=sn, ScreenCapacity=sc,SeatAvail=sa)
+        sta = request.POST.get("status")
+        ScreenDB.objects.filter(id=dataid).update(ScreenName=sn, ScreenStatus=sta)
+        messages.success(request, "Successfully Updated Details")
         return redirect('list_screen')
 
 def add_movie(request):
@@ -316,4 +361,164 @@ def submit_movie(request):
                     MovieCrew5Name=crew5na, MovieCrew5Role=crew5ro, MovieCrew5Image=crew5im
                     )
         obj.save()
-        return redirect('add_movie')
+        messages.success(request, "New Movie Added")
+        return redirect('list_movie')
+
+def list_movie(request):
+    if request.user.is_authenticated:
+        user=request.user
+        movie=MovieDB.objects.all()
+        return render(request, 'ListMovies.html',{'user':user, 'movie':movie})
+    else:
+        return redirect(login_reg)
+
+def edit_movie(request,dataid):
+    if request.user.is_authenticated:
+        first_name=request.user.first_name
+        profile_image=request.user.profile_image
+        movie = MovieDB.objects.get(id=dataid)
+        return render(request, 'EditMovie.html',{'first_name':first_name, 'profile_image':profile_image, 'movie':movie})
+    else:
+        return redirect('login_reg')
+
+def update_movie(request,dataid):
+    if request.method=="POST":
+        na=request.POST.get("name")
+        sy=request.POST.get("synopsis")
+        la=request.POST.get("lang")
+        ge=request.POST.get("genre")
+        ty=request.POST.get("type")
+        da=request.POST.get("date")
+        dur=request.POST.get("duration")
+        act1na = request.POST.get("actor1name")
+        act2na = request.POST.get("actor2name")
+        act3na = request.POST.get("actor3name")
+        act4na = request.POST.get("actor4name")
+        act5na = request.POST.get("actor5name")
+        crew1na = request.POST.get("Crew1name")
+        crew1ro = request.POST.get("Crew1role")
+        crew2na = request.POST.get("Crew2name")
+        crew2ro = request.POST.get("Crew2role")
+        crew3na = request.POST.get("Crew3name")
+        crew3ro = request.POST.get("Crew3role")
+        crew4na = request.POST.get("Crew4name")
+        crew4ro = request.POST.get("Crew4role")
+        crew5na = request.POST.get("Crew5name")
+        crew5ro = request.POST.get("Crew5role")
+        try:
+            im = request.FILES['poster']
+            fs = FileSystemStorage()
+            file = fs.save(im.name, im)
+        except MultiValueDictKeyError:
+            file = MovieDB.objects.get(id=dataid).MoviePoster
+        try:
+            act1im = request.FILES['actor1image']
+            fs = FileSystemStorage()
+            act1im_file = fs.save(act1im.name, act1im)
+        except MultiValueDictKeyError:
+            act1im_file = MovieDB.objects.get(id=dataid).MovieActor1Image
+        try:
+            act2im = request.FILES['actor2image']
+            fs = FileSystemStorage()
+            act2im_file = fs.save(act2im.name, act2im)
+        except MultiValueDictKeyError:
+            act2im_file = MovieDB.objects.get(id=dataid).MovieActor2Image
+        try:
+            act3im = request.FILES['actor3image']
+            fs = FileSystemStorage()
+            act3im_file = fs.save(act3im.name, act3im)
+        except MultiValueDictKeyError:
+            act3im_file = MovieDB.objects.get(id=dataid).MovieActor3Image
+        try:
+            act4im = request.FILES['actor4image']
+            fs = FileSystemStorage()
+            act4im_file = fs.save(act4im.name, act4im)
+        except MultiValueDictKeyError:
+            act4im_file = MovieDB.objects.get(id=dataid).MovieActor4Image
+        try:
+            act5im = request.FILES['actor5image']
+            fs = FileSystemStorage()
+            act5im_file = fs.save(act5im.name, act5im)
+        except MultiValueDictKeyError:
+            act5im_file = MovieDB.objects.get(id=dataid).MovieActor5Image
+        try:
+            crew1im = request.FILES['Crew1image']
+            crew1im = request.FILES['Crew1image']
+            fs = FileSystemStorage()
+            crew1im_file = fs.save(crew1im.name, crew1im)
+        except MultiValueDictKeyError:
+            crew1im_file = MovieDB.objects.get(id=dataid).MovieCrew1Image
+        try:
+            crew2im = request.FILES['Crew2image']
+            fs = FileSystemStorage()
+            crew2im_file = fs.save(crew2im.name, crew2im)
+        except MultiValueDictKeyError:
+            crew2im_file = MovieDB.objects.get(id=dataid).MovieCrew2Image
+        try:
+            crew3im = request.FILES['Crew3image']
+            fs = FileSystemStorage()
+            crew3im_file = fs.save(crew3im.name, crew3im)
+        except MultiValueDictKeyError:
+            crew3im_file = MovieDB.objects.get(id=dataid).MovieCrew3Image
+
+        try:
+            crew4im = request.FILES['Crew4image']
+            fs = FileSystemStorage()
+            crew4im_file = fs.save(crew4im.name, crew4im)
+        except MultiValueDictKeyError:
+            crew4im_file = MovieDB.objects.get(id=dataid).MovieCrew4Image
+
+        try:
+            crew5im = request.FILES['Crew5image']
+            fs = FileSystemStorage()
+            crew5im_file = fs.save(crew5im.name, crew5im)
+        except MultiValueDictKeyError:
+            crew5im_file = MovieDB.objects.get(id=dataid).MovieCrew5Image
+        MovieDB.objects.filter(id=dataid).update(MovieName=na, MovieLanguage=la, MovieGenre=ge, MoviePoster=file,MovieType=ty,
+                                                 MovieSynopsis=sy,MovieDuration=dur, MovieRelease=da, MovieActor1Name=act1na,
+                                                 MovieActor1Image=act1im_file, MovieActor2Name=act2na,
+                                                 MovieActor2Image=act2im_file, MovieActor3Name=act3na,
+                                                 MovieActor3Image=act3im_file, MovieActor4Name=act4na,
+                                                 MovieActor4Image=act4im_file, MovieActor5Name=act5na,
+                                                 MovieActor5Image=act5im_file, MovieCrew1Name=crew1na,
+                                                 MovieCrew1Role=crew1ro, MovieCrew1Image=crew1im_file,
+                                                 MovieCrew2Name=crew2na, MovieCrew2Role=crew2ro, MovieCrew2Image=crew2im_file,
+                                                 MovieCrew3Name=crew3na, MovieCrew3Role=crew3ro, MovieCrew3Image=crew3im_file,
+                                                 MovieCrew4Name=crew4na, MovieCrew4Role=crew4ro, MovieCrew4Image=crew4im_file,
+                                                 MovieCrew5Name=crew5na, MovieCrew5Role=crew5ro, MovieCrew5Image=crew5im_file,
+                                                 )
+        return redirect(list_movie)
+
+def delete_movie(request, dataid):
+   data=MovieDB.objects.filter(id=dataid)
+   data.delete()
+   messages.success(request, "Movie successfully removed from the system..!")
+
+def add_show_time(request):
+    if request.user.is_authenticated:
+        user=request.user
+        movies=MovieDB.objects.all()
+        screens=ScreenDB.objects.all()
+        return render(request, 'AddShowTime.html',{'user':user, 'movies':movies, 'screens':screens})
+    else:
+        return redirect(login_reg)
+
+def submit_show_time(request):
+    if request.method == "POST":
+        mn = request.POST.get("movie-name")
+        sn = request.POST.get("screen-name")
+        st = request.POST.get("start-time")
+        et = request.POST.get("end-time")
+        dt = request.POST.get("date")
+        dt = request.POST.get("date")
+        ps = request.POST.get("price-std")
+        pp = request.POST.get("price-premium")
+        stat=request.POST.get("status")
+        obj = ShowTimeDB(MovieName=mn,ScreenName=sn, StartTime=st, EndTime=et,Date=dt,
+                         PriceStandard=ps, PricePremium=pp, Status=stat)
+        obj.save()
+        return redirect('add_show_time')
+
+
+
+

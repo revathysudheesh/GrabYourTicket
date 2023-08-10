@@ -16,11 +16,12 @@
                                             <input type="text" placeholder="Screen Nam" name="screen-name" id="screen-name" class="form-control" required>
                                         </div>
                                         <div class="form-group"><label class="form-control-label">Capacity</label>
-                                            <input type="text" placeholder="Capacity" name="screen-capacity" id="screen-capacity" class="form-control"required></input>
+                                            <input type="number" placeholder="Capacity" name="screen-capacity" id="screen-capacity" class="form-control"required></input>
                                         </div>
                                         <div class="form-group"><label class=" form-control-label">Available Seats</label>
-                                            <input type="tel" placeholder="Available Seats" name="available-seats" id="available-seats" class="form-control" required>
+                                            <input type="number" placeholder="Available Seats" name="available-seats" id="available-seats" class="form-control" required>
                                         </div>
+
 
 
                                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -35,11 +36,13 @@
 {% block breadcrumbs_js %}
     <!-- Call the function to update breadcrumbs with the specific menu and submenu names -->
     <script>
-        currentMenu = 'Manage Admin';
-        currentSubmenu = 'Add Admin';
+        currentMenu = 'Manage Screens';
+        currentSubmenu = 'Add Screen';
         updateBreadcrumbs();
     </script>
 {% endblock %}
+ <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 {% if messages %}
       {% for i in messages %}
            {% if i.tags == 'warning' %}

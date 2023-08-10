@@ -53,19 +53,19 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="form-group"><label  class=" form-control-label">Capacity</label>
-                                                     <input type="number" name="capacity" id="capacity" value="{{theatre.TheatreCapacity}}" class="form-control" required>
+                                                     <input type="number" name="capacity" id="capacity" value="{{theatre.TheatreCapacity}}" class="form-control" readonly>
                                                 </div>
                                             </div>
 
                                             <div class="col-6">
                                                 <div class="form-group"><label  class=" form-control-label">Screens</label>
-                                                    <input type="number" id="screen" name="screen" value="{{theatre.TheatreScreen}}" class="form-control" required>
+                                                    <input type="number" id="screen" name="screen" value="{{theatre.TheatreScreen}}" class="form-control" readonly>
                                                 </div>
                                             </div>
                                         </div>
                                     <div class="form-group"><label class=" form-control-label">Status</label>
                                            <select name="status" id="status" required>
-                                              <option value="{{data.TheatreStatus}}" >{{theatre.TheatreStatus}}</option>
+                                              <option value="{{theatre.TheatreStatus}}" >{{theatre.TheatreStatus}}</option>
                                               <option value="Open" >Open</option>
                                               <option value="Closed" >Closed</option>
                                                <option value="Under Renovation">Under Renovation</option>
@@ -89,8 +89,8 @@
 {% block breadcrumbs_js %}
     <!-- Call the function to update breadcrumbs with the specific menu and submenu names -->
     <script>
-        currentMenu = 'Dashboard';
-        currentSubmenu = 'Theatre Details';
+        currentMenu = 'Manage Theatre';
+        currentSubmenu = 'Edit Theatre';
         updateBreadcrumbs();
     </script>
 {% endblock %}
