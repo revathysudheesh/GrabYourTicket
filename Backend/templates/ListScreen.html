@@ -109,7 +109,8 @@
                                                     <tr role="row">
                                                         <th>Screen Name</th>
                                                         <th>Total Seats</th>
-                                                        <th>Available Seats</th>
+                                                        <th>Premium Seats</th>
+                                                        <th>Standard Seats</th>
                                                         <th>Status</th>
                                                         <th>Action</th>
                                                     </tr>
@@ -119,10 +120,11 @@
                                                 <tr>
                                                     <td>{{i.ScreenName}}</td>
                                                 <td>{{i.ScreenCapacity}}</td>
-                                                <td>{{i.SeatAvail}}</td>
+                                                <td>{{i.PremiumCapacity}}</td>
+                                                <td>{{i.StandardCapacity}}</td>
                                                 <td>{{i.ScreenStatus}}</td>
                                                 <td>
-                                                <a href="{% url 'edit_screen' dataid=i.id %}"><i class="menu-icon fa fa-edit"></i></a>
+                                                <a href="{% url 'delete_screen' dataid=i.id %}"><i class="menu-icon fa fa-trash"></i></a>
                                                 </td>
                                                 </tr>
 

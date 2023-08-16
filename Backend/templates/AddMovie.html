@@ -71,8 +71,19 @@
                 </select>
               </div>
               <div class="form-group">
-                <label >Movie Poster</label>
+                <label >Status</label>
+                <select name="status" id="status" class="form-control" required>
+                  <option value="Now Showing">Now Showing</option>
+                  <option value="Coming Soon">Coming Soon</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label >Movie Poster1</label>
                 <input type="file" name="poster" id="poster" class="form-control" >
+              </div>
+              <div class="form-group">
+                <label >Movie Poster2</label>
+                <input type="file" name="poster1" id="poster2" class="form-control" >
               </div>
               <div class="form-group">
                 <label >Type</label>
@@ -89,6 +100,11 @@
                 <label >Duration</label>
                 <input type="text" id="duration" name="duration"  placeholder=" Movie Duration" class="form-control" required>
               </div>
+              <div class="form-group">
+                <label >Movie Trailer Link</label>
+                <input type="text" name="link" id="link" class="form-control" required >
+              </div>
+
 
               <button type="button" class="btn btn-primary" onclick="stepper.next()">Next</button>
             </div>
@@ -266,6 +282,7 @@
                     <input type="file" name="crew5image" id="crew5image" class="form-control" >
                   </div>
                 </div>
+
               </div>
 
 

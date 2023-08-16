@@ -12,6 +12,15 @@
                             <div class="card-body card-block">
                                 <form method="post" action="{% url 'submit_show_time' %}">
                                     {% csrf_token %}
+                                    <div class="form-group"><label class=" form-control-label">ShowTime Name</label>
+                                            <select name="showtime-name" id="showtime-name" class="form-control" required>
+                                              <option value="Open" >Show1</option>
+                                              <option value="Closed" >Show2</option>
+                                                <option value="Sold Out" >Show3</option>
+
+                                           </select>
+                                        </div>
+
                                         <div class="form-group"><label class=" form-control-label">Movie Name</label>
                                             <select name="movie-name" id="movie-name" class="form-control" required>
                                               {% for movie in movies %}
@@ -20,6 +29,7 @@
                                            </select>
                                         </div>
                                         <div class="form-group"><label class=" form-control-label">Scren Name</label>
+
                                             <select name="screen-name" id="screen-name" class="form-control" required>
                                               {% for screen in screens %}
                                                 <option value="{{screen.ScreenName}}">{{screen.ScreenName}}</option>

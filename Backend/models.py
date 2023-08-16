@@ -20,17 +20,21 @@ class TheatreDB(models.Model):
 class ScreenDB(models.Model):
     ScreenName = models.CharField(max_length=200, null=True, blank=True)
     ScreenCapacity = models.IntegerField(null=True, blank=True)
-    SeatAvail= models.IntegerField(null=True, blank=True)
+    PremiumCapacity=models.IntegerField(null=True, blank=True)
+    StandardCapacity=models.IntegerField(null=True, blank=True)
     ScreenStatus= models.CharField(max_length=200, null=True, blank=True)
 class MovieDB(models.Model):
     MovieName = models.CharField(max_length=200, null=True, blank=True)
     MovieLanguage = models.CharField(max_length=200, null=True, blank=True)
     MovieGenre = models.CharField(max_length=200, null=True, blank=True)
     MoviePoster = models.ImageField(upload_to='MoviePoster', null=True, blank=True)
+    MoviePoster1 = models.ImageField(upload_to='MoviePoster', null=True, blank=True)
     MovieType = models.CharField(max_length=2, null=True, blank=True)
     MovieSynopsis = models.CharField(max_length=500, null=True, blank=True)
     MovieDuration= models.CharField(max_length=10, null=True, blank=True)
     MovieRelease = models.DateField(max_length=10, null=True, blank=True)
+    MovieTrailer = models.CharField(max_length=500, null=True, blank=True)
+    MovieStatus=models.CharField(max_length=10, null=True, blank=True)
     MovieActor1Name=models.CharField(max_length=30, null=True, blank=True)
     MovieActor1Image = models.ImageField(upload_to='Actors', null=True, blank=True)
     MovieActor2Name = models.CharField(max_length=30, null=True, blank=True)
@@ -58,10 +62,11 @@ class MovieDB(models.Model):
     MovieCrew5Image = models.ImageField(upload_to='Crew', null=True, blank=True)
 
 class ShowTimeDB(models.Model):
+    ShowTimeName=models.CharField(max_length=200, null=True, blank=True)
     MovieName = models.CharField(max_length=200, null=True, blank=True)
     ScreenName = models.CharField(max_length=200, null=True, blank=True)
-    StartTime= models.TimeField(null=True, blank=True)
-    EndTime= models.TimeField(null=True, blank=True)
+    StartTime= models.CharField(max_length=20,null=True, blank=True)
+    EndTime= models.CharField(max_length=20,null=True, blank=True)
     Date = models.DateField(null=True, blank=True)
     PriceStandard= models.IntegerField(null=True, blank=True)
     TotalStandardTickets= models.IntegerField(null=True, blank=True)
@@ -71,8 +76,13 @@ class ShowTimeDB(models.Model):
     AvailablePremiumTickets = models.IntegerField(null=True, blank=True)
     Status = models.CharField(max_length=200, null=True, blank=True)
 
-# class SeatingDB(models.Model):
-#     ShowTime=
+class SeatingDB(models.Model):
+    ShowTimeName=models.CharField(max_length=200, null=True, blank=True)
+    ScreenName=models.CharField(max_length=200, null=True, blank=True)
+    SeatClass=models.CharField(max_length=200, null=True, blank=True)
+    SeatNumber=models.CharField(max_length=5, null=True, blank=True)
+    Date= models.DateField(null=True, blank=True)
+    Status=models.CharField(max_length=20, null=True, blank=True)
 
 
 

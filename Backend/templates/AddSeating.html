@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+{% extends 'Dashboard.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header"><small>Add</small><strong> Screen</strong></div>
+                            <div class="card-body card-block">
+                                <form method="post" action="">
+                                    {% csrf_token %}
+                                        <div class="form-group">
+                                            <label >Show Name</label>
+                                            <select name="show-name" id="show-name" class="form-control" required>
+                                              {% for show in shows %}
+                                                <option value="{{show.ShowTimeName}}">{{show.ShowTimeName}}</option>
+                                            {% endfor %}
+                                            </select>
+                                          </div>
+
+
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+
+</div>
+{% block breadcrumbs_js %}
+    <!-- Call the function to update breadcrumbs with the specific menu and submenu names -->
+    <script>
+        currentMenu = 'Manage Screens';
+        currentSubmenu = 'Add Screen';
+        updateBreadcrumbs();
+    </script>
+{% endblock %}
+ <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if messages %}
+      {% for i in messages %}
+           {% if i.tags == 'warning' %}
+               <script>
+                    swal('{{i}}','','warning');
+               </script>
+           {% elif i.tags == 'error' %}
+               <script>
+                    swal('{{i}}','','error');
+               </script>
+           {% else %}
+               <script>
+                    swal('{{i}}','','success');
+               </script>
+           {% endif %}
+        {% endfor %}
+    {% endif %}
+<script>
+    function validateSignUpForm() {
+  var username = document.getElementById("signup-username").value;
+  var email = document.getElementById("signup-email").value;
+  var password = document.getElementById("signup-password").value;
+  var repeatPassword = document.getElementById("signup-repeat-password").value;
+  var mobileNumber = document.getElementById("signup-mobile").value;
+  var profilePhoto = document.getElementById("signup-profile-photo").value;
+
+  if (username.trim() === "") {
+    alert("Please enter a username.");
+    return false;
+  }
+
+  if (email.trim() === "" || !emailIsValid(email)) {
+    alert("Please enter a valid email address.");
+    return false;
+  }
+
+  if (password.trim() === "" || password.length < 6) {
+    alert("Please enter a password with at least 6 characters.");
+    return false;
+  }
+
+  if (password !== repeatPassword) {
+    alert("Passwords do not match.");
+    return false;
+  }
+
+  if (mobileNumber.trim() === "" || !mobileNumberIsValid(mobileNumber)) {
+    alert("Please enter a valid 10-digit mobile number.");
+    return false;
+  }
+ if (profilePhoto.trim() === "") {
+    alert("Please upload a profile photo.");
+    return false;
+  }
+
+
+  return true;
+}
+</script>
+</body>
+</html>
+{% endblock %}

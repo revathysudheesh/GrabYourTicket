@@ -102,16 +102,16 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa-solid fa-clock"></i>Manage Show Times</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-arrow-circle-right"></i><a href="{% url 'add_show_time' %}">Add Show Time</a></li>
-                            <li><i class="menu-icon fa fa-arrow-circle-right"></i><a href="">List Show Time</a></li>
+                            <li><i class="menu-icon fa fa-arrow-circle-right"></i><a href="{% url 'list_showtime' %}">List Show Time</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa-solid fa-chair"></i>Manage Seating</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-arrow-circle-right"></i><a href="">Add Seating</a></li>
-                            <li><i class="menu-icon fa fa-arrow-circle-right"></i><a href="">List Seating</a></li>
-                        </ul>
-                    </li>
+<!--                    <li class="menu-item-has-children dropdown">-->
+<!--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa-solid fa-chair"></i>Manage Seating</a>-->
+<!--                        <ul class="sub-menu children dropdown-menu">-->
+<!--                            <li><i class="menu-icon fa fa-arrow-circle-right"></i><a href="">Add Seating</a></li>-->
+<!--                            <li><i class="menu-icon fa fa-arrow-circle-right"></i><a href="">List Seating</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
                     <li>
                         <a href="widgets.html"> <i class="menu-icon fa fa-book"></i>View Bookings </a>
                     </li>
@@ -136,9 +136,13 @@
                                 <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
                             </form>
                         </div>
+                        <div class="dropdown for-message">
+                            <a href="{% url 'view_messages' %}"><i class=" fa fa-envelope"></i></a>
+                        </div>
 
                     </div>
                 </div>
+
                 <div class="col-sm-5">
                     <div class="user-area dropdown float-right">
                         {% if user.profile_image %}

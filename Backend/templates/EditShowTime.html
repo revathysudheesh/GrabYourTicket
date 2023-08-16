@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+{% extends 'Dashboard.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header"><small>Add</small><strong> Show Time</strong></div>
+                            <div class="card-body card-block">
+                                <form method="post" action="{% url 'update_show_time' dataid=showtime.id %}">
+                                    {% csrf_token %}
+                                    <div class="form-group"><label class=" form-control-label">Status</label>
+                                            <select name="name" id="name" class="form-control" required>
+                                                <option value="{{showtime.ShowTimeName}}">{{showtime.ShowTimeName}}</option>
+                                              <option value="Open" >Show1</option>
+                                              <option value="Closed" >Show2</option>
+                                                <option value="Sold Out" >Show3</option>
+                                           </select>
+                                        </div>
+                                        <div class="form-group"><label class=" form-control-label">Movie Name</label>
+                                            <select name="movie-name" id="movie-name" class="form-control" required>
+                                                <option value="{{showtime.MovieName}}">{{showtime.MovieName}}</option>
+                                              {% for movie in movies %}
+                                                <option value="{{movie.MovieName}}">{{movie.MovieName}}</option>
+                                            {% endfor %}
+                                           </select>
+                                        </div>
+                                        <div class="form-group"><label class=" form-control-label">Screen Name</label>
+                                            <select name="screen-name" id="screen-name" class="form-control" required>
+                                                <option value="{{showtime.ScreenName}}">{{showtime.ScreenName}}</option>
+                                              {% for screen in screens %}
+                                                <option value="{{screen.ScreenName}}">{{screen.ScreenName}}</option>
+                                            {% endfor %}
+                                           </select>
+                                        </div>
+                                        <div class="form-group"><label class="form-control-label">Start Time</label>
+                                            <input type="time" value="{{showtime.StartTime}}" name="start-time" id="start-time" class="form-control"required></input>
+                                        </div>
+                                        <div class="form-group"><label class=" form-control-label">End Time</label>
+                                            <input type="time" value="{{showtime.EndTime}}" name="end-time" id="end-time" class="form-control" required>
+                                        </div>
+                                        <div class="form-group"><label class=" form-control-label">Date</label>
+                                            <input type="date" value="{{showtime.Date|date:'Y-m-d'}}" name="date" id="date" class="form-control" required>
+                                        </div>
+                                        <div class="form-group"><label class=" form-control-label">Price Standard</label>
+                                            <input type="number" value="{{showtime.PriceStandard}}" name="price-std" id="price-std" class="form-control" required>
+                                        </div>
+                                        <div class="form-group"><label class=" form-control-label">Total Standard Tickets</label>
+                                            <input type="number" value="{{showtime.TotalStandardTickets}}" name="total-std" id="total-std" class="form-control" readonly>
+                                        </div>
+                                        <div class="form-group"><label class=" form-control-label">Available Standard Tickets</label>
+                                            <input type="number" value="{{showtime.AvailableStandardTickets}}" name="available-std" id="available-std" class="form-control" readonly>
+                                        </div>
+
+                                        <div class="form-group"><label class=" form-control-label">Price Premium</label>
+                                            <input type="number" value="{{showtime.PricePremium}}" name="price-premium" id="price-premium" class="form-control" required>
+                                        </div>
+                                        <div class="form-group"><label class=" form-control-label">Total Premium Tickets</label>
+                                            <input type="number" value="{{showtime.TotalPremiumTickets}}" name="total-premium" id="total-premium" class="form-control"readonly >
+                                        </div>
+                                        <div class="form-group"><label class=" form-control-label">Available Premium Tickets</label>
+                                            <input type="number" value="{{showtime.AvailablePremiumTickets}}" name="available-premium" id="available-premium" class="form-control" readonly>
+                                        </div>
+                                        <div class="form-group"><label class=" form-control-label">Status</label>
+                                            <select name="status" id="status" class="form-control" required>
+                                                <option value="{{showtime.Status}}">{{showtime.Status}}</option>
+                                              <option value="Open" >Open</option>
+                                              <option value="Closed" >Cancelled</option>
+                                                <option value="Sold Out" >Sold Out</option>
+
+                                           </select>
+                                        </div>
+
+
+
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+
+</div>
+{% block breadcrumbs_js %}
+    <!-- Call the function to update breadcrumbs with the specific menu and submenu names -->
+    <script>
+        currentMenu = 'Manage Show Time';
+        currentSubmenu = 'Add Show Time';
+        updateBreadcrumbs();
+    </script>
+{% endblock %}
+ <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if messages %}
+      {% for i in messages %}
+           {% if i.tags == 'warning' %}
+               <script>
+                    swal('{{i}}','','warning');
+               </script>
+           {% elif i.tags == 'error' %}
+               <script>
+                    swal('{{i}}','','error');
+               </script>
+           {% else %}
+               <script>
+                    swal('{{i}}','','success');
+               </script>
+           {% endif %}
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
+{% endblock %}

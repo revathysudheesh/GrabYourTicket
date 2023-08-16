@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<!-- -->
+    <section class="movie-section padding-top padding-bottom">
+        <div class="container">
+            <div class="row flex-wrap-reverse justify-content-center">
+                <div class="col-sm-10 col-md-8 col-lg-3">
+<!--                    <div class="widget-1 widget-banner">-->
+<!--                        <div class="widget-1-body">-->
+<!--                            <a href="#0">-->
+<!--                                <img src="{% static 'images/sidebar/banner/banner01.jpg' %}" alt="banner">-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <form method="get" action="{% url 'nowshowing' %}">
+                        <div class="widget-1 widget-check">
+                        <div class="widget-header">
+                            <h5 class="m-title">Filter By</h5> <a href="#0" class="clear-check">Clear All</a>
+                        </div>
+                        <div class="widget-1-body">
+                            <h6 class="subtitle">Language</h6>
+                            <div class="check-area">
+                                {% for i in lang %}
+                                <div class="form-group">
+                                    <input type="checkbox" name="langua" id="lang{{ forloop.counter }}" value="{{i}}">
+                                    <label for="lang{{ forloop.counter }}">{{i}}</label>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-1 widget-check">
+                        <div class="widget-1-body">
+                            <h6 class="subtitle">experience</h6>
+                            <div class="check-area">
+                                {% for i in types %}
+                                <div class="form-group">
+                                    <input type="checkbox" name="mode" id="mode{{ forloop.counter }}" value="{{i}}">
+                                    <label for="mode{{ forloop.counter }}">{{i}}</label>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+<!--                            <div class="add-check-area">-->
+<!--                                <a href="#0">view more <i class="plus"></i></a>-->
+<!--                            </div>-->
+                        </div>
+                    </div>
+                    <div class="widget-1 widget-check">
+                        <div class="widget-1-body">
+                            <h6 class="subtitle">genre</h6>
+                            <div class="check-area">
+
+                                <div class="form-group">
+                                    {% for i in genr %}
+                                    <input type="checkbox" name="genre" id="genre{{ forloop.counter }}" value="{{i}}">
+                                    <label for="genre{{ forloop.counter }}">{{i}}</label>
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+<!--                            <div class="add-check-area">-->
+<!--                                <a href="#0">view more <i class="plus"></i></a>-->
+<!--                            </div>-->
+                        </div>
+                    </div>
+                     <div class="widget-1 widget-check">
+                        <div class="widget-1-body">
+                            <div class="check-area">
+
+                                <div class="form-group">
+                                    <button type="submit" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">ApplyFilter</button>
+
+                                </div>
+
+                            </div>
+<!--                            <div class="add-check-area">-->
+<!--                                <a href="#0">view more <i class="plus"></i></a>-->
+<!--                            </div>-->
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <div class="col-lg-9 mb-50 mb-lg-0">
+                    <div class="filter-tab tab">
+                        <div class="filter-area">
+                            <div class="filter-main">
+                                <div class="left">
+
+                                </div>
+                                <ul class="grid-button tab-menu">
+                                    <li>
+                                        <i class="fas fa-th"></i>
+                                    </li>
+                                    <li class="active">
+                                        <i class="fas fa-bars"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-area">
+                            <div class="tab-item">
+                                <div class="row mb-10 justify-content-center">
+                                    {% for i in filtered_movies %}
+                                    <div class="col-sm-6 col-lg-4">
+                                        <div class="movie-grid">
+                                            <div class="movie-thumb c-thumb">
+                                                <a href="{% url 'movie_details' movie_id=i.id %}">
+                                                    <img src="{{i.MoviePoster.url}}" alt="movie">
+                                                </a>
+                                            </div>
+                                            <div class="movie-content bg-one">
+                                                <h5 class="title m-0">
+                                                    <a href="#">{{i.MovieName}}</a>
+                                                </h5>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor%}
+                                </div>
+                            </div>
+                            <div class="tab-item active">
+                                <div class="movie-area mb-10">
+                                    {% for i in filtered_movies %}
+                                    <div class="movie-list">
+                                        <div class="movie-thumb c-thumb">
+                                            <a href="{% url 'movie_details' movie_id=i.id %}" class="w-100 bg_img h-100" data-background="{% static 'images/movie/movie01.jpg' %}">
+                                                <img src="{{i.MoviePoster.url}}" alt="movie">
+
+                                            </a>
+                                        </div>
+                                        <div class="movie-content bg-one">
+                                            <h5 class="title">
+                                                <a href="movie-details.html">{{i.MovieName}}</a>
+                                            </h5>
+                                            <p class="duration">{{i.MovieDuration}}</p>
+                                            <div class="movie-tags">
+                                                <a href="#0">{{i.MovieGenre}}</a>
+                                                <a href="#0">{{i.MovieLanguage}}</a>
+
+                                            </div>
+                                            <div class="release">
+                                                <span>Release Date : </span> <a href="#0"> {{i.MovieRelease}}</a>
+                                            </div>
+
+                                            <div class="book-area">
+                                                <div class="book-ticket">
+                                                    <div class="react-item">
+                                                        <a href="#0">
+                                                            <div class="thumb">
+                                                                <img src="{% static 'images/icons/heart.png' %}" alt="icons">
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="react-item mr-auto">
+                                                        <a href="#0">
+                                                            <div class="thumb">
+                                                                <img src="{% static 'images/icons/book.png' %}" alt="icons">
+                                                            </div>
+                                                            <span>book ticket</span>
+                                                        </a>
+                                                    </div>
+                                                    <div class="react-item">
+                                                        <a href="{{i.MovieTrailer}}" class="popup-video" target="_blank">
+                                                            <div class="thumb">
+                                                                <img src="{% static 'images/icons/play-button.png' %}" alt="icons">
+                                                            </div>
+                                                            <span>watch trailer</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pagination-area text-center">
+                            <a href="#0"><i class="fas fa-angle-double-left"></i><span>Prev</span></a>
+                            <a href="#0">1</a>
+                            <a href="#0">2</a>
+                            <a href="#0" class="active">3</a>
+                            <a href="#0">4</a>
+                            <a href="#0">5</a>
+                            <a href="#0"><span>Next</span><i class="fas fa-angle-double-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
+{% endblock %}

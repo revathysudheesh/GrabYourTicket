@@ -72,10 +72,23 @@
                   <option value="Horror">Horror</option>
                 </select>
               </div>
+                <div class="form-group">
+                <label >Status</label>
+                <select name="status" id="status" class="form-control" required>
+                    <option value="{{movie.MovieStatus}}">{{movie.MovieStatus}}</option>
+                  <option value="Now Showing">Now Showing</option>
+                  <option value="Coming Soon">Coming Soon</option>
+
+                </select>
+              </div>
               <label >Movie Poster</label><br>
               <img src="{{movie.MoviePoster.url}}" width="100px" height="100px"><br>
               <div>
                  <input type="file" name="poster" id="poster" class="form-control"  >
+              </div>
+                <img src="{{movie.MoviePoster1.url}}" width="100px" height="100px"><br>
+              <div>
+                 <input type="file" name="poster1" id="poster1" class="form-control"  >
               </div>
               <div class="form-group">
                 <label >Type</label>
@@ -92,6 +105,10 @@
               <div class="form-group">
                 <label >Duration</label>
                 <input type="text" id="duration" name="duration"  value="{{movie.MovieDuration}}" class="form-control" required>
+              </div>
+                 <div class="form-group">
+                <label >Movie Trailer Link</label>
+                <input type="text" name="link" id="link" value="{{movie.MovieTrailer}}" class="form-control" required >
               </div>
               <button type="button" class="btn btn-primary" onclick="stepper.next()">Next</button>
             </div>

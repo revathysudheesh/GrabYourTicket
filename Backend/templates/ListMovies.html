@@ -113,6 +113,9 @@
                                                         <th style="width:40%">Synopsis</th>
                                                         <th>Type</th>
                                                         <th>Duration</th>
+                                                        <th>Trailer Link</th>
+                                                        <th>Status</th>
+
                                                         <th>Release Date</th>
                                                         <th>Poster</th>
                                                         <th>Actors</th>
@@ -122,15 +125,20 @@
                                                 </thead>
                                                 <tbody>
                                                 {% for i in movie %}
-                                                <td>{{i.MovieName}}</td>
+                                                <tr>
+                                                    <td>{{i.MovieName}}</td>
                                                 <td>{{i.MovieLanguage}}</td>
                                                 <td>{{i.MovieGenre}}</td>
                                                 <td>{{i.MovieSynopsis}}</td>
                                                 <td>{{i.MovieType}}</td>
                                                 <td>{{i.MovieDuration}}</td>
+                                                    <td>{{i.MovieTrailer}}</td>
+                                                <td>{{i.MovieStatus}}</td>
                                                 <td>{{i.MovieRelease|date:"Y-m-d" }}</td>
                                                 <td>
-                                                    <img src="{{i.MoviePoster.url}}" width="100px" height="100px" alt="poster">
+                                                    <img src="{{i.MoviePoster.url}}" width="100px" height="100px" alt="poster"><br><br>
+                                                    <img src="{{i.MoviePoster1.url}}" width="100px" height="100px" alt="poster">
+
                                                 </td>
                                                 <td>{{i.MovieActor1Name}}- <img src="{{i.MovieActor1Image.url}}" width="100px" height="100px" >
                                                     <br>{{i.MovieActor2Name}}- <img src="{{i.MovieActor2Image.url}}" width="100px" height="100px">
@@ -141,15 +149,17 @@
                                                 <td>
                                                         {{i.MovieCrew1Name}}-{{i.MovieCrew1Role}} <img src="{{i.MovieCrew1Image.url}}" width="100px" height="100px" >
                                                     <br>{{i.MovieCrew2Name}}-{{i.MovieCrew2Role}} <img src="{{i.MovieCrew2Image.url}}" width="100px" height="100px" alt="poster">
-                                                    <br>{{i.MovieCrew3Name}}-{{i.MovieCrew3Role}} <img src="{{i.MovieCrew1Image.url}}" width="100px" height="100px" alt="poster">
-                                                    <br>{{i.MovieCrew4Name}}-{{i.MovieCrew4Role}} <img src="{{i.MovieCrew1Image.url}}" width="100px" height="100px" alt="poster">
-                                                    <br>{{i.MovieCrew5Name}}-{{i.MovieCrew5Role}} <img src="{{i.MovieCrew1Image.url}}" width="100px" height="100px" alt="poster">
+                                                    <br>{{i.MovieCrew3Name}}-{{i.MovieCrew3Role}} <img src="{{i.MovieCrew3Image.url}}" width="100px" height="100px" alt="poster">
+                                                    <br>{{i.MovieCrew4Name}}-{{i.MovieCrew4Role}} <img src="{{i.MovieCrew4Image.url}}" width="100px" height="100px" alt="poster">
+                                                    <br>{{i.MovieCrew5Name}}-{{i.MovieCrew5Role}} <img src="{{i.MovieCrew5Image.url}}" width="100px" height="100px" alt="poster">
                                                 </td>
                                                 <td>
                                                     <a href="{% url 'edit_movie' dataid=i.id %}"><i class="menu-icon fa fa-edit"></i></a>
                                                     <a href="{% url 'delete_movie' dataid=i.id %}"><i class="menu-icon fa fa-trash"></i></a>
 
                                                 </td>
+
+                                                </tr>
 
 
 
