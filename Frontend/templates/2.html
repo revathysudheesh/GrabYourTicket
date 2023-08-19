@@ -1,0 +1,39 @@
+<form method="post" action="{% url 'your_submit_url_name' %}">
+    {% csrf_token %}
+    <ul class="seat-layout">
+        {% for row in seat_data_stand|dictsort:"RowName" %}
+            <li class="seat-line">
+                <span>{{ row.RowName }}</span>
+                <ul class="seat--area">
+                    {% for seat in row.value %}
+                        <li class="single-seat" data-status="{{ seat.Status }}" data-seat="{{ seat.SeatNumber }}">
+                            <img src="{% static 'images/movie/seat01-{{ seat.Status }}.png' %}" alt="seat">
+                            <span class="sit-num">{{ seat.SeatNumber }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <span>{{ row.RowName }}N</span>
+            </li>
+        {% endfor %}
+    </ul>
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+    const seats = document.querySelectorAll('.single-seat');
+
+    seats.forEach(seat => {
+        seat.addEventListener('click', function() {
+            const status = this.getAttribute('data-status');
+
+            if (status === 'available') {
+                this.setAttribute('data-status', 'selected');
+            } else if (status === 'selected') {
+                this.setAttribute('data-status', 'available');
+            }
+
+            const img = this.querySelector('img');
+            img.src = img.src.replace(status, this.getAttribute('data-status'));
+        });
+    });
+</script>

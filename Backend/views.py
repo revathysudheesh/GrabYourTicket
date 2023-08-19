@@ -526,16 +526,19 @@ def submit_show_time(request):
         dt = request.POST.get("date")
         ps = request.POST.get("price-std")
         pp = request.POST.get("price-premium")
-        ast= request.POST.get("available-standard")
-        tst= request.POST.get("total-standard")
-        ap = request.POST.get("available-premium")
-        tp = request.POST.get("total-premium")
         stat=request.POST.get("status")
-        obj = ShowTimeDB(ShowTimeName=na,MovieName=mn,ScreenName=sn, StartTime=st, EndTime=et,Date=dt,
-                         PriceStandard=ps, PricePremium=pp,TotalStandardTickets=tst,AvailableStandardTickets=ast,
-                         TotalPremiumTickets=tp,AvailablePremiumTickets=ap, Status=stat)
-        obj.save()
-        return redirect('add_show_time')
+        existing_show = ShowTimeDB.objects.filter(ScreenName=sn, ShowTimeName=na, Date=dt)
+        if existing_show.exists():
+            messages.error(request, "Show already exists")
+            return redirect('add_show_time')
+        else:
+            obj = ShowTimeDB(ShowTimeName=na,MovieName=mn,ScreenName=sn, StartTime=st, EndTime=et,Date=dt,
+                         PriceStandard=ps, PricePremium=pp,TotalStandardTickets=68,AvailableStandardTickets=68,
+                         TotalPremiumTickets=170,AvailablePremiumTickets=170, Status=stat)
+            obj.save()
+            return redirect('add_show_time')
+    return redirect('add_show_time')
+
 
 def list_showtime(request):
     if request.user.is_authenticated:
@@ -571,10 +574,23 @@ def update_show_time(request, dataid):
         ap = request.POST.get("available-premium")
         tp = request.POST.get("total-premium")
         stat=request.POST.get("status")
-        ShowTimeDB.objects.filter(id=dataid).update(ShowTimeName=na,MovieName=mn,ScreenName=sn, StartTime=st, EndTime=et,Date=dt,
+        existing_show = ShowTimeDB.objects.filter(ScreenName=sn, ShowTimeName=na, Date=dt)
+        if existing_show.exists():
+            messages.error(request, "Show already exists")
+            return redirect('list_showtime')
+        else:
+            ShowTimeDB.objects.filter(id=dataid).update(ShowTimeName=na,MovieName=mn,ScreenName=sn, StartTime=st, EndTime=et,Date=dt,
                          PriceStandard=ps, PricePremium=pp,TotalStandardTickets=tst,AvailableStandardTickets=ast,
                          TotalPremiumTickets=tp,AvailablePremiumTickets=ap, Status=stat)
-        return redirect('list_showtime')
+            return redirect('list_showtime')
+    return redirect('list_showtime')
+
+def delete_showtime(request,dataid):
+    data = ShowTimeDB.objects.filter(id=dataid)
+    data.delete()
+    messages.success(request, "Showtime successfully removed from the system..!")
+    return redirect('list_showtime')
+
 
 # def add_seating(request):
 #     if request.user.is_authenticated:
@@ -586,10 +602,13 @@ def update_show_time(request, dataid):
 
 def delete_screen(request, dataid):
     data=ScreenDB.objects.filter(id=dataid)
+    nam=data.ScreenName
     cap=data[0].ScreenCapacity
     theater = TheatreDB.objects.get(id=1)
     theater.TheatreCapacity -= cap
     theater.TheatreScreen -=1
+    showtimes=ShowTimeDB.objects.filter(ScreenName=nam)
+    showtimes.delete()
     theater.save()
     data.delete()
     messages.success(request, "Screen successfully removed from the system..!")

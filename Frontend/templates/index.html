@@ -54,7 +54,7 @@
                 <ul class="menu">
                     <li><a href="{% url 'index' %}" {% if request.resolver_match.url_name == 'index' %} class="active"{% endif %}>Home</a></li>
                     <li>
-                        <a href="#0">Movies</a>
+                        <a href="#0"{% if request.resolver_match.url_name == 'nowshowing' or request.resolver_match.url_name == 'comingsoon' %} class="active"{% endif %}>Movies</a>
                         <ul class="submenu">
                             <li>
                                 <a href="{% url 'nowshowing' %}">Now Showing</a>
@@ -70,7 +70,7 @@
                         <a href="#">BOOKING HISTORY</a>
                     </li>
                     <li>
-                        <a href="#0">{{request.session.UserName}}</a>
+                        <a href="#0"{% if request.resolver_match.url_name == 'my_profile' %} class="active"{% endif %}>{{request.session.UserName}}</a>
                         <ul class="submenu">
                             <li>
                                 <a href="{% url 'my_profile' %}">My Profile</a>
@@ -152,34 +152,17 @@
                 </div>
                 <div class="tab-area">
                     <div>
-                        <form class="ticket-search-form">
-<!--                            <div class="form-group large">-->
-<!--                                <input type="text" placeholder="Search fo Events">-->
-<!--                                <button type="submit"><i class="fas fa-search"></i></button>-->
-<!--                            </div>-->
-<!--                            <div class="form-group">-->
-<!--                                <div >-->
-<!--                                    <img src="{% static 'images/ticket/city.png' %}" alt="ticket">-->
-<!--                                </div>-->
-<!--                                <span class="type">city</span>-->
-<!--                                <select class="select-bar">-->
-<!--                                    <option value="london">London</option>-->
-<!--                                    <option value="dhaka">dhaka</option>-->
-<!--                                    <option value="rosario">rosario</option>-->
-<!--                                    <option value="madrid">madrid</option>-->
-<!--                                    <option value="koltaka">kolkata</option>-->
-<!--                                    <option value="rome">rome</option>-->
-<!--                                    <option value="khoksa">khoksa</option>-->
-<!--                                </select>-->
-<!--                            </div>-->
+                        <form class="ticket-search-form" method="post" action="{% url 'seating_plan'%}">
+                            {% csrf_token %}
+
                             <div class="form-group">
                                 <div class="thumb">
                                     <img src="{% static 'images/ticket/date.png' %}" alt="ticket">
                                 </div>
                                 <span class="type">date</span>
-                                <select class="select-bar">
+                                <select class="select-bar" name="selected_date">
                                     {% for date in next_three_days %}
-                                        <option value="{{ date }}">{{ date|date:"F j, Y" }}</option>
+                                        <option value="{{ date|date:"Y-m-d" }}">{{ date|date:"F j, Y" }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -188,17 +171,22 @@
                                     <img src="{% static 'images/ticket/cinema.png' %}" alt="ticket">
                                 </div>
                                 <span class="type">movie</span>
-                                <select class="select-bar">
-                                    {% for i in movies %}
+                                <select class="select-bar" name="selected_movie">
+                                    {% for i in now_movie %}
                                         <option value="{{i.MovieName}}">{{i.MovieName}}</option>
                                     {% endfor %}
 
                                 </select>
+
                             </div>
+
                             <div class="form-group">
-                                <a href="{% url 'seating_plan' %}" class="custom-button">book tickets</a>
+                                <button type="submit" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%); color:white; border-radius:14px; width:150px; text-align:center">Book Now</button>
                             </div>
                         </form>
+                        <div class="form-group">
+</div>
+
                     </div>
 
                 </div>

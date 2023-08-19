@@ -12,6 +12,14 @@
                             <div class="card-body card-block">
                                 <form method="post" action="{% url 'submit_show_time' %}">
                                     {% csrf_token %}
+                                    <div class="form-group"><label class=" form-control-label">Scren Name</label>
+
+                                            <select name="screen-name" id="screen-name" class="form-control" required>
+                                              {% for screen in screens %}
+                                                <option value="{{screen.ScreenName}}">{{screen.ScreenName}}</option>
+                                            {% endfor %}
+                                           </select>
+                                        </div>
                                     <div class="form-group"><label class=" form-control-label">ShowTime Name</label>
                                             <select name="showtime-name" id="showtime-name" class="form-control" required>
                                               <option value="Open" >Show1</option>
@@ -28,14 +36,7 @@
                                             {% endfor %}
                                            </select>
                                         </div>
-                                        <div class="form-group"><label class=" form-control-label">Scren Name</label>
 
-                                            <select name="screen-name" id="screen-name" class="form-control" required>
-                                              {% for screen in screens %}
-                                                <option value="{{screen.ScreenName}}">{{screen.ScreenName}}</option>
-                                            {% endfor %}
-                                           </select>
-                                        </div>
                                         <div class="form-group"><label class="form-control-label">Start Time</label>
                                             <input type="time" placeholder="Start Time" name="start-time" id="start-time" class="form-control"required></input>
                                         </div>
@@ -48,30 +49,30 @@
                                         <div class="form-group"><label class=" form-control-label">Price Standard</label>
                                             <input type="number" placeholder="Price Standard" name="price-std" id="price-std" class="form-control" required>
                                         </div>
-                                        <div class="form-group"><label class=" form-control-label">Total Standard Tickets</label>
-                                            <input type="number" placeholder="Total Standard Tickets" name="total-std" id="total-std" class="form-control" required>
-                                        </div>
-                                        <div class="form-group"><label class=" form-control-label">Available Standard Tickets</label>
-                                            <input type="number" placeholder="Available Standard Tickets" name="available-std" id="available-std" class="form-control" required>
-                                        </div>
+<!--                                        <div class="form-group"><label class=" form-control-label">Total Standard Tickets</label>-->
+<!--                                            <input type="number" placeholder="Total Standard Tickets" name="total-std" id="total-std" class="form-control" required>-->
+<!--                                        </div>-->
+<!--                                        <div class="form-group"><label class=" form-control-label">Available Standard Tickets</label>-->
+<!--                                            <input type="number" placeholder="Available Standard Tickets" name="available-std" id="available-std" class="form-control" required>-->
+<!--                                        </div>-->
 
                                         <div class="form-group"><label class=" form-control-label">Price Premium</label>
                                             <input type="number" placeholder="Price Premium" name="price-premium" id="price-premium" class="form-control" required>
                                         </div>
-                                        <div class="form-group"><label class=" form-control-label">Total Premium Tickets</label>
-                                            <input type="number" placeholder="Total Premium Tickets" name="total-premium" id="total-premium" class="form-control" required>
-                                        </div>
-                                        <div class="form-group"><label class=" form-control-label">Available Premium Tickets</label>
-                                            <input type="number" placeholder="Available Premium Tickets" name="available-premium" id="available-premium" class="form-control" required>
-                                        </div>
-                                        <div class="form-group"><label class=" form-control-label">Status</label>
-                                            <select name="status" id="status" class="form-control" required>
-                                              <option value="Open" >Active</option>
-                                              <option value="Closed" >Cancelled</option>
-                                                <option value="Sold Out" >Sold Out</option>
+<!--                                        <div class="form-group"><label class=" form-control-label">Total Premium Tickets</label>-->
+<!--                                            <input type="number" placeholder="Total Premium Tickets" name="total-premium" id="total-premium" class="form-control" required>-->
+<!--                                        </div>-->
+<!--                                        <div class="form-group"><label class=" form-control-label">Available Premium Tickets</label>-->
+<!--                                            <input type="number" placeholder="Available Premium Tickets" name="available-premium" id="available-premium" class="form-control" required>-->
+<!--                                        </div>-->
+<!--                                        <div class="form-group"><label class=" form-control-label">Status</label>-->
+<!--                                            <select name="status" id="status" class="form-control" required>-->
+<!--                                              <option value="Open" >Active</option>-->
+<!--                                              <option value="Closed" >Cancelled</option>-->
+<!--                                                <option value="Sold Out" >Sold Out</option>-->
 
-                                           </select>
-                                        </div>
+<!--                                           </select>-->
+<!--                                        </div>-->
 
 
 
@@ -111,6 +112,9 @@
            {% endif %}
         {% endfor %}
     {% endif %}
+<script >
+
+</script>
 </body>
 </html>
 {% endblock %}

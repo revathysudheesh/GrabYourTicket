@@ -2,6 +2,8 @@ from django.urls import path
 from Frontend import views
 urlpatterns=[path('index/', views.index, name='index'),
              path('seating_plan/', views.seating_plan, name='seating_plan'),
+             path('submit_booking/', views.submit_booking, name='submit_booking'),
+             path('movie_checkout/', views.movie_checkout, name='movie_checkout'),
              path('nowshowing/', views.nowshowing, name='nowshowing'),
              path('comingsoon/', views.comingsoon, name='comingsoon'),
              path('contactus/', views.contactus, name='contactus'),
@@ -13,5 +15,4 @@ urlpatterns=[path('index/', views.index, name='index'),
              path('save_message/', views.save_message, name='save_message'),
              path('post_review/<int:movie_id>/', views.post_review, name='post_review'),
              path('my_profile/', views.my_profile, name='my_profile'),
-
              ]
