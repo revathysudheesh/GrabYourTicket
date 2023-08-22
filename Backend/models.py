@@ -29,6 +29,8 @@ class MovieDB(models.Model):
     MovieGenre = models.CharField(max_length=200, null=True, blank=True)
     MoviePoster = models.ImageField(upload_to='MoviePoster', null=True, blank=True)
     MoviePoster1 = models.ImageField(upload_to='MoviePoster', null=True, blank=True)
+    MoviePoster2 = models.ImageField(upload_to='MoviePoster', null=True, blank=True)
+    MoviePoster3 = models.ImageField(upload_to='MoviePoster', null=True, blank=True)
     MovieType = models.CharField(max_length=2, null=True, blank=True)
     MovieSynopsis = models.CharField(max_length=500, null=True, blank=True)
     MovieDuration= models.CharField(max_length=10, null=True, blank=True)

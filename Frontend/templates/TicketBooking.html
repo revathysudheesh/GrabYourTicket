@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+ <section class="details-banner hero-area bg_img seat-plan-banner" data-background="{% static 'images/banner/banner04.jpg' %}">
+        <div class="container">
+            <div class="details-banner-wrapper">
+                <div class="details-banner-content style-two">
+                    <h3 class="title">{{movie_name}}</h3>
+
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="search-tab bg_img" data-background="{% static 'images/ticket/ticket-bg.jpg' %}">
+                <div class="row align-items-center mb--20">
+                    <div class="col-lg-6 mb-20">
+                        <div class="search-ticket-header">
+<!--                            <h6 class="category">Welcome to Boleto </h6>-->
+<!--                            <h3 class="title">Make a Quick Book</h3>-->
+                        </div>
+                    </div>
+
+                </div>
+                <div class="tab-area">
+                    <div>
+                        <form class="ticket-search-form" method="post" action="{% url 'seating_plan'%}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <div class="thumb">
+                                    <img src="{% static 'images/ticket/date.png' %}" alt="ticket">
+                                </div>
+                                <span class="type">date</span>
+                                <select class="select-bar" name="selected_date">
+                                    {% for date in next_three_days %}
+                                        <option value="{{ date|date:"Y-m-d" }}">{{ date|date:"F j, Y" }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div class="thumb">
+                                    <img src="{% static 'images/ticket/cinema.png' %}" alt="ticket">
+                                </div>
+                                <span class="type">{{movie_name}}</span>
+                                <input type="hidden" name="selected_movie" value="{{movie_name}}">
+
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%); color:white; border-radius:14px; width:150px; text-align:center">Book Now</button>
+                            </div>
+
+                        </form>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="page-title bg-one">
+        <div class="container">
+            <div class="page-title-area">
+                <div class="item md-order-1">
+                    <a href="{% url 'index' %}" class="custom-button back-button">
+                        <i class="flaticon-double-right-arrows-angles"></i>back
+                    </a>
+                </div>
+        </div>
+    </section>
+    <!-- ==========Page-Title========== -->
+
+    <!-- ==========Movie-Section========== -->
+
+
+</body>
+</html>
+{% endblock %}

@@ -58,13 +58,14 @@
                         <div class="widget-1-body">
                             <h6 class="subtitle">genre</h6>
                             <div class="check-area">
-
+{% for i in genr %}
                                 <div class="form-group">
-                                    {% for i in genr %}
+
                                     <input type="checkbox" name="genre" id="genre{{ forloop.counter }}" value="{{i}}">
                                     <label for="genre{{ forloop.counter }}">{{i}}</label>
-                                    {% endfor %}
+
                                 </div>
+                                {% endfor %}
 
                             </div>
 <!--                            <div class="add-check-area">-->

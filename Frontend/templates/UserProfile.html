@@ -72,7 +72,7 @@ color:black;
 <section class="main-page-header speaker-banner bg_img" data-background="{% static 'images/contact/contactus.avif' %}">
         <div class="container">
             <div class="speaker-banner-content">
-                <h2 class="title">contact us</h2>
+                <h2 class="title">My Profile</h2>
                 <ul class="breadcrumb">
                     <li>
                         <a href="{% url 'index' %}">
@@ -95,22 +95,25 @@ color:black;
                 <div class="card-header">Profile Picture</div>
                 <div class="card-body text-center">
                     <!-- Profile picture image-->
+                    {% if user_details.UserImage %}
+                    <img class="img-account-profile rounded-circle mb-2" src="{{user_details.UserImage.url}}" alt="">
+                    {% else %}
                     <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                    {% endif %}
                     <!-- Profile picture help block-->
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                     <!-- Profile picture upload button-->
-                    <form>
+                    <form method="post" action="{% url 'update_profile' dataid=user_details.id %}" enctype="multipart/form-data">
+                        {% csrf_token %}
                         <div class="d-flex justify-content-center">
                             <div class="input-group">
                                   <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                      aria-describedby="inputGroupFileAddon01">
-                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                      <input type="file" name="img" id="img" class="form-control"  >
                                   </div>
                             </div>
 
                         </div><br>
-                        <button style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);border-radius:25px;">Submit</button>
+                        <button type="submit" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);border-radius:25px;">Submit</button>
                     </form>
                 </div>
             </div>
@@ -120,8 +123,8 @@ color:black;
             <div class="card mb-4">
                 <div class="card-header">Account Details</div>
                 <div class="card-body">
-                    <form>
-                        <!-- Form Group (username)-->
+                    <form method="post" action="{% url 'update_profile' dataid=user_details.id %}" enctype="multipart/form-data">
+                        {% csrf_token %}
                         <div class="mb-3">
                             <label class="small mb-1" for="inputUsername">Username (how your name will appear to other users on the site)</label>
                             <input class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="{{user_details.UserName}}" readonly>
@@ -131,12 +134,12 @@ color:black;
                             <!-- Form Group (first name)-->
                             <div class="col-md-6">
                                 <label class="small mb-1" for="inputFirstName">First name</label>
-                                <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" >
+                                <input class="form-control" id="inputFirstName" name="inputFirstName" type="text" value="{% if user_details.UserFirstName %}{{ user_details.UserFirstName }}{% else %}Enter your First Name{% endif %}" required>
                             </div>
                             <!-- Form Group (last name)-->
                             <div class="col-md-6">
                                 <label class="small mb-1" for="inputLastName">Last name</label>
-                                <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" >
+                                <input class="form-control" id="inputLastName" name="inputLastName" type="text" value="{% if user_details.UserLastName %}{{ user_details.UserLastName }}{% else %}Enter your Last Name{% endif %}" required>
                             </div>
                         </div>
                         <!-- Form Row        -->
@@ -144,30 +147,21 @@ color:black;
                             <!-- Form Group (organization name)-->
                             <div class="col-md-6">
                              <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                            <input class="form-control" id="inputEmailAddress" type="email" value="{{user_details.UserEmail}}" >
+                            <input class="form-control" id="inputEmailAddress" name="inputEmailAddress" type="email" value="{{user_details.UserEmail}}" required>
                             </div>
                             <!-- Form Group (location)-->
+
                             <div class="col-md-6">
-                                <label class="small mb-1" for="inputAddress">Address</label>
-                                <input class="form-control" id="inputAddress" type="text" placeholder="Enter your location" value="Enter Your Address">
+                                <label class="small mb-1" for="inputPhone">Phone number</label>
+                                <input class="form-control" id="inputPhone" type="tel" name="inputPhone" placeholder="Enter your phone number" value="{{user_details.UserContact}}" required>
                             </div>
                         </div>
                         <!-- Form Group (email address)-->
-                        <div class="mb-3">
 
-                        </div>
                         <!-- Form Row-->
-                        <div class="row gx-3 mb-3">
-                            <!-- Form Group (phone number)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputPhone">Phone number</label>
-                                <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" value="{{user_details.UserContact}}">
-                            </div>
-                            <!-- Form Group (birthday)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputBirthday">Birthday</label>
-                                <input class="form-control" id="inputBirthday" type="text" name="birthday" placeholder="Enter your birthday" value="dd/mm/yyyy">
-                            </div>
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputAddress">Address</label>
+                            <input class="form-control" id="inputAddress" type="text" name="inputAddress" value="{% if user_details.UserAddress %}{{ user_details.UserAddress }}{% else %}Enter your Address{% endif %}">
                         </div>
                         <!-- Save changes button-->
                         <button style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);border-radius:25px;" type="submit">Save changes</button>
@@ -177,7 +171,26 @@ color:black;
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    {% if messages %}
+      {% for i in messages %}
+           {% if i.tags == 'warning' %}
+               <script>
+                    swal('{{i}}','','warning');
+               </script>
+           {% elif i.tags == 'error' %}
+               <script>
+                    swal('{{i}}','','error');
+               </script>
+           {% else %}
+               <script>
+                    swal('{{i}}','','success');
+               </script>
+           {% endif %}
+        {% endfor %}
+    {% endif %}
 
 
 </body>

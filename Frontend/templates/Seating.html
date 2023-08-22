@@ -32,21 +32,20 @@
                 {% csrf_token %}
                 <div class="item date-item">
                     <span class="date">{{selected_date}}</span>
+                    <input type="hidden" value="{{selected_date}}" id="selectedDate" name="selectedDate">
                     <input type="hidden" value="{{selected_movie}}" id="movieName" name="movieName">
 
                     {% for i in show %}
                     <select class="select-bar">
                         <option value="{{i.ShowTimeName}}|{{i.StartTime}}">{{i.ShowTimeName}}|{{i.StartTime}}</option>
-<input type="hidden" id="premium-price" value="{{ i.PricePremium }}">
-<input type="hidden" id="standard-price" value="{{ i.PriceStandard }}">
+                        <input type="hidden" id="premium-price" value="{{ i.PricePremium }}">
+                        <input type="hidden" id="standard-price" value="{{ i.PriceStandard }}">
                         <input type="hidden" value="{{i.ShowTimeName}}" id="showName" name="showName">
                         <input type="hidden" value="{{i.StartTime}}" id="showStartTime" name="showStartTime">
-
-
-
                         {% endfor %}
                     </select>
                 </div>
+
 
             </div>
         </div>
@@ -78,7 +77,6 @@
                                     <img src="{% static seat_image %}" alt="seat">
                                             <span class="sit-num">{{i.SeatNumber}}</span>
                                     <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
-
                                     {% endwith %}
                                 </li>
                                 {% endfor %}
@@ -162,7 +160,8 @@
                                     {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
                                             <img src="{% static seat_image %}" alt="seat">
                                             <span class="sit-num">{{i.SeatNumber}}</span>
-                                                                        <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+                                    <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+
 
                                     {%endwith %}
                                 </li>
@@ -267,20 +266,20 @@
                             <span>C</span>
                         </li>
                         <li class="seat-line">
-                            <span>b</span>
-                            <ul class="seat--area" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
+                            <span>a</span>
+                            <ul class="seat--area">
                                 {% for i in seat_data_B %}
-                                <li class="single-seat">
+                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
                                     {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
-                                            <img src="{% static seat_image %}" alt="seat">
+                                    <img src="{% static seat_image %}" alt="seat">
                                             <span class="sit-num">{{i.SeatNumber}}</span>
-                                                                        <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+                                    <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
 
                                     {% endwith %}
                                 </li>
                                 {% endfor %}
                             </ul>
-                            <span>B</span>
+                            <span>A</span>
                         </li>
                         <li class="seat-line">
                             <span>a</span>
@@ -314,6 +313,8 @@
                     </div>
                     <input type="hidden" value="{{request.session.UserName}}" id="userName" name="userName">
                     <input type="hidden" id="finalPrice" name="finalPrice">
+                    <input type="hidden" id="chosenSeats" name="chosenSeats">
+                    <input type="hidden" id="chosenTypes" name="chosenTypes">
 
 
 
@@ -359,10 +360,12 @@
                 }
 
 <!--                chosenSeatsElement.textContent = selectedSeats.map(seat => seat.seatNumber).join(', ');-->
-                                chosenSeatsElement.textContent = selectedSeats.map(seat => `${seat.seatNumber} (${seat.seatType})`).join(', ');
+                    chosenSeatsElement.textContent = selectedSeats.map(seat => `${seat.seatNumber} (${seat.seatType})`).join(', ');
 
                 totalPriceElement.textContent = `₹${totalPrice}`;
                 document.getElementById("finalPrice").value = totalPrice;
+                 document.getElementById("chosenTypes").value= selectedSeats.map(seat => seat.seatType);
+                document.getElementById("chosenSeats").value = selectedSeats.map(seat => `${seat.seatNumber} (${seat.seatType})`).join(', ');
 
 
                 const img = this.querySelector('img');

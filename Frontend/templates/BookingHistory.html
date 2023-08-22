@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        h1{
+  font-size: 30px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 15px;
+}
+table{
+  width:100%;
+  table-layout: fixed;
+}
+.tbl-header{
+  background-color: rgba(255,255,255,0.3);
+ }
+.tbl-content{
+  height:300px;
+  overflow-x:auto;
+  margin-top: 0px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+th{
+  padding: 20px 15px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  color: #fff;
+  text-transform: uppercase;
+}
+td{
+  padding: 15px;
+  text-align: left;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 12px;
+  color: #fff;
+  border-bottom: solid 1px rgba(255,255,255,0.1);
+}
+
+
+/* demo styles */
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+body{
+
+  font-family: 'Roboto', sans-serif;
+}
+.section1{
+
+  margin: 200px;
+
+}
+
+
+/* follow me template */
+.made-with-love {
+  margin-top: 40px;
+  padding: 10px;
+  clear: left;
+  text-align: center;
+  font-size: 10px;
+  font-family: arial;
+  color: #fff;
+}
+.made-with-love i {
+  font-style: normal;
+  color: #F50057;
+  font-size: 14px;
+  position: relative;
+  top: 2px;
+}
+.made-with-love a {
+  color: #fff;
+  text-decoration: none;
+}
+.made-with-love a:hover {
+  text-decoration: underline;
+}
+
+
+/* for custom scrollbar for webkit browser*/
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+    </style>
+    <script !src="">
+    $(window).on("load resize ", function() {
+  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+  $('.tbl-header').css({'padding-right':scrollWidth});
+}).resize();
+</script>
+</head>
+<body>
+<!-- ==========Banner-Section========== -->
+    <section class="main-page-header speaker-banner bg_img" data-background="{% static 'images/contact/contactus.avif' %}">
+        <div class="container">
+            <div class="speaker-banner-content">
+                <h2 class="title">Booking History</h2>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{% url 'index' %}">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        Booking History
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+<section class="section1">
+  <!--for demo wrap-->
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+
+          <th>Movie Name</th>
+          <th>Screen Name</th>
+          <th>Show Name</th>
+          <th>Date of Show</th>
+          <th>Show  Time</th>
+          <th>No of Seats</th>
+          <th>Seat Numbers</th>
+          <th>Amount Paid</th>
+          <th>Booked Date</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+      {% for i in bookings %}
+        <tr>
+          <td>{{i.MovieName}}</td>
+          <td>{{i.ScreenName}} </td>
+          <td>{{i.ShowName}}</td>
+          <td>{{i.SelectedDate}}</td>
+          <td>{{i.StartTime}}</td>
+          <td>{{i.NoOfSeats}}</td>
+          <td>{{i.SeatNumbers}}</td>
+          <td>{{i.AmountToBePaid}}</td>
+          <td>{{i.BookedDate}}</td>
+            <td>
+                <a href="{% url 'download_booking_pdf' i.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+</svg></a>
+
+            </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+</body>
+</html>
+{% endblock %}

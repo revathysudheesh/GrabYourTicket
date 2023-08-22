@@ -100,7 +100,11 @@
 <!--                        <p><a href="#0">Rate It</a></p>-->
 <!--                    </div>-->
 <!--                </div>-->
-                <a href="#0" class="custom-button">book tickets</a>
+                <form action="{% url 'ticket_booking' data_id=movie.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">Book Tickets</button>
+
+                </form>
             </div>
         </div>
     </section>
@@ -166,9 +170,20 @@
                     <div class="movie-details">
                         <h3 class="title">photos</h3>
                         <div class="details-photos owl-carousel">
+
                             <div class="thumb">
-                                <a href="{{movie.MoviePoster.url}}" class="img-pop">
-                                    <img src="{{movie.MoviePoster.url}}" alt="movie" width="210px" height="112px">
+                                <a href="{{movie.MoviePoster1.url}}" class="img-pop">
+                                    <img src="{{movie.MoviePoster1.url}}" alt="movie" width="210px" height="112px">
+                                </a>
+                            </div>
+                           <div class="thumb">
+                                <a href="{{movie.MoviePoster2.url}}" class="img-pop">
+                                    <img src="{{movie.MoviePoster2.url}}" alt="movie" width="210px" height="112px">
+                                </a>
+                            </div>
+                            <div class="thumb">
+                                <a href="{{movie.MoviePoster3.url}}" class="img-pop">
+                                    <img src="{{movie.MoviePoster3.url}}" alt="movie" width="210px" height="112px">
                                 </a>
                             </div>
                             <div class="thumb">
@@ -176,14 +191,14 @@
                                     <img src="{{movie.MoviePoster1.url}}" alt="movie" width="210px" height="112px">
                                 </a>
                             </div>
-                            <div class="thumb">
-                                <a href="{{movie.MoviePoster.url}}" class="img-pop">
-                                    <img src="{{movie.MoviePoster.url}}" alt="movie" width="210px" height="112px">
+                           <div class="thumb">
+                                <a href="{{movie.MoviePoster2.url}}" class="img-pop">
+                                    <img src="{{movie.MoviePoster2.url}}" alt="movie" width="210px" height="112px">
                                 </a>
                             </div>
                             <div class="thumb">
-                                <a href="{{movie.MoviePoster1.url}}" class="img-pop">
-                                    <img src="{{movie.MoviePoster1.url}}" alt="movie" width="210px" height="112px">
+                                <a href="{{movie.MoviePoster3.url}}" class="img-pop">
+                                    <img src="{{movie.MoviePoster3.url}}" alt="movie" width="210px" height="112px">
                                 </a>
                             </div>
 

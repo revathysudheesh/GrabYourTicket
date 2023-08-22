@@ -111,8 +111,8 @@
                                                         <th>Total Seats</th>
                                                         <th>Premium Seats</th>
                                                         <th>Standard Seats</th>
-                                                        <th>Status</th>
-                                                        <th>Action</th>
+<!--                                                        <th>Status</th>-->
+<!--                                                        <th>Action</th>-->
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -122,10 +122,10 @@
                                                 <td>{{i.ScreenCapacity}}</td>
                                                 <td>{{i.PremiumCapacity}}</td>
                                                 <td>{{i.StandardCapacity}}</td>
-                                                <td>{{i.ScreenStatus}}</td>
-                                                <td>
-                                                <a href="{% url 'delete_screen' dataid=i.id %}"><i class="menu-icon fa fa-trash"></i></a>
-                                                </td>
+<!--                                                <td>{{i.ScreenStatus}}</td>-->
+<!--                                                <td>-->
+<!--                                                <a href="{% url 'delete_screen' dataid=i.id %}"><i class="menu-icon fa fa-trash"></i></a>-->
+<!--                                                </td>-->
                                                 </tr>
 
                                                 {% endfor %}
@@ -180,51 +180,11 @@
 {% block breadcrumbs_js %}
     <!-- Call the function to update breadcrumbs with the specific menu and submenu names -->
     <script>
-        currentMenu = 'Manage Admins';
-        currentSubmenu = 'List Admins';
+        currentMenu = 'Manage Screens';
+        currentSubmenu = 'List Screens';
         updateBreadcrumbs();
     </script>
-<script>
-  function showScaledImage() {
-    // Get the image element
-    const image = document.getElementById('scaling-image');
 
-    // Get the modal dialog and its content
-    const modal = document.createElement('div');
-    modal.classList.add('modal');
-    const modalContent = document.createElement('div');
-    modalContent.classList.add('modal-content');
-
-    // Create an image element to display the scaled image
-    const scaledImage = document.createElement('img');
-    scaledImage.src = image.src;
-    scaledImage.style.width = '100%';
-    scaledImage.alt = 'Scaled Image';
-
-    // Add the scaled image to the modal content
-    modalContent.appendChild(scaledImage);
-
-    // Add a close button to the modal
-    const closeButton = document.createElement('span');
-    closeButton.classList.add('close');
-    closeButton.innerHTML = '&times;';
-
-    // Function to close the modal when the close button is clicked
-    closeButton.onclick = function() {
-      modal.style.display = 'none';
-    };
-
-    // Add the close button to the modal content
-    modalContent.appendChild(closeButton);
-
-    // Add the modal content to the modal dialog
-    modal.appendChild(modalContent);
-
-    // Show the modal
-    document.body.appendChild(modal);
-    modal.style.display = 'block';
-  }
-</script>
 
 
 {% endblock %}

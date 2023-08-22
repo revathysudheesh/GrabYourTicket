@@ -12,10 +12,10 @@
         <div class="container">
             <div class="details-banner-wrapper">
                 <div class="details-banner-content style-two">
-                    <h3 class="title">Venus</h3>
+                    <h3 class="title">{{movieName}}</h3>
                     <div class="tags">
-                        <a href="#0">City Walk</a>
-                        <a href="#0">English - 2D</a>
+                        <a href="#0">{{screenName}}</a>
+                        <a href="#0">{{movieLang}} - {{movieType}}</a>
                     </div>
                 </div>
             </div>
@@ -33,18 +33,16 @@
                     </a>
                 </div>
                 <div class="item date-item">
-                    <span class="date">MON, SEP 09 2020</span>
+                    <span class="date">{{selectedDate}}</span>
                     <select class="select-bar">
-                        <option value="sc1">09:40</option>
-                        <option value="sc2">13:45</option>
-                        <option value="sc3">15:45</option>
-                        <option value="sc4">19:50</option>
+                        <option value="showStartTime">{{showStartTime}}</option>
+
                     </select>
                 </div>
-                <div class="item">
-                    <h5 class="title">05:00</h5>
-                    <p>Mins Left</p>
-                </div>
+<!--                <div class="item">-->
+<!--                    <h5 class="title">05:00</h5>-->
+<!--                    <p>Mins Left</p>-->
+<!--                </div>-->
             </div>
         </div>
     </section>
@@ -53,28 +51,22 @@
     <!-- ==========Movie-Section========== -->
     <div class="movie-facility padding-bottom padding-top">
         <div class="container">
-            <div class="row">
+            <form action="{% url 'confirm_booking' %}" method="post">
+                {% csrf_token %}
+                <div class="row">
                 <div class="col-lg-8">
-                    <div class="checkout-widget d-flex flex-wrap align-items-center justify-cotent-between">
-                        <div class="title-area">
-                            <h5 class="title">Already a Boleto  Member?</h5>
-                            <p>Sign in to earn points and make booking easier!</p>
-                        </div>
-                        <a href="#0" class="sign-in-area">
-                            <i class="fas fa-user"></i><span>Sign in</span>
-                        </a>
-                    </div>
+
                     <div class="checkout-widget checkout-contact">
                         <h5 class="title">Share your Contact  Details </h5>
                         <form class="checkout-contact-form">
                             <div class="form-group">
-                                <input type="text" placeholder="Full Name">
+                                <input type="text" value="{{userName}}" readonly>
                             </div>
                             <div class="form-group">
-                                <input type="text" placeholder="Enter your Mail">
+                                <input type="email" value="{{userEmail}}" readonly>
                             </div>
                             <div class="form-group">
-                                <input type="text" placeholder="Enter your Phone Number ">
+                                <input type="text" value="{{userContact}}" readonly>
                             </div>
                             <div class="form-group">
                                 <input type="submit" value="Continue" class="custom-button">
@@ -97,19 +89,19 @@
                         <ul class="payment-option">
                             <li class="active">
                                 <a href="#0">
-                                    <img src="assets/images/payment/card.png" alt="payment">
+                                    <img src="{% static 'images/payment/card.png' %}" alt="payment">
                                     <span>Credit Card</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#0">
-                                    <img src="assets/images/payment/card.png" alt="payment">
+                                    <img src="{% static 'images/payment/card.png' %}" alt="payment">
                                     <span>Debit Card</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#0">
-                                    <img src="assets/images/payment/paypal.png" alt="payment">
+                                    <img src="{% static 'images/payment/paypal.png' %}" alt="payment">
                                     <span>paypal</span>
                                 </a>
                             </li>
@@ -156,39 +148,29 @@
                         <h4 class="title">booking summery</h4>
                         <ul>
                             <li>
-                                <h6 class="subtitle">Venus</h6>
-                                <span class="info">English-2d</span>
+                                <h6 class="subtitle">{{movieName}}</h6>
+                                <span class="info">{{movieLang}}-{{movieType}}</span>
                             </li>
                             <li>
-                                <h6 class="subtitle"><span>City Walk</span><span>02</span></h6>
-                                <div class="info"><span>10 SEP TUE, 11:00 PM</span> <span>Tickets</span></div>
+                                <h6 class="subtitle"><span>{{screenName}}</span><span>{{chosenSeats}}</span></h6>
+                                <div class="info"><span>{{selectedDate}}</span></div>
                             </li>
                             <li>
-                                <h6 class="subtitle mb-0"><span>Tickets  Price</span><span>$150</span></h6>
+                                <h6 class="subtitle mb-0"><span>Tickets  Price</span><span>{{finalPrice}}</span></h6>
                             </li>
                         </ul>
-                        <ul class="side-shape">
-                            <li>
-                                <h6 class="subtitle"><span>combos</span><span>$57</span></h6>
-                                <span class="info"><span>2 Nachos Combo</span></span>
-                            </li>
-                            <li>
-                                <h6 class="subtitle"><span>food & bevarage</span></h6>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <span class="info"><span>price</span><span>$207</span></span>
-                                <span class="info"><span>vat</span><span>$15</span></span>
-                            </li>
-                        </ul>
+
                     </div>
                     <div class="proceed-area  text-center">
-                        <h6 class="subtitle"><span>Amount Payable</span><span>$222</span></h6>
-                        <a href="#0" class="custom-button back-button">proceed</a>
+                        <h6 class="subtitle"><span>Amount Payable</span><span>{{finalPrice}}</span></h6>
+                        <input type="hidden" name="selected_seats" value="{{selectedSeat}}">
+                        <input type="hidden" name="selected_seats_type" value="{{chosenSeats}}">
+                    <button type="submit" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">Proceed</button>
                     </div>
                 </div>
             </div>
+            </form>
+
         </div>
     </div>
     <!-- ==========Movie-Section========== -->

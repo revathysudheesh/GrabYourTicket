@@ -2,6 +2,18 @@ from django.shortcuts import render, redirect
 from datetime import datetime, timedelta
 from Backend.models import MovieDB, ShowTimeDB
 from Frontend.models import UserDB, ReviewDB,UserMessagesDB,SeatDB, UserBookingDB
+from django.contrib import messages
+from django.urls import reverse
+import ast
+from django.http import FileResponse
+from reportlab.pdfgen import canvas
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
+from django.core.files.storage import FileSystemStorage
+from django.utils.datastructures import MultiValueDictKeyError
+
+
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password, check_password
 
@@ -26,6 +38,7 @@ def nowshowing(request):
     movies=MovieDB.objects.filter(MovieStatus="Now Showing")
     languages = request.GET.getlist('langua')
     genres = request.GET.getlist('genre')
+    print(genres)
     modes = request.GET.getlist('mode')
     filtered_movies = MovieDB.objects.filter(MovieStatus="Now Showing")
     #print("ffdaDA", languages)
@@ -138,7 +151,6 @@ def save_message(request):
         obj.save()
         return redirect(contactus)
 
-@login_required
 def my_profile(request):
     username = request.session.get("UserName")
     user_details = UserDB.objects.get(UserName=username)
@@ -170,50 +182,49 @@ def seating_plan(request):
     selected_date = request.POST.get('selected_date')
     selected_movie = request.POST.get('selected_movie')
     ShowTimeNames = ShowTimeDB.objects.filter(MovieName=selected_movie, Date=selected_date).values_list('ShowTimeName', flat= True)
-    for show_name in ShowTimeNames:
-        initialize_seat_statuses(selected_date, show_name)
-    seat_data = SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames)
-    seat_data_A=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="A")
-    seat_data_B=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="B")
-    seat_data_C=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="C")
-    seat_data_D=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="D")
-    seat_data_E=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="E")
-    seat_data_F=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="F")
-    seat_data_G=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="G")
-    seat_data_H=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="H")
-    seat_data_I=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="I")
-    seat_data_J=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="J")
-    seat_data_K=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Standard", RowNumber="K")
-    seat_data_L=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Standard", RowNumber="L")
-    seat_data_M=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Standard", RowNumber="M")
-    seat_data_N=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Standard", RowNumber="N")
-    seat_data_pre=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium")
-    if selected_date:
-        if request.session.get("UserName"):
+    if 'UserName' in request.session:
+        for show_name in ShowTimeNames:
+            initialize_seat_statuses(selected_date, show_name)
+            seat_data = SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames)
+            seat_data_A=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="A")
+            seat_data_B=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="B")
+            seat_data_C=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="C")
+            seat_data_D=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="D")
+            seat_data_E=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="E")
+            seat_data_F=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="F")
+            seat_data_G=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="G")
+            seat_data_H=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="H")
+            seat_data_I=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="I")
+            seat_data_J=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="J")
+            seat_data_K=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Standard", RowNumber="K")
+            seat_data_L=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Standard", RowNumber="L")
+            seat_data_M=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Standard", RowNumber="M")
+            seat_data_N=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Standard", RowNumber="N")
+            seat_data_pre=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium")
             show=ShowTimeDB.objects.filter(MovieName=selected_movie, Date=selected_date)
             context={'selected_date':selected_date,
-                     'selected_movie':selected_movie,
-                     'show':show,
-                     'seat_data':seat_data,
-                     'seat_data_A':seat_data_A,
-                     'seat_data_B':seat_data_B,
-                     'seat_data_C':seat_data_C,
-                     'seat_data_D':seat_data_D,
-                     'seat_data_E':seat_data_E,
-                     'seat_data_F':seat_data_F,
-                     'seat_data_G':seat_data_G,
-                     'seat_data_H':seat_data_H,
-                     'seat_data_I':seat_data_I,
-                     'seat_data_J':seat_data_J,
-                     'seat_data_K':seat_data_K,
-                     'seat_data_L':seat_data_L,
-                     'seat_data_M':seat_data_M,
-                     'seat_data_N': seat_data_N,
-                     'seat_data_pre':seat_data_pre}
-            return render(request, 'Seating.html', context)
+                         'selected_movie':selected_movie,
+                         'show':show,
+                         'seat_data':seat_data,
+                         'seat_data_A':seat_data_A,
+                         'seat_data_B':seat_data_B,
+                         'seat_data_C':seat_data_C,
+                         'seat_data_D':seat_data_D,
+                         'seat_data_E':seat_data_E,
+                         'seat_data_F':seat_data_F,
+                         'seat_data_G':seat_data_G,
+                         'seat_data_H':seat_data_H,
+                         'seat_data_I':seat_data_I,
+                         'seat_data_J':seat_data_J,
+                         'seat_data_K':seat_data_K,
+                         'seat_data_L':seat_data_L,
+                         'seat_data_M':seat_data_M,
+                         'seat_data_N': seat_data_N,
+                         'seat_data_pre':seat_data_pre}
+        return render(request, 'Seating.html', context)
     else:
-        return render(request, 'Login.html')
-
+        messages.error(request,"Please login first")
+        return redirect(login_signup)
 def submit_booking(request):
     if request.method == 'POST':
         na = request.POST.get('screenName')
@@ -222,18 +233,157 @@ def submit_booking(request):
         mn = request.POST.get('movieName')
         un = request.POST.get('userName')
         fp = request.POST.get('finalPrice')
-        print(na,shn,mn,fp,un)
+        dt= request.POST.get('selectedDate')
+        seats=request.POST.get('chosenSeats')
+        types=request.POST.get('chosenTypes')
+        current_datetime = datetime.now()
+        types_list = types.split(',')
+        premium_count = types_list.count('Premium')
+        standard_count = types_list.count('Standard')
+        count_types=len(types)
+
+        # print(na,shn,mn,fp,un)
         selected_seats_data = request.POST.getlist('seats')
         # print(selected_seats_data)
         selected_seats = [seat.split(':')[0] for seat in selected_seats_data if seat.split(':')[1] == 'selected']
+        count=len(selected_seats)
+
         if selected_seats:
-            SeatDB.objects.filter(SeatNumber__in=selected_seats).update(SeatStatus='booked')
-            return redirect('movie_checkout')
+            SeatDB.objects.filter(SeatNumber__in=selected_seats).update(SeatStatus='selected')
+            obj = UserBookingDB(UserName=un, MovieName=mn, ScreenName=na, ShowName=shn, SelectedDate=dt,StartTime=sht,AmountToBePaid=fp,
+                                NoOfSeats=count, SeatNumbers=seats,SeatNumberOnly=selected_seats, PaymentStatus="UnderProcess", BookedDate=current_datetime)
+            obj.save()
+            showtime = ShowTimeDB.objects.get(MovieName=mn, Date=dt,ScreenName=na,ShowTimeName=shn)
+            showtime.AvailablePremiumTickets -= premium_count
+            showtime.AvailableStandardTickets -= standard_count
+            showtime.save()
+            url = reverse('movie_checkout') + f'?screenName={na}&selectedSeat={selected_seats}&showName={shn}&showStartTime={sht}&movieName={mn}&userName={un}&finalPrice={fp}&selectedDate={dt}&chosenSeats={seats}&chosenTypes={types}&count={count}'
+            return redirect(url)
         else:
             return redirect('index') #enter error message
 
 def movie_checkout(request):
-    return render(request, 'MovieCheckOut.html')
+    screenName = request.GET.get('screenName')
+    showName = request.GET.get('showName')
+    showStartTime = request.GET.get('showStartTime')
+    movieName = request.GET.get('movieName')
+    moviedet=MovieDB.objects.filter(MovieName=movieName)
+    movieLang=moviedet[0].MovieLanguage
+    movieType=moviedet[0].MovieType
+    userName = request.GET.get('userName')
+    userdet=UserDB.objects.filter(UserName=userName)
+    userEmail=userdet[0].UserEmail
+    print(userEmail)
+    userContact=userdet[0].UserContact
+    finalPrice = request.GET.get('finalPrice')
+    selectedDate = request.GET.get('selectedDate')
+    chosenSeats = request.GET.get('chosenSeats')
+    chosenTypes = request.GET.get('chosenTypes')
+    count = request.GET.get('count')
+    selectedSeat=request.GET.get('selectedSeat')
+
+    # Render the "MovieCheckOut.html" template with the retrieved data
+    return render(request, 'MovieCheckOut.html', {
+        'screenName': screenName,
+        'showName': showName,
+        'showStartTime': showStartTime,
+        'movieName': movieName,
+        'movieLang': movieLang,
+        'movieType': movieType,
+        'userName': userName,
+        'userEmail': userEmail,
+        'userContact': userContact,
+        'finalPrice': finalPrice,
+        'selectedDate': selectedDate,
+        'chosenSeats': chosenSeats,
+        'chosenTypes': chosenTypes,
+        'count': count,
+        'selectedSeat':selectedSeat,
+
+    })
+def ticket_booking(request, data_id):
+    if request.method == 'POST':
+        movie=MovieDB.objects.filter(id=data_id)
+        today = datetime.today()
+        next_three_days = [today + timedelta(days=i) for i in range(0, 4)]
+        movie_name = movie[0].MovieName
+        # now_movie = ShowTimeDB.objects.all()
+        return render(request, 'TicketBooking.html',{'next_three_days': next_three_days, 'movie_name': movie_name})
+    else:
+        return redirect('index')
 
 
+def confirm_booking(request):
+    if request.method == 'POST':
+        selected_seats_data= request.POST.getlist('selected_seats')
+        selected_seats_data_type= request.POST.getlist('selected_seats_type')
+        print(selected_seats_data)
+        print(selected_seats_data_type)
+        if selected_seats_data:
+            selected_seats_list = ast.literal_eval(selected_seats_data[0])
+            # print(selected_seats_list)
+            SeatDB.objects.filter(SeatNumber__in=selected_seats_list).update(SeatStatus='booked')
+            UserBookingDB.objects.filter(SeatNumbers__in=selected_seats_data_type).update(PaymentStatus='PaymentDone')
+            messages.success(request,"Booked successfully")
+            return redirect('index')
+        else:
+            messages.error(request,"Booking Failed")
+            return redirect('index')
+    return redirect('index')
+
+
+def booking_history(request):
+    username=request.session['UserName']
+    print(username)
+    bookings=UserBookingDB.objects.filter(UserName=username)
+    return render(request, 'BookingHistory.html', {'bookings':bookings})
+def download_booking_pdf(request, booking_id):
+    booking = get_object_or_404(UserBookingDB, id=booking_id)
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="booking_{booking.id}.pdf"'
+    p = canvas.Canvas(response)
+    p.drawString(100, 750, f"Booking ID: {booking.id}")
+    p.drawString(100, 730, f"User Name: {booking.UserName}")
+    p.drawString(100, 710, f"Movie Name: {booking.MovieName}")
+    p.drawString(100, 690, f"Screen Name: {booking.ScreenName}")
+    p.drawString(100, 670, f"Show Name: {booking.ShowName}")
+    p.drawString(100, 650, f"Selected Date: {booking.SelectedDate.strftime('%Y-%m-%d')}")
+    p.drawString(100, 630, f"Start Time: {booking.StartTime}")
+    p.drawString(100, 610, f"No. of Seats: {booking.NoOfSeats}")
+    p.drawString(100, 590, f"Seat Numbers: {booking.SeatNumbers}")
+    p.drawString(100, 570, f"Amount Paid: ₹{booking.AmountToBePaid}")
+    p.drawString(100, 550, f"Payment Status: {booking.PaymentStatus}")
+    p.drawString(100, 530, f"Booked Date: {booking.BookedDate.strftime('%Y-%m-%d')}")
+    p.showPage()
+    p.save()
+    return response
+
+def update_profile(request, dataid):
+    if request.method == "POST":
+        fn = request.POST.get('inputFirstName')
+        ln = request.POST.get('inputLastName')
+        em = request.POST.get('inputEmailAddress')
+        ph = request.POST.get('inputPhone')
+        ad = request.POST.get('inputAddress')
+        try:
+            im = request.FILES['img']
+            fs = FileSystemStorage()
+            file = fs.save(im.name, im)
+        except MultiValueDictKeyError:
+            file = UserDB.objects.get(id=dataid).UserImage
+        current_ph = UserDB.objects.get(id=dataid).UserContact
+        current_em = UserDB.objects.get(id=dataid).UserEmail
+
+        if ph != current_ph and UserDB.objects.filter(id=dataid, UserContact=ph).exclude(id=dataid).exists():
+            messages.error(request, "MobileNumber already exists ")
+            return redirect('my_profile')
+        elif em != current_em and UserDB.objects.filter(id=dataid, UserEmail=em).exclude(id=dataid).exists():
+            messages.error(request, "Email already exists ")
+            return redirect('my_profile')
+        else:
+            UserDB.objects.filter(id=dataid).update(UserFirstName=fn, UserLastName=ln,
+                                                UserAddress=ad, UserContact=ph,UserEmail=em,UserImage=file)
+            messages.success(request, "Profile  updated successfully")
+            return redirect('my_profile')
+    return redirect('my_profile')
 

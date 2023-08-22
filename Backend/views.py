@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from Backend.models import CustomUser,TheatreDB, ScreenDB, MovieDB, ShowTimeDB
-from Frontend.models import UserMessagesDB
+from Frontend.models import UserMessagesDB, UserBookingDB
 from django.core.files.storage import FileSystemStorage
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth.models import User
@@ -326,6 +326,8 @@ def submit_movie(request):
         ge=request.POST.get("genre")
         pos=request.FILES['poster']
         pos1 = request.FILES['poster1']
+        pos2 = request.FILES['poster2']
+        pos3 = request.FILES['poster3']
         ty=request.POST.get("type")
         da=request.POST.get("date")
         sta = request.POST.get("status")
@@ -356,7 +358,8 @@ def submit_movie(request):
         crew5na = request.POST.get("crew5name")
         crew5ro = request.POST.get("crew5role")
         crew5im = request.FILES['crew5image']
-        obj=MovieDB(MovieName=na,MovieLanguage=la,MovieGenre=ge,MoviePoster=pos,MoviePoster1=pos1,MovieType=ty,MovieSynopsis=sy,
+        obj=MovieDB(MovieName=na,MovieLanguage=la,MovieGenre=ge,MoviePoster=pos,MoviePoster1=pos1,MoviePoster2=pos2,
+                    MoviePoster3=pos3, MovieType=ty,MovieSynopsis=sy,
                     MovieDuration=dur, MovieTrailer=lin, MovieStatus=sta, MovieRelease=da,MovieActor1Name=act1na, MovieActor1Image=act1im, MovieActor2Name=act2na,
                     MovieActor2Image=act2im, MovieActor3Name=act3na, MovieActor3Image=act3im, MovieActor4Name=act4na,
                     MovieActor4Image=act4im, MovieActor5Name=act5na, MovieActor5Image=act5im,MovieCrew1Name=crew1na, MovieCrew1Role=crew1ro,MovieCrew1Image=crew1im,
@@ -425,6 +428,18 @@ def update_movie(request,dataid):
         except MultiValueDictKeyError:
             poster_file = MovieDB.objects.get(id=dataid).MoviePoster1
         try:
+            im = request.FILES['poster2']
+            fs = FileSystemStorage()
+            post_file = fs.save(im.name, im)
+        except MultiValueDictKeyError:
+            post_file = MovieDB.objects.get(id=dataid).MoviePoster2
+        try:
+            im = request.FILES['poster3']
+            fs = FileSystemStorage()
+            poste_file = fs.save(im.name, im)
+        except MultiValueDictKeyError:
+            poste_file = MovieDB.objects.get(id=dataid).MoviePoster3
+        try:
             act1im = request.FILES['actor1image']
             fs = FileSystemStorage()
             act1im_file = fs.save(act1im.name, act1im)
@@ -487,7 +502,8 @@ def update_movie(request,dataid):
             crew5im_file = fs.save(crew5im.name, crew5im)
         except MultiValueDictKeyError:
             crew5im_file = MovieDB.objects.get(id=dataid).MovieCrew5Image
-        MovieDB.objects.filter(id=dataid).update(MovieName=na, MovieLanguage=la, MovieGenre=ge, MoviePoster=file,MoviePoster1=poster_file,MovieType=ty,
+        MovieDB.objects.filter(id=dataid).update(MovieName=na, MovieLanguage=la, MovieGenre=ge, MoviePoster=file,
+                                                 MoviePoster1=poster_file,MoviePoster2=post_file,MoviePoster3=poste_file,MovieType=ty,
                                                  MovieSynopsis=sy,MovieDuration=dur, MovieStatus=sta,MovieRelease=da, MovieActor1Name=act1na,
                                                  MovieTrailer=lin, MovieActor1Image=act1im_file, MovieActor2Name=act2na,
                                                  MovieActor2Image=act2im_file, MovieActor3Name=act3na,
@@ -510,7 +526,7 @@ def delete_movie(request, dataid):
 def add_show_time(request):
     if request.user.is_authenticated:
         user=request.user
-        movies=MovieDB.objects.all()
+        movies=MovieDB.objects.filter(MovieStatus="Now Showing")
         screens=ScreenDB.objects.all()
         return render(request, 'AddShowTime.html',{'user':user, 'movies':movies, 'screens':screens})
     else:
@@ -526,15 +542,18 @@ def submit_show_time(request):
         dt = request.POST.get("date")
         ps = request.POST.get("price-std")
         pp = request.POST.get("price-premium")
-        stat=request.POST.get("status")
+        # stat=request.POST.get("status")
+        screen_det=ScreenDB.objects.filter(ScreenName=sn)
+        premium_cap=screen_det[0].PremiumCapacity
+        std_cap=screen_det[0].StandardCapacity
         existing_show = ShowTimeDB.objects.filter(ScreenName=sn, ShowTimeName=na, Date=dt)
         if existing_show.exists():
             messages.error(request, "Show already exists")
             return redirect('add_show_time')
         else:
             obj = ShowTimeDB(ShowTimeName=na,MovieName=mn,ScreenName=sn, StartTime=st, EndTime=et,Date=dt,
-                         PriceStandard=ps, PricePremium=pp,TotalStandardTickets=68,AvailableStandardTickets=68,
-                         TotalPremiumTickets=170,AvailablePremiumTickets=170, Status=stat)
+                         PriceStandard=ps, PricePremium=pp,TotalStandardTickets=std_cap,AvailableStandardTickets=std_cap,
+                         TotalPremiumTickets=premium_cap,AvailablePremiumTickets=premium_cap, Status="Open")
             obj.save()
             return redirect('add_show_time')
     return redirect('add_show_time')
@@ -602,16 +621,18 @@ def delete_showtime(request,dataid):
 
 def delete_screen(request, dataid):
     data=ScreenDB.objects.filter(id=dataid)
-    nam=data.ScreenName
+    nam=data[0].ScreenName
     cap=data[0].ScreenCapacity
     theater = TheatreDB.objects.get(id=1)
     theater.TheatreCapacity -= cap
     theater.TheatreScreen -=1
     showtimes=ShowTimeDB.objects.filter(ScreenName=nam)
+
     showtimes.delete()
     theater.save()
     data.delete()
     messages.success(request, "Screen successfully removed from the system..!")
+    return redirect(list_screen)
 
 def view_messages(request):
     if request.user.is_authenticated:

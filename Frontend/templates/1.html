@@ -1,22 +1,258 @@
-<!DOCTYPE html>
-{% extends 'index.html' %}
-{% load static %}
-{% block content %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-</head>
-<body>
- <section class="details-banner hero-area bg_img seat-plan-banner" data-background="{% static 'images/banner/banner04.jpg' %}">
+<div height="800px" class="stepper" id="stepper">
+  <div class="steps-container">
+    <div class="steps">
+      <div class="step" icon="fa fa-pencil-alt" id="1"></div>
+      <div class="step" icon="fa fa-pencil-alt" id="2"></div>
+      <div class="step" icon="fa fa-pencil-alt" id="3"></div>
+      <div class="step" icon="fa fa-pencil-alt" id="4"></div>
+    </div>
+  </div>
+  <div class="stepper-content-container">
+    <div class="stepper-content fade-in" stepper-label="1">
+      <div class="w-100 h-100" style="padding: 30px 10px; background: #f9f9f9;">
+        <div class="my-0 mx-auto" style="max-width: 500px;  border-radius: 10px; background: #f5f5f5;">
+            <div class="p-10 d-flex flex-col justify-content-center align-items-center">
+              <div class="text-center pt-20 pe-0 pb-10 ps-0 fw-bold" style="fontSize: 30px; color: #939393">
+              Step 1
+              </div>
+              <div class="p-10 d-flex flex-col justify-content-center align-items-center w-100">
+                <label class="text-muted mb-2">
+                        Username
+                      </label>
+                      <div class="cdb-form">
+                        <input type="text"
+                         class="form-control bg-light">
+                      </div>
+                      <label class="text-muted mb-2">
+                        Email
+                      </label>
+                      <div class="cdb-form">
+                        <input type="text"  class="form-control bg-light">
+                      </div>
+                      <label class="text-muted mb-2">
+                        Password
+                      </label>
+                      <div class="cdb-form">
+                        <input type="password" class="form-control bg-light">
+                      </div>
+                      <label class="text-muted mb-2">
+                        Confirm Password
+                      </label>
+                      <div class="cdb-form">
+                        <input type="password" class="form-control bg-light">
+                      </div>
+                      <div class="d-flex w-100 align-items-center justify-content-between">
+                        <button class="btn btn-dark btn-block mb-3 mt-5 ms-auto" onclick="stepper2.navigate('2')">
+                          Next
+                        </button>
+                      </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="stepper-content fade-in" stepper-label="2">
+      <div class="w-100 h-100" style="padding: 30px 10px; background: #f9f9f9;">
+        <div class="my-0 mx-auto" style="max-width: 500px;  border-radius: 10px; background: #f5f5f5;">
+            <div class="p-10 d-flex flex-col justify-content-center align-items-center">
+              <div class="text-center pt-20 pe-0 pb-10 ps-0 fw-bold" style="fontSize: 30px; color: #939393">
+              Step 2
+              </div>
+              <div class="p-10 d-flex flex-col justify-content-center align-items-center w-100">
+                <label class="text-muted mb-2">
+                        First Name
+                      </label>
+                      <div class="cdb-form">
+                        <input type="text"  class="form-control bg-light " />
+                      </div>
+                      <label class="text-muted mb-2">
+                        Last Name
+                      </label>
+                      <div class="cdb-form">
+                        <input type="email" class="form-control bg-light " />
+                      </div>
+                      <label class="text-muted mb-2">
+                        Phone Number
+                      </label>
+                      <div class="cdb-form">
+                        <input type="text"  class="form-control bg-light " />
+                      </div>
+                      <label class="text-muted mb-2">
+                        Address
+                      </label>
+                      <div class="cdb-form">
+                        <input type="email" class="form-control bg-light " />
+                      </div>
+                      <label class="text-muted mb-2">
+                        Country
+                      </label>
+                      <div class="cdb-form">
+                        <input type="text"  class="form-control bg-light " />
+                      </div>
+
+                      <div class="d-flex w-100 align-items-center justify-content-between">
+                        <button class="btn btn-dark btn-block mb-3 mt-5" onclick="stepper.navigate('1')">
+                          Previous
+                        </button>
+                        <button class="btn btn-dark btn-block mb-3 mt-5" onclick="stepper.navigate('3')">
+                          Next
+                        </button>
+                      </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="stepper-content fade-in" stepper-label="3">
+      <div class="w-100 h-100" style="padding: 30px 10px; background: #f9f9f9;">
+        <div class="my-0 mx-auto" style="max-width: 500px;  border-radius: 10px; background: #f5f5f5;">
+            <div class="p-10 d-flex flex-col justify-content-center align-items-center">
+              <div class="text-center pt-20 pe-0 pb-10 ps-0 fw-bold" style="fontSize: 30px; color: #939393">
+              Step 3
+              </div>
+              <div class="p-10 d-flex flex-col justify-content-center align-items-center w-100">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui dicta minus
+                  molestiae vel beatae natus eveniet ratione temporibus aperiam harum alias officiis
+                  assumenda officia quibusdam deleniti eos cupiditate dolore doloribus!
+                </p>
+                <p>
+                  Ad dolore dignissimos asperiores dicta facere optio quod commodi nam tempore
+                  recusandae. Rerum sed nulla eum vero expedita ex delectus voluptates rem at neque
+                  quos facere sequi unde optio aliquam!
+                </p>
+                <p>
+                  Ad dolore dignissimos asperiores dicta facere optio quod commodi nam tempore
+                  recusandae. Rerum sed nulla eum vero expedita ex delectus voluptates rem at neque
+                  quos facere sequi unde optio aliquam!
+                </p>
+                <p>
+                  Ad dolore dignissimos asperiores dicta facere optio quod commodi nam tempore
+                  recusandae. Rerum sed nulla eum vero expedita ex delectus voluptates rem at neque
+                  quos facere sequi unde optio aliquam!
+                </p>
+              </div>
+                      <div class="d-flex w-100 align-items-center justify-content-between">
+                         <button class="btn btn-dark btn-block mb-3 mt-5" onclick="stepper.navigate('2')">
+                          Previous
+                        </button>
+                        <button class="btn btn-dark btn-block mb-3 mt-5" onclick="stepper.navigate('4')">
+                          Next
+                        </button>
+                      </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="stepper-content fade-in" stepper-label="4">
+      <div class="w-100 h-100" style="padding: 30px 10px; background: #f9f9f9;">
+        <div class="my-0 mx-auto" style="max-width: 500px;  border-radius: 10px; background: #f5f5f5;">
+            <div class="p-10 d-flex flex-col justify-content-center align-items-center">
+              <div class="text-center pt-20 pe-0 pb-10 ps-0 fw-bold" style="fontSize: 30px; color: #939393">
+              Step 4
+              </div>
+              <div class="p-10 d-flex flex-col justify-content-center align-items-center w-100">
+                    <div class="text-center" style={{ fontSize: '25px', textAlign: 'center' }}>
+                      Congratulations! You have completed this process.
+                      <span style={{ fontSize: '50px', display: 'block' }} role="img" aria-label="image">
+                        🎉
+                      </span>
+                    </div>
+                    <div class="d-flex w-100 align-items-center justify-content-between">
+                      <button class="btn btn-dark btn-block mb-3 mt-5" onclick="stepper.navigate('3')">
+                      Previous
+                    </button>
+                    </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="search-ticket-section padding-top pt-lg-0">
         <div class="container">
-            <div class="details-banner-wrapper">
-                <div class="details-banner-content style-two">
-                    <h3 class="title">{{selected_movie}}</h3>
+            <div class="search-tab bg_img" data-background="{% static 'images/ticket/ticket-bg.jpg' %}">
+                <div class="row align-items-center mb--20">
+                    <div class="col-lg-6 mb-20">
+                        <div class="search-ticket-header">
+<!--                            <h6 class="category">Welcome to Boleto </h6>-->
+<!--                            <h3 class="title">Make a Quick Book</h3>-->
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-20">
+                        <ul class="tab-menu ticket-tab-menu">
+<!--                            <li class="active">-->
+<!--                                <div class="tab-thumb">-->
+<!--                                    <img src="{% static 'images/ticket/ticket-tab01.png' %}" alt="ticket">-->
+<!--                                </div>-->
+<!--                                <span>movie</span>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <div class="tab-thumb">-->
+<!--                                    <img src="{% static 'images/ticket/ticket-tab02.png' %}" alt="ticket">-->
+<!--                                </div>-->
+<!--                                <span>events</span>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <div class="tab-thumb">-->
+<!--                                    <img src="{% static 'images/ticket/ticket-tab03.png' %}" alt="ticket">-->
+<!--                                </div>-->
+<!--                                <span>sports</span>-->
+<!--                            </li>-->
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-area">
+                    <div>
+                        <form class="ticket-search-form" method="post" action="{% url 'seating_plan'%}">
+                            {% csrf_token %}
+
+                            <div class="form-group">
+                                <div class="thumb">
+                                    <img src="{% static 'images/ticket/date.png' %}" alt="ticket">
+                                </div>
+                                <span class="type">date</span>
+                                <select class="select-bar" name="selected_date">
+                                    {% for date in next_three_days %}
+                                        <option value="{{ date|date:"Y-m-d" }}">{{ date|date:"F j, Y" }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div class="thumb">
+                                    <img src="{% static 'images/ticket/cinema.png' %}" alt="ticket">
+                                </div>
+                                <span class="type">{{movie_name}}</span>
+
+                            </div>
+                            <div class="form-group">
+                                <div class="thumb">
+                                    <img src="{% static 'images/ticket/cinema.png' %}" alt="ticket">
+                                </div>
+                                <span class="type">Show Time</span>
+                                <select class="select-bar" name="selected_movie">
+                                    {% for i in showtiming %}
+                                        <option value="{{i.MovieName}}">{{i.StartTime}}</option>
+                                    {% endfor %}
+
+                                </select>
+
+                            </div>
+
+
+                        </form>
+                        <div class="form-group">
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
         </div>
     </section>
-    <!-- ==========Banner-Section========== -->
 
     <!-- ==========Page-Title========== -->
     <section class="page-title bg-one">
@@ -27,14 +263,24 @@
                         <i class="flaticon-double-right-arrows-angles"></i>back
                     </a>
                 </div>
+                <form method="post" action=" {% url 'submit_booking' %}">
+                {% csrf_token %}
                 <div class="item date-item">
                     <span class="date">{{selected_date}}</span>
+                    <input type="hidden" value="{{selected_date}}" id="selectedDate" name="selectedDate">
+                    <input type="hidden" value="{{selected_movie}}" id="movieName" name="movieName">
+
+                    {% for i in show %}
                     <select class="select-bar">
-                        {% for i in show %}
-                        <option value="sc1">{{i.ShowTimeName}}|{{i.StartTime}}</option>
+                        <option value="{{i.ShowTimeName}}|{{i.StartTime}}">{{i.ShowTimeName}}|{{i.StartTime}}</option>
+                        <input type="hidden" id="premium-price" value="{{ i.PricePremium }}">
+                        <input type="hidden" id="standard-price" value="{{ i.PriceStandard }}">
+                        <input type="hidden" value="{{i.ShowTimeName}}" id="showName" name="showName">
+                        <input type="hidden" value="{{i.StartTime}}" id="showStartTime" name="showStartTime">
                         {% endfor %}
                     </select>
                 </div>
+
 
             </div>
         </div>
@@ -43,358 +289,81 @@
 
     <!-- ==========Movie-Section========== -->
     <div class="seat-plan-section padding-bottom padding-top">
+
         <div class="container">
             <div class="screen-area">
-                <h4 class="screen">screen</h4>
+                 {% for i in show %}
+                <h4 class="screen">{{i.ScreenName}}</h4>
+                <input type="hidden" value="{{i.ScreenName}}" id="screenName" name="screenName">
+                {%endfor%}
                 <div class="screen-thumb">
                     <img src="{% static 'images/movie/screen-thumb.png' %}" alt="movie">
                 </div>
+
                 <h5 class="subtitle">Standard</h5>
                 <div class="screen-wrapper">
                     <ul class="seat-area">
-
                         <li class="seat-line">
                             <span>n</span>
                             <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">n1</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">n2</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">n3</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">n4</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">n5</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">n6</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">n7</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">n8</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">n9</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">n10</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">n11</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">n12</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">n13</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">n14</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">n15</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">n16</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">n17</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <span>N</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>M</span>
-                            <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">m1</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">m2</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">m3</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">m4</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">m5</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">m6</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">m7</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">m8</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">m9</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">m10</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">m11</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">m12</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">m13</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">m14</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">m15</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">m16</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">m17</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <span>M</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>L</span>
-                            <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">l1</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">l2</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">l3</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">l4</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">l5</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">l6</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">l7</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">l8</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">l9</span>
+                                {% for i in seat_data_N %}
+                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
+                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
+                                    <img src="{% static seat_image %}" alt="seat">
+                                            <span class="sit-num">{{i.SeatNumber}}</span>
+                                    <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
 
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">l10</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">l11</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">l12</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">l13</span>
-                                        </li>
-                                    </ul>
+                                    {% endwith %}
                                 </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">l14</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">l15</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">l16</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">l17</span>
-                                        </li>
-                                    </ul>
+                                {% endfor %}
+                            </ul>
+                            <span>n</span>
+                        </li>
+                        <li class="seat-line">
+                            <span>m</span>
+                            <ul class="seat--area">
+                                {% for i in seat_data_M %}
+                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
+                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
+                                     <img src="{% static seat_image %}" alt="seat">
+                                            <span class="sit-num">{{i.SeatNumber}}</span>
+                                    <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+
+                                    {% endwith %}
                                 </li>
+                                {% endfor %}
+                            </ul>
+                            <span>m</span>
+                        </li>
+                        <li class="seat-line">
+                            <span>l</span>
+                            <ul class="seat--area">
+                                {% for i in seat_data_L %}
+                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
+                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
+                            <img src="{% static seat_image %}" alt="seat">
+                                            <span class="sit-num">{{i.SeatNumber}}</span>
+                                                                        <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+
+                                    {%endwith%}
+                                </li>
+                                {% endfor %}
                             </ul>
                             <span>l</span>
                         </li>
                         <li class="seat-line">
-                            <span>K</span>
+                            <span>k</span>
                             <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">k1</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">k2</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">k3</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">k4</span>
-                                        </li>
-                                    </ul>
+                                {% for i in seat_data_K %}
+                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
+                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
+                                    <img src="{% static seat_image %}" alt="seat">
+                                            <span class="sit-num">{{i.SeatNumber}}</span>
+                                    <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+                                {% endwith %}
+
                                 </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">k5</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">k6</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">k7</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">k8</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">k9</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">k10</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">k11</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">k12</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">k13</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">k14</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">k15</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">k16</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">k17</span>
-                                        </li>
-                                    </ul>
-                                </li>
+                                {% endfor %}
                             </ul>
                             <span>k</span>
                         </li>
@@ -404,868 +373,166 @@
                 <div class="screen-wrapper">
                     <ul class="seat-area">
                         <li class="seat-line">
-                            <span>J</span>
+                            <span>j</span>
                             <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">j1</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">j2</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">j3</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">j4</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">j5</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">j6</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">j7</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">j8</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">j9</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">j10</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">j11</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">j12</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">j13</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">j14</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">j15</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">j16</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">j17</span>
+                                {% for i in seat_data_J %}
+                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
+                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
+                                    <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
 
-                                        </li>
-                                    </ul>
+                                            <img src="{% static seat_image %}" alt="seat">
+                                            <span class="sit-num">{{i.SeatNumber}}</span>
+                                    {% endwith %}
                                 </li>
+                                {% endfor %}
                             </ul>
-                            <span>J</span>
+                            <span>j</span>
                         </li>
                         <li class="seat-line">
-                            <span>I</span>
-                            <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">i1</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">i2</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">i3</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">i4</span>
-                                        </li>
-                                    </ul>
+                            <span>i</span>
+                            <ul class="seat--area" >
+                                {% for i in seat_data_I %}
+                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
+                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
+                                            <img src="{% static seat_image %}" alt="seat">
+                                            <span class="sit-num">{{i.SeatNumber}}</span>
+                                                                        <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+
+                                    {%endwith %}
                                 </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">i5</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">i6</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">i7</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">i8</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">i9</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">i10</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">i11</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">i12</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">i13</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">i14</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">i15</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">i16</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">i17</span>
-                                        </li>
-                                    </ul>
-                                </li>
+                                {% endfor %}
                             </ul>
                             <span>i</span>
                         </li>
                         <li class="seat-line">
-                            <span>H</span>
+                            <span>h</span>
                             <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">h1</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">h2</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">h3</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">h4</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">h5</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">h6</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">h7</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">h8</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">h9</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">h10</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">h11</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">h12</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">h13</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">h14</span>
+                                {% for i in seat_data_H %}
+                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
+                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
+                                    <img src="{% static seat_image %}" alt="seat">
+                                            <span class="sit-num">{{i.SeatNumber}}</span>
+                                                                        <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
 
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">h15</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">h16</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">h17</span>
-                                        </li>
-                                    </ul>
+                                    {% endwith %}
                                 </li>
+                                {% endfor %}
                             </ul>
-                            <span>H</span>
+                            <span>h</span>
                         </li>
                         <li class="seat-line">
-                            <span>G</span>
+                            <span>g</span>
                             <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">g1</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">g2</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">g3</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">f4</span>
-                                        </li>
-                                    </ul>
+                                {% for i in seat_data_G %}
+                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
+                                            {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
+                                            <img src="{% static seat_image %}" alt="seat">
+                                            <span class="sit-num">{{i.SeatNumber}}</span>
+                                                                        <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+
+                                    {%endwith%}
                                 </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">g5</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">g6</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">g7</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">g8</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">g9</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">g10</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">g11</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">g12</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">g13</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">g14</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">g15</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">g16</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">g17</span>
-                                        </li>
-                                    </ul>
-                                </li>
+                                {% endfor %}
                             </ul>
-                            <span>G</span>
+                            <span>g</span>
                         </li>
                         <li class="seat-line">
-                            <span>F</span>
+                            <span>f</span>
                             <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">f1</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">f2</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">f3</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">f4</span>
-                                        </li>
-                                    </ul>
+                                {% for i in seat_data_F %}
+                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
+                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
+                                    <img src="{% static seat_image %}" alt="seat">
+                                            <span class="sit-num">{{i.SeatNumber}}</span>
+                                                                        <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+
+                                    {% endwith %}
                                 </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">f5</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">f6</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">f7</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">f8</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">f9</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">f10</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">f11</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">f12</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">f13</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">f14</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">f15</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">f16</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">f17</span>
-                                        </li>
-                                    </ul>
-                                </li>
+                                {% endfor %}
                             </ul>
-                            <span>F</span>
+                            <span>f</span>
                         </li>
                         <li class="seat-line">
-                            <span>E</span>
+                            <span>e</span>
                             <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">e1</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">e2</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">e3</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">e4</span>
-                                        </li>
-                                    </ul>
+                                {% for i in seat_data_E %}
+                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
+                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
+                                    <img src="{% static seat_image %}" alt="seat">
+                                            <span class="sit-num">{{i.SeatNumber}}</span>
+                                                                        <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+
+                                    {% endwith %}
                                 </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">e5</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">e6</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">e7</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">e8</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">e9</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">e10</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">e11</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">e12</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">e13</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">e14</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">e15</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">e16</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">e17</span>
-                                        </li>
-                                    </ul>
-                                </li>
+                                {% endfor %}
                             </ul>
                             <span>E</span>
                         </li>
                         <li class="seat-line">
-                            <span>D</span>
-                            <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">D1</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">d2</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">d3</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">d4</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">D5</span>
-
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">D6</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">D7</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">D8</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">D9</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">D10</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">D11</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">D12</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">D13</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">D14</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">D15</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">D16</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">D17</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
                             <span>d</span>
+                            <ul class="seat--area">
+                                {% for i in seat_data_D %}
+                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
+                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
+                                    <img src="{% static seat_image %}" alt="seat">
+                                            <span class="sit-num">{{i.SeatNumber}}</span>
+                                                                        <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+
+                                    {% endwith %}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            <span>D</span>
                         </li>
                         <li class="seat-line">
-                            <span>C</span>
+                            <span>c</span>
                             <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">c1</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">c1</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">c3</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">c4</span>
-                                        </li>
-                                    </ul>
+                                {% for i in seat_data_C %}
+                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
+                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
+                                            <img src="{% static seat_image %}" alt="seat">
+                                            <span class="sit-num">{{i.SeatNumber}}</span>
+                                                                        <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+
+                                    {% endwith %}
                                 </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">c5</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">c6</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">c7</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">c8</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">c9</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">c10</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">c11</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">c12</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">c13</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">c14</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">c15</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">c16</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">c17</span>
-                                        </li>
-                                    </ul>
-                                </li>
+                                {% endfor %}
                             </ul>
                             <span>C</span>
                         </li>
                         <li class="seat-line">
-                            <span>B</span>
+                            <span>a</span>
                             <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">b1</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">b2</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">b3</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">b4</span>
-                                        </li>
-                                    </ul>
+                                {% for i in seat_data_B %}
+                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
+                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
+                                    <img src="{% static seat_image %}" alt="seat">
+                                            <span class="sit-num">{{i.SeatNumber}}</span>
+                                    <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+
+                                    {% endwith %}
                                 </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">b5</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">b6</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">b7</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">b8</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">b9</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">b10</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">b11</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">b12</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">b13</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">b14</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">b15</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">b16</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">b17</span>
-                                        </li>
-                                    </ul>
-                                </li>
+                                {% endfor %}
                             </ul>
-                            <span>B</span>
+                            <span>A</span>
                         </li>
                         <li class="seat-line">
-                            <span>A</span>
+                            <span>a</span>
                             <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">a1</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">a2</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">a3</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">a4</span>
-                                        </li>
-                                    </ul>
+                                {% for i in seat_data_A %}
+                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
+                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
+                                    <img src="{% static seat_image %}" alt="seat">
+                                            <span class="sit-num">{{i.SeatNumber}}</span>
+                                    <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+
+                                    {% endwith %}
                                 </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">a5</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">a6</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">a7</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">a8</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">a9</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">a10</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">a11</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">a12</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">a13</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">a14</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">a15</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">a16</span>
-                                        </li>
-                                        <li class="single-seat">
-                                            <img src="{% static 'images/movie/seat01-free.png' %}" alt="seat">
-                                            <span class="sit-num">a17</span>
-                                        </li>
-                                    </ul>
-                                </li>
+                                {% endfor %}
                             </ul>
                             <span>A</span>
                         </li>
+
                     </ul>
                 </div>
             </div>
@@ -1273,19 +540,83 @@
                 <div class="proceed-to-book">
                     <div class="book-item">
                         <span>You have Choosed Seat</span>
-                        <h3 class="title">d9, d10</h3>
+                        <h3 class="title" id="chosen-seats"></h3>
                     </div>
                     <div class="book-item">
                         <span>total price</span>
-                        <h3 class="title">$150</h3>
+                        <h3 class="title" id="total-price"></h3>
                     </div>
+                    <input type="hidden" value="{{request.session.UserName}}" id="userName" name="userName">
+                    <input type="hidden" id="finalPrice" name="finalPrice">
+                    <input type="hidden" id="chosenSeats" name="chosenSeats">
+                    <input type="hidden" id="chosenTypes" name="chosenTypes">
+
+
+
                     <div class="book-item">
-                        <a href="movie-checkout.html" class="custom-button">proceed</a>
+                        <button type="submit" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">Proceed</button>
                     </div>
                 </div>
             </div>
         </div>
+        </form>
     </div>
-</body>
-</html>
-{% endblock %}
+
+    <script>
+        const seats = document.querySelectorAll('.single-seat');
+        const chosenSeatsElement = document.getElementById('chosen-seats');
+        const totalPriceElement = document.getElementById('total-price');
+        const finalPriceElement = document.getElementById('finalPrice');
+
+        const premiumPriceElement = document.getElementById('premium-price');
+        const standardPriceElement = document.getElementById('standard-price');
+        let totalPrice = 0;
+        let selectedSeats = [];
+
+        seats.forEach(seat => {
+            seat.addEventListener('click', function() {
+                const status = this.getAttribute('data-status');
+                const seatInfo = this.getAttribute('data-seat').split('-');
+
+                const seatNumber = seatInfo[0];
+                const seatType = seatInfo[1];
+
+                if (status === 'available') {
+                    this.setAttribute('data-status', 'selected');
+                    selectedSeats.push({ seatNumber, seatType });
+                    totalPrice += calculateSeatPrice(seatNumber, seatType);
+                } else if (status === 'selected') {
+                    this.setAttribute('data-status', 'available');
+                    const index = selectedSeats.findIndex(seat => seat.seatNumber === seatNumber && seat.seatType === seatType);
+                    if (index !== -1) {
+                        selectedSeats.splice(index, 1);
+                        totalPrice -= calculateSeatPrice(seatNumber, seatType);
+                    }
+                }
+
+<!--                chosenSeatsElement.textContent = selectedSeats.map(seat => seat.seatNumber).join(', ');-->
+                    chosenSeatsElement.textContent = selectedSeats.map(seat => `${seat.seatNumber} (${seat.seatType})`).join(', ');
+
+                totalPriceElement.textContent = `₹${totalPrice}`;
+                document.getElementById("finalPrice").value = totalPrice;
+                 document.getElementById("chosenTypes").value= selectedSeats.map(seat => seat.seatType);
+                document.getElementById("chosenSeats").value = selectedSeats.map(seat => `${seat.seatNumber} (${seat.seatType})`).join(', ');
+
+
+                const img = this.querySelector('img');
+                img.src = img.src.replace(status, this.getAttribute('data-status'));
+
+                const input = this.querySelector('input[name="seats"]');
+                input.value = input.value.replace(/:(selected|available)$/, ':' + this.getAttribute('data-status'));
+            });
+        });
+
+        function calculateSeatPrice(seatNumber, seatType) {
+            if (seatType === 'Premium') {
+        return parseFloat(premiumPriceElement.value); // Retrieve the premium price from the hidden input
+            } else {
+        return parseFloat(standardPriceElement.value); // Retrieve the standard price from the hidden input
+                    }
+        }
+
+    </script>

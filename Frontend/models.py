@@ -6,6 +6,10 @@ class UserDB(models.Model):
     UserEmail= models.EmailField(max_length=200, null=True, blank=True)
     UserContact= models.IntegerField(null=True, blank=True)
     UserPassword=models.CharField(max_length=100, null=True, blank=True)
+    UserImage=models.ImageField(upload_to="profile_images",null=True,blank=True)
+    UserFirstName=models.CharField(max_length=100, null=True, blank=True)
+    UserLastName=models.CharField(max_length=100, null=True, blank=True)
+    UserAddress=models.CharField(max_length=500, null=True, blank=True)
 
 class ReviewDB(models.Model):
     UserName=models.CharField(max_length=100, null=True, blank=True)
@@ -27,8 +31,10 @@ class UserBookingDB(models.Model):
     ShowName=models.CharField(max_length=200, null=True, blank=True)
     SelectedDate=models.DateField(null=True, blank=True)
     NoOfSeats=models.IntegerField(null=True, blank=True)
-    SeatType= models.CharField(max_length=50, null=True, blank=True)
     SeatNumbers= models.CharField(max_length=5, null=True, blank=True)
+    SeatNumberOnly= models.CharField(max_length=5, null=True, blank=True)
+    StartTime= models.CharField(max_length=20,null=True, blank=True)
+    AmountToBePaid= models.IntegerField(null=True, blank=True)
     PaymentStatus=models.CharField(max_length=5, null=True, blank=True)
     BookedDate=models.DateField(null=True, blank=True)
 
