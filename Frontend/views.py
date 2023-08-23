@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from datetime import datetime, timedelta
-from Backend.models import MovieDB, ShowTimeDB
+from Backend.models import MovieDB, ShowTimeDB, TheatreDB
 from Frontend.models import UserDB, ReviewDB,UserMessagesDB,SeatDB, UserBookingDB
 from django.contrib import messages
 from django.urls import reverse
@@ -29,7 +29,11 @@ def index(request):
 
 
 def login_signup(request):
-    return render(request, 'Login.html')
+    username = request.session.get("UserName")
+    if username:
+        return render(request, 'index.html')
+    else:
+        return render(request, 'Login.html')
 
 def nowshowing(request):
     lang=MovieDB.objects.filter(MovieStatus='Now Showing').values_list('MovieLanguage',flat=True).distinct()
@@ -89,7 +93,8 @@ def movie_details(request, movie_id):
     return render(request, 'MovieDetails.html',{'movie':movie, 'review':review, 'review_count':review_count})
 
 def contactus(request):
-    return render(request, 'ContactUs.html')
+    theatredet=TheatreDB.objects.get(id=1)
+    return render(request, 'ContactUs.html',{'theatredet':theatredet})
 
 def saveuser(request):
     if request.method=="POST":
@@ -102,7 +107,7 @@ def saveuser(request):
             # hashed_password = make_password(pw)
             obj = UserDB(UserName=un,UserEmail=em, UserContact=mo, UserPassword=pw)
             obj.save()
-            # messages.success(request, "Registration done successfully..! Login Now..")
+            messages.success(request, "Registration done successfully..! Login Now..")
             return redirect('index')
         else:
             # messages.error(request,"Password and Confirm password are not matching")
@@ -253,10 +258,7 @@ def submit_booking(request):
             obj = UserBookingDB(UserName=un, MovieName=mn, ScreenName=na, ShowName=shn, SelectedDate=dt,StartTime=sht,AmountToBePaid=fp,
                                 NoOfSeats=count, SeatNumbers=seats,SeatNumberOnly=selected_seats, PaymentStatus="UnderProcess", BookedDate=current_datetime)
             obj.save()
-            showtime = ShowTimeDB.objects.get(MovieName=mn, Date=dt,ScreenName=na,ShowTimeName=shn)
-            showtime.AvailablePremiumTickets -= premium_count
-            showtime.AvailableStandardTickets -= standard_count
-            showtime.save()
+
             url = reverse('movie_checkout') + f'?screenName={na}&selectedSeat={selected_seats}&showName={shn}&showStartTime={sht}&movieName={mn}&userName={un}&finalPrice={fp}&selectedDate={dt}&chosenSeats={seats}&chosenTypes={types}&count={count}'
             return redirect(url)
         else:
@@ -315,6 +317,11 @@ def ticket_booking(request, data_id):
 
 def confirm_booking(request):
     if request.method == 'POST':
+        mn= request.POST.get('movieName')
+        na= request.POST.get('screenName')
+        dt= request.POST.get('selectedDate')
+        shn= request.POST.get('showName')
+        typee= request.POST.get('selected_type')
         selected_seats_data= request.POST.getlist('selected_seats')
         selected_seats_data_type= request.POST.getlist('selected_seats_type')
         print(selected_seats_data)
@@ -324,6 +331,16 @@ def confirm_booking(request):
             # print(selected_seats_list)
             SeatDB.objects.filter(SeatNumber__in=selected_seats_list).update(SeatStatus='booked')
             UserBookingDB.objects.filter(SeatNumbers__in=selected_seats_data_type).update(PaymentStatus='PaymentDone')
+            booking=UserBookingDB.objects.filter()
+            types_list = typee.split(',')
+            premium_count = types_list.count('Premium')
+            standard_count = types_list.count('Standard')
+            showtime = ShowTimeDB.objects.get(MovieName=mn, Date=dt, ScreenName=na, ShowTimeName=shn)
+            showtime.AvailablePremiumTickets -= premium_count
+            showtime.AvailableStandardTickets -= standard_count
+            showtime.save()
+            if (showtime.TotalPremiumTickets==showtime.AvailablePremiumTickets) and (showtime.TotalStandardTickets == showtime.AvailableStandardTicketsTickets):
+                showtime.status="Closed"
             messages.success(request,"Booked successfully")
             return redirect('index')
         else:
@@ -365,6 +382,7 @@ def update_profile(request, dataid):
         em = request.POST.get('inputEmailAddress')
         ph = request.POST.get('inputPhone')
         ad = request.POST.get('inputAddress')
+        pw=request.POST.get('password')
         try:
             im = request.FILES['img']
             fs = FileSystemStorage()
@@ -382,7 +400,7 @@ def update_profile(request, dataid):
             return redirect('my_profile')
         else:
             UserDB.objects.filter(id=dataid).update(UserFirstName=fn, UserLastName=ln,
-                                                UserAddress=ad, UserContact=ph,UserEmail=em,UserImage=file)
+                                                UserAddress=ad, UserContact=ph,UserEmail=em,UserPassword=pw,UserImage=file)
             messages.success(request, "Profile  updated successfully")
             return redirect('my_profile')
     return redirect('my_profile')

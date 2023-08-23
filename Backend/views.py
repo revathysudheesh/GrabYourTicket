@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from Backend.models import CustomUser,TheatreDB, ScreenDB, MovieDB, ShowTimeDB
-from Frontend.models import UserMessagesDB, UserBookingDB
+from Frontend.models import UserMessagesDB, UserBookingDB, UserDB
 from django.core.files.storage import FileSystemStorage
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth.models import User
@@ -16,7 +16,17 @@ def admin_home(request):
     if request.user.is_authenticated:
         first_name=request.user.first_name
         profile_image=request.user.profile_image
-        return render(request, 'Dashboard.html',{'first_name':first_name, 'profile_image':profile_image})
+        users=UserDB.objects.all()
+        user_count = users.count()
+        shows=ShowTimeDB.objects.all()
+        show_count=shows.count()
+        movies=MovieDB.objects.filter(MovieStatus="Now Showing")
+        movie_count=movies.count()
+        booking=UserBookingDB.objects.all()
+        booking_count=booking.count()
+        return render(request, 'Dashboard.html',{'first_name':first_name, 'profile_image':profile_image,
+                                                 'user_count':user_count, 'show_count':show_count,
+                                                 'movie_count':movie_count, 'booking_count':booking_count})
     else:
         return redirect('login_reg')
 
@@ -640,5 +650,14 @@ def view_messages(request):
         profile_image = request.user.profile_image
         msgs=UserMessagesDB.objects.all()
         return render(request, 'ViewMessages.html', {'first_name': first_name, 'profile_image': profile_image,'msgs': msgs})
+    else:
+        return redirect('login_reg')
+
+def view_bookings(request):
+    if request.user.is_authenticated:
+        first_name = request.user.first_name
+        profile_image = request.user.profile_image
+        bookings=UserBookingDB.objects.all()
+        return render(request, 'ViewBookings.html', {'first_name': first_name, 'profile_image': profile_image,'bookings': bookings})
     else:
         return redirect('login_reg')

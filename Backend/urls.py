@@ -40,6 +40,7 @@ urlpatterns=[path('admin_home/', views.admin_home, name='admin_home'),
              path('update_show_time/<int:dataid>/', views.update_show_time, name='update_show_time'),
              path('submit_movie/', views.submit_movie, name='submit_movie'),
              path('view_messages/', views.view_messages, name='view_messages'),
+             path('view_bookings/', views.view_bookings, name='view_bookings'),
 
 
              ]

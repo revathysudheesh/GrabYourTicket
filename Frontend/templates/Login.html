@@ -227,7 +227,7 @@ section .container.active .signinBx .imgBx {
       </div>
       <div class="user signupBx">
         <div class="formBx">
-          <form method="post" action="{% url 'saveuser' %}">
+          <form method="post" action="{% url 'saveuser' %}" onsubmit="return validateSignUpForm()" >
             {% csrf_token %}
             <h2 style="color:#5f1d5f">Create an account</h2>
             <input type="text" name="username" id="username" placeholder="User Name" required/>
@@ -252,6 +252,46 @@ section .container.active .signinBx .imgBx {
   const container = document.querySelector('.container');
   container.classList.toggle('active');
 };</script>
+<script>
+function validateSignUpForm() {
+  var username = document.getElementById("username").value;
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("password").value;
+  var repeatPassword = document.getElementById("cpassword").value;
+  var mobileNumber = document.getElementById("contact").value;
+  if (username.trim() === "") {
+    alert("Please enter a username.");
+    return false;
+  }
+  if (email.trim() === "" || !emailIsValid(email)) {
+    alert("Please enter a valid email address.");
+    return false;
+  }
+
+  if (password.trim() === "" || password.length < 6) {
+    alert("Please enter a password with at least 6 characters.");
+    return false;
+  }
+
+  if (password !== repeatPassword) {
+    alert("Passwords do not match.");
+    return false;
+  }
+
+  if (mobileNumber.trim() === "" || !mobileNumberIsValid(mobileNumber)) {
+    alert("Please enter a valid 10-digit mobile number.");
+    return false;
+  }
+  return true;
+}
+
+function emailIsValid(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function mobileNumberIsValid(mobileNumber) {
+  return /^[0-9]{10}$/.test(mobileNumber);
+}</script>
 
 </body>
 </html>

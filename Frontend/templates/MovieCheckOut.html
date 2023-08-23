@@ -152,7 +152,7 @@
                                 <span class="info">{{movieLang}}-{{movieType}}</span>
                             </li>
                             <li>
-                                <h6 class="subtitle"><span>{{screenName}}</span><span>{{chosenSeats}}</span></h6>
+                                <h6 class="subtitle"><span>{{screenName}}|{{showName}}</span><span>{{chosenSeats}}</span></h6>
                                 <div class="info"><span>{{selectedDate}}</span></div>
                             </li>
                             <li>
@@ -165,6 +165,11 @@
                         <h6 class="subtitle"><span>Amount Payable</span><span>{{finalPrice}}</span></h6>
                         <input type="hidden" name="selected_seats" value="{{selectedSeat}}">
                         <input type="hidden" name="selected_seats_type" value="{{chosenSeats}}">
+                        <input type="hidden" name="selected_type" value="{{chosenTypes}}">
+                        <input type="hidden" name="movieName" value="{{movieName}}">
+                        <input type="hidden" name="showName" value="{{showName}}">
+                        <input type="hidden" name="screenName" value="{{screenName}}">
+                        <input type="hidden" name="selectedDate" value="{{selectedDate}}">
                     <button type="submit" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">Proceed</button>
                     </div>
                 </div>
