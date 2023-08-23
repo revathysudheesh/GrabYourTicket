@@ -8,7 +8,7 @@
 </head>
 <body>
 <!-- -->
-    <section class="movie-section padding-top padding-bottom">
+    <section class="movie-section padding-top padding-bottom" style="margin-top:100px;">
         <div class="container">
             <div class="row flex-wrap-reverse justify-content-center">
                 <div class="col-sm-10 col-md-8 col-lg-3">
@@ -19,10 +19,10 @@
 <!--                            </a>-->
 <!--                        </div>-->
 <!--                    </div>-->
-                    <form method="get" action="{% url 'nowshowing' %}">
+                    <form method="get" action="{% url 'comingsoon' %}">
                         <div class="widget-1 widget-check">
                         <div class="widget-header">
-                            <h5 class="m-title">Filter By</h5> <a href="#0" class="clear-check">Clear All</a>
+                            <h5 class="m-title">Filter By</h5>
                         </div>
                         <div class="widget-1-body">
                             <h6 class="subtitle">Language</h6>
@@ -58,14 +58,14 @@
                         <div class="widget-1-body">
                             <h6 class="subtitle">genre</h6>
                             <div class="check-area">
-
+{% for i in genr %}
                                 <div class="form-group">
-                                    {% for i in genr %}
+
                                     <input type="checkbox" name="genre" id="genre{{ forloop.counter }}" value="{{i}}">
                                     <label for="genre{{ forloop.counter }}">{{i}}</label>
-                                    {% endfor %}
-                                </div>
 
+                                </div>
+{% endfor %}
                             </div>
 <!--                            <div class="add-check-area">-->
 <!--                                <a href="#0">view more <i class="plus"></i></a>-->
@@ -109,7 +109,7 @@
                         <div class="tab-area">
                             <div class="tab-item">
                                 <div class="row mb-10 justify-content-center">
-                                    {% for i in filtered_movies %}
+                                    {% for i in page %}
                                     <div class="col-sm-6 col-lg-4">
                                         <div class="movie-grid">
                                             <div class="movie-thumb c-thumb">
@@ -130,7 +130,7 @@
                             </div>
                             <div class="tab-item active">
                                 <div class="movie-area mb-10">
-                                    {% for i in filtered_movies %}
+                                    {% for i in page %}
                                     <div class="movie-list">
                                         <div class="movie-thumb c-thumb">
                                             <a href="{% url 'movie_details' movie_id=i.id %}" class="w-100 bg_img h-100" data-background="{% static 'images/movie/movie01.jpg' %}">
@@ -186,14 +186,20 @@
                             </div>
                         </div>
                         <div class="pagination-area text-center">
-                            <a href="#0"><i class="fas fa-angle-double-left"></i><span>Prev</span></a>
-                            <a href="#0">1</a>
-                            <a href="#0">2</a>
-                            <a href="#0" class="active">3</a>
-                            <a href="#0">4</a>
-                            <a href="#0">5</a>
-                            <a href="#0"><span>Next</span><i class="fas fa-angle-double-right"></i></a>
-                        </div>
+    {% if page.has_previous %}
+    <a href="?page=1"><i class="fas fa-angle-double-left"></i><span>First</span></a>
+    <a href="?page={{ page.previous_page_number }}"><i class="fas fa-angle-left"></i><span>Prev</span></a>
+    {% endif %}
+
+    {% for i in page.paginator.page_range %}
+        <a href="?page={{ i }}" {% if page.number == i %}class="active"{% endif %}>{{ i }}</a>
+    {% endfor %}
+
+    {% if page.has_next %}
+    <a href="?page={{ page.next_page_number }}"><span>Next</span><i class="fas fa-angle-right"></i></a>
+    <a href="?page={{ page.paginator.num_pages }}"><span>Last</span><i class="fas fa-angle-double-right"></i></a>
+    {% endif %}
+</div>   
                     </div>
                 </div>
             </div>

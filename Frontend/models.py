@@ -6,7 +6,7 @@ class UserDB(models.Model):
     UserEmail= models.EmailField(max_length=200, null=True, blank=True)
     UserContact= models.IntegerField(null=True, blank=True)
     UserPassword=models.CharField(max_length=100, null=True, blank=True)
-    UserImage=models.ImageField(upload_to="profile_images",null=True,blank=True)
+    UserImage=models.ImageField(upload_to="profile_images",null=True,blank=True,default='avatar1.png')
     UserFirstName=models.CharField(max_length=100, null=True, blank=True)
     UserLastName=models.CharField(max_length=100, null=True, blank=True)
     UserAddress=models.CharField(max_length=500, null=True, blank=True)
@@ -16,6 +16,7 @@ class ReviewDB(models.Model):
     Review=models.CharField(max_length=500, null=True, blank=True)
     Date=models.DateField(null=True,blank=True)
     MovieName=models.CharField(max_length=200, null=True, blank=True)
+    UserImage=models.ImageField(upload_to="profileImage", null=True, blank=True)
 
 class UserMessagesDB(models.Model):
     Name=models.CharField(max_length=100, null=True, blank=True)

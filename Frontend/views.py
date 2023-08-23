@@ -5,7 +5,7 @@ from Frontend.models import UserDB, ReviewDB,UserMessagesDB,SeatDB, UserBookingD
 from django.contrib import messages
 from django.urls import reverse
 import ast
-from django.http import FileResponse
+from django.core.paginator import Paginator
 from reportlab.pdfgen import canvas
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
@@ -57,9 +57,13 @@ def nowshowing(request):
 
     if modes:
         filtered_movies = filtered_movies.filter(MovieType__in=modes)
+    filtered_movies = filtered_movies.order_by('-MovieRelease')
+    paginator = Paginator(filtered_movies, per_page=2)  # Display 5 items per page
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
 
     return render(request, 'NowShowing.html', {'lang': lang, 'genr':genr,'types':types, 'movies':movies,
-                                               'filtered_movies': filtered_movies })
+                                               'filtered_movies': filtered_movies, 'page':page })
 
 def comingsoon(request):
     lang=MovieDB.objects.filter(MovieStatus='Coming Soon').values_list('MovieLanguage',flat=True).distinct()
@@ -70,7 +74,7 @@ def comingsoon(request):
     genres = request.GET.getlist('genre')
     modes = request.GET.getlist('mode')
     filtered_movies = MovieDB.objects.filter(MovieStatus="Coming Soon")
-    #print("ffdaDA", languages)
+
     if languages:
         filtered_movies = filtered_movies.filter(MovieLanguage__in=languages)
 
@@ -80,17 +84,27 @@ def comingsoon(request):
         filtered_movies = filtered_movies.filter(MovieGenre__in=genres)
     if modes:
         filtered_movies = filtered_movies.filter(MovieType__in=modes)
+    filtered_movies = filtered_movies.order_by('-MovieRelease')
+    paginator = Paginator(filtered_movies, per_page=2)  # Display 5 items per page
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
 
-    return render(request, 'NowShowing.html', {'lang': lang, 'genr':genr,'types':types, 'movies':movies,
-                                               'filtered_movies': filtered_movies })
+    return render(request, 'ComingSoon.html', {'lang': lang, 'genr':genr,'types':types, 'movies':movies,
+                                               'filtered_movies': filtered_movies , 'page':page})
 
 def movie_details(request, movie_id):
     movie=MovieDB.objects.get(id=movie_id)
     mn=movie.MovieName
     review=ReviewDB.objects.filter(MovieName=mn)
     review_count=review.count()
-    print(review_count)
-    return render(request, 'MovieDetails.html',{'movie':movie, 'review':review, 'review_count':review_count})
+    username = request.session.get("UserName")
+    if username:
+        user_details=UserDB.objects.get(UserName=username)
+        return render(request, 'MovieDetails.html',{'movie':movie, 'review':review,
+                                                    'review_count':review_count,'user_details':user_details})
+    else:
+        return render(request, 'MovieDetails.html', {'movie': movie, 'review': review,
+                                                     'review_count': review_count})
 
 def contactus(request):
     theatredet=TheatreDB.objects.get(id=1)
@@ -140,8 +154,8 @@ def post_review(request, movie_id):
         review=request.POST.get('review')
         date=datetime.now().date()
         username=request.session['UserName']
-        # print(moviename,review,date,username)
-        obj=ReviewDB(UserName=username, Review=review,Date=date,MovieName=moviename)
+        im = request.POST.get('image')
+        obj=ReviewDB(UserName=username, Review=review,Date=date,MovieName=moviename, UserImage=im)
         obj.save()
         return redirect(nowshowing)
 
@@ -154,6 +168,7 @@ def save_message(request):
         dat=datetime.now().date()
         obj=UserMessagesDB(Name=na,Email=em,Subject=sub,Message=msg,PostDate=dat)
         obj.save()
+        messages.success(request, "Thank you for Contacting Us..")
         return redirect(contactus)
 
 def my_profile(request):

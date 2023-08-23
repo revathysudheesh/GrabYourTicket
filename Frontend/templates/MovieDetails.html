@@ -368,7 +368,7 @@
                                         <div class="author">
                                             <div class="thumb">
                                                 <a href="#0">
-                                                    <img src="assets/images/cast/cast02.jpg" alt="cast">
+                                                    <img src="{{i.UserImage.url }}" alt="img">
                                                 </a>
                                             </div>
                                             <div class="movie-review-info">
@@ -377,25 +377,15 @@
                                             </div>
                                         </div>
                                         <div class="movie-review-content">
-                                            <div class="review">
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                                <i class="flaticon-favorite-heart-button"></i>
-                                            </div>
+<!--                                            <div class="review">-->
+<!--                                                <i class="flaticon-favorite-heart-button"></i>-->
+<!--                                                <i class="flaticon-favorite-heart-button"></i>-->
+<!--                                                <i class="flaticon-favorite-heart-button"></i>-->
+<!--                                                <i class="flaticon-favorite-heart-button"></i>-->
+<!--                                                <i class="flaticon-favorite-heart-button"></i>-->
+<!--                                            </div>-->
                                             <p>{{i.Review}}</p>
-                                            <div class="review-meta">
-                                                <a href="#0">
-                                                    <i class="flaticon-hand"></i><span>8</span>
-                                                </a>
-                                                <a href="#0" class="dislike">
-                                                    <i class="flaticon-dont-like-symbol"></i><span>0</span>
-                                                </a>
-                                                <a href="#0">
-                                                    Report Abuse
-                                                </a>
-                                            </div>
+
                                         </div>
                                     </div>
                                     {% endfor %}
@@ -412,6 +402,7 @@
                                             <label for="review">Review <span>*</span></label>
                                             <textarea name="review" id="review" placeholder="Enter Your Review" required></textarea>
                                          </div>
+                                            <input type="hidden" name="image" value="{{ user_details.UserImage }}">
                                         <div class="form-group">
                                             <button type="submit" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">Submit Review</button>
                                         </div>

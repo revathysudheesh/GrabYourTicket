@@ -90,7 +90,7 @@ def admin_logout(request):
     messages.success(request, "Successfully Signed Out")
     return redirect(login_reg)
 
-def my_profile(request):
+def admin_profile(request):
     if request.user.is_authenticated:
         user=request.user
         return render(request, 'MyProfile.html',{'user':user})
