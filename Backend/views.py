@@ -1,15 +1,11 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import get_user_model
 from Backend.models import CustomUser,TheatreDB, ScreenDB, MovieDB, ShowTimeDB
 from Frontend.models import UserMessagesDB, UserBookingDB, UserDB
 from django.core.files.storage import FileSystemStorage
 from django.utils.datastructures import MultiValueDictKeyError
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from django.contrib import messages
-from datetime import datetime
+from django.utils import timezone
 # Create your views here.
 
 def admin_home(request):
@@ -657,7 +653,30 @@ def view_bookings(request):
     if request.user.is_authenticated:
         first_name = request.user.first_name
         profile_image = request.user.profile_image
-        bookings=UserBookingDB.objects.all()
+        current_datetime = timezone.now()
+
+        bookings=UserBookingDB.objects.filter(SelectedDate__gte=current_datetime)
         return render(request, 'ViewBookings.html', {'first_name': first_name, 'profile_image': profile_image,'bookings': bookings})
+    else:
+        return redirect('login_reg')
+def view_bookings_old(request):
+    if request.user.is_authenticated:
+        first_name = request.user.first_name
+        profile_image = request.user.profile_image
+        current_datetime = timezone.now()
+
+        bookings=UserBookingDB.objects.filter(SelectedDate__lt=current_datetime)
+        return render(request, 'ViewBookings.html', {'first_name': first_name, 'profile_image': profile_image,'bookings': bookings})
+    else:
+        return redirect('login_reg')
+
+def view_users(request):
+    if request.user.is_authenticated:
+        first_name = request.user.first_name
+        profile_image = request.user.profile_image
+        users=UserDB.objects.all()
+        print(users)
+        return render(request, 'ViewUsers.html', {'first_name': first_name, 'profile_image': profile_image,
+                                                  'users': users})
     else:
         return redirect('login_reg')

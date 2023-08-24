@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+{% extends 'Dashboard.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Theatre</title>
+    <!-- Your existing CSS styles -->
+    <!-- ... -->
+
+    <style>
+        /* Style the container to control its size */
+        .table-container {
+            overflow-x: auto;
+            width: 100%;
+        }
+
+        /* Style the first table with the fixed column */
+        .fixed-column-table {
+            width: auto;
+            table-layout: fixed;
+        }
+
+        /* Style the second table with scrollable content */
+        .scrollable-table {
+            width: 100%;
+        }
+
+        /* Add more CSS as needed for your other styles */
+        /* ... */
+    </style>
+</head>
+<body>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title">List of Movies{{i.MovieCrew1Role}}</strong>
+            </div>
+            <div class="card-body">
+                <div id="bootstrap-data-table-export_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <!-- ... -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <!-- Wrap your table in the table-container div -->
+                            <div class="table-container">
+                                <!-- Create the first table with the fixed column -->
+                                <table class="fixed-column-table">
+                                    <thead style="text-align:center;">
+                                    <tr role="row">
+                                        <th>Name</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- Loop through your data and populate the fixed column table -->
+                                    {% for i in movie %}
+                                    <tr>
+                                        <td>{{i.MovieName}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                <!-- Create the second table with scrollable content -->
+                                <table class="scrollable-table table table-striped table-bordered dataTable no-footer">
+                                    <thead style="text-align:center;">
+                                    <tr role="row">
+                                        <!-- Add headers for the remaining columns here -->
+                                        <th>Language</th>
+                                        <th>Genre</th>
+                                        <!-- Add headers for other columns -->
+                                        <!-- ... -->
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- Loop through your data and populate the scrollable content table -->
+                                    {% for i in movie %}
+                                    <tr>
+                                        <!-- Add cells for the remaining columns here -->
+                                        <td>{{i.MovieLanguage}}</td>
+                                        <td>{{i.MovieGenre}}</td>
+                                        <!-- Add cells for other columns -->
+                                        <!-- ... -->
+                                        <td>
+                                            <a href="{% url 'edit_movie' dataid=i.id %}"><i class="menu-icon fa fa-edit"></i></a>
+                                            <a href="{% url 'delete_movie' dataid=i.id %}"><i class="menu-icon fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block breadcrumbs_js %}
+    <!-- Call the function to update breadcrumbs with the specific menu and submenu names -->
+    <script>
+        currentMenu = 'Manage Movies';
+        currentSubmenu = 'List Movies';
+        updateBreadcrumbs();
+    </script>
+{% endblock %}
+
+<!-- Include your JavaScript and other scripts here -->
+<!-- ... -->
+</body>
+</html>
+{% endblock %}

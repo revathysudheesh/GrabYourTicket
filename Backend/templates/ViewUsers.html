@@ -4,15 +4,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-
 </head>
 <body>
 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">List of Movies</strong>
+                                <strong class="card-title">Users List</strong>
                             </div>
                             <div class="card-body">
                                 <div id="bootstrap-data-table-export_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -39,76 +37,33 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div>
-                                                <table style="width:100%;" id="bootstrap-data-table-export" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="bootstrap-data-table-export_info">
-                                                <thead style="text-align:center;">
+                                            <table id="bootstrap-data-table-export" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="bootstrap-data-table-export_info">
+                                                <thead>
                                                     <tr role="row">
-                                                        <th>Name</th>
-                                                        <th>Language</th>
-                                                        <th>Genre</th>
-                                                        <th style="width:70%">Synopsis</th>
-                                                        <th>Type</th>
-                                                        <th>Duration</th>
-                                                        <th>Trailer Link</th>
-                                                        <th>Status</th>
-
-                                                        <th>Release Date</th>
-                                                        <th>Poster</th>
-                                                        <th>Actors</th>
-                                                        <th>Crew</th>
-                                                        <th>Action</th>
+                                                        <th>User Name</th>
+                                                        <th>User First Name</th>
+                                                          <th>UserLast Name</th>
+                                                          <th>User Email</th>
+                                                          <th>User Contact</th>
+                                                          <th>User Address</th>
+                                                          <th>UserImage</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                {% for i in movie %}
+                                                {% for i in users %}
                                                 <tr>
-                                                    <td>{{i.MovieName}}</td>
-                                                <td>{{i.MovieLanguage}}</td>
-                                                <td>{{i.MovieGenre}}</td>
-                                                <td>{{i.MovieSynopsis}}</td>
-                                                <td>{{i.MovieType}}</td>
-                                                <td>{{i.MovieDuration}}</td>
-                                                    <td>{{i.MovieTrailer}}</td>
-                                                <td>{{i.MovieStatus}}</td>
-                                                <td>{{i.MovieRelease|date:"Y-m-d" }}</td>
-                                                <td>
-                                                    <img src="{{i.MoviePoster.url}}" width="100px" height="100px" alt="poster"><br><br>
-                                                    <img src="{{i.MoviePoster1.url}}" width="100px" height="100px" alt="poster"><br><br>
-                                                    <img src="{{i.MoviePoster2.url}}" width="100px" height="100px" alt="poster"><br><br>
-                                                    <img src="{{i.MoviePoster3.url}}" width="100px" height="100px" alt="poster"><br><br>
-
-                                                </td>
-                                                <td>{{i.MovieActor1Name}}- <img src="{{i.MovieActor1Image.url}}" width="100px" height="100px" >
-                                                    <br>{{i.MovieActor2Name}}- <img src="{{i.MovieActor2Image.url}}" width="100px" height="100px">
-                                                    <br>{{i.MovieActor3Name}}- <img src="{{i.MovieActor3Image.url}}" width="100px" height="100px">
-                                                    <br>{{i.MovieActor4Name}}- <img src="{{i.MovieActor4Image.url}}" width="100px" height="100px">
-                                                    <br>{{i.MovieActor5Name}}- <img src="{{i.MovieActor5Image.url}}" width="100px" height="100px">
-                                                </td>
-                                                <td>
-                                                        {{i.MovieCrew1Name}}-{{i.MovieCrew1Role}} <img src="{{i.MovieCrew1Image.url}}" width="100px" height="100px" >
-                                                    <br>{{i.MovieCrew2Name}}-{{i.MovieCrew2Role}} <img src="{{i.MovieCrew2Image.url}}" width="100px" height="100px" alt="poster">
-                                                    <br>{{i.MovieCrew3Name}}-{{i.MovieCrew3Role}} <img src="{{i.MovieCrew3Image.url}}" width="100px" height="100px" alt="poster">
-                                                    <br>{{i.MovieCrew4Name}}-{{i.MovieCrew4Role}} <img src="{{i.MovieCrew4Image.url}}" width="100px" height="100px" alt="poster">
-                                                    <br>{{i.MovieCrew5Name}}-{{i.MovieCrew5Role}} <img src="{{i.MovieCrew5Image.url}}" width="100px" height="100px" alt="poster">
-                                                </td>
-                                                <td>
-                                                    <a href="{% url 'edit_movie' dataid=i.id %}"><i class="menu-icon fa fa-edit"></i></a>
-                                                    <a href="{% url 'delete_movie' dataid=i.id %}"><i class="menu-icon fa fa-trash"></i></a>
-
-                                                </td>
-
-                                                </tr>
-
-
-
-
-
-
-                                                {% endfor %}
+                                                  <td>{{i.UserName}}</td>
+                                                  <td>{{i.UserFirstName}}</td>
+                                                  <td>{{i.UserLastName}} </td>
+                                                  <td>{{i.UserEmail}}</td>
+                                                  <td>{{i.UserContact}}</td>
+                                                  <td>{{i.UserAddress}}</td>
+                                                  <td>
+                                                      <img src="{{i.UserImage.url}}" alt="Image" width="100px" height="100px">
+                                                  </td>
+                                                    {% endfor %}
                                                 </tbody>
                                             </table>
-
-                                            </div>
                                         </div>
                                     </div>
 <!--                                    <div class="row">-->
@@ -158,33 +113,12 @@
 {% block breadcrumbs_js %}
     <!-- Call the function to update breadcrumbs with the specific menu and submenu names -->
     <script>
-        currentMenu = 'Manage Movies';
-        currentSubmenu = 'List Movies';
+        currentMenu = 'Dashboard';
+        currentSubmenu = 'Bookings';
         updateBreadcrumbs();
     </script>
-
-
 {% endblock %}
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    {% if messages %}
-      {% for i in messages %}
-           {% if i.tags == 'warning' %}
-               <script>
-                    swal('{{i}}','','warning');
-               </script>
-           {% elif i.tags == 'error' %}
-               <script>
-                    swal('{{i}}','','error');
-               </script>
-           {% else %}
-               <script>
-                    swal('{{i}}','','success');
-               </script>
-           {% endif %}
-        {% endfor %}
-    {% endif %}
 </body>
 </html>
 {% endblock %}

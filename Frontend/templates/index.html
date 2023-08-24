@@ -67,7 +67,7 @@
                     <li><a href="{% url 'contactus' %}" {% if request.resolver_match.url_name == 'contactus' %} class="active"{% endif %}>contact us</a></li>
                     {% if request.session.UserName %}
                     <li>
-                        <a href="{% url 'booking_history' %}">BOOKING HISTORY</a>
+                        <a href="{% url 'booking_history' %}"{% if request.resolver_match.url_name == 'booking_history' %} class="active"{% endif %}>BOOKING HISTORY</a>
                     </li>
                     <li>
                         <a href="#0"{% if request.resolver_match.url_name == 'my_profile' %} class="active"{% endif %}>{{request.session.UserName}}</a>
@@ -123,7 +123,9 @@
                 <div class="row align-items-center mb--20">
                     <div class="col-lg-6 mb-20">
                         <div class="search-ticket-header">
-<!--                            <h6 class="category">Welcome to Boleto </h6>-->
+                            <h6 class="category">Welcome to Raagam Cinemas </h6>
+                            <h4 class="title">Make a Quick Book</h4>
+
                         </div>
                     </div>
                     <div class="col-lg-6 mb-20">

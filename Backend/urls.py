@@ -41,6 +41,8 @@ urlpatterns=[path('admin_home/', views.admin_home, name='admin_home'),
              path('submit_movie/', views.submit_movie, name='submit_movie'),
              path('view_messages/', views.view_messages, name='view_messages'),
              path('view_bookings/', views.view_bookings, name='view_bookings'),
+             path('view_bookings_old/', views.view_bookings_old, name='view_bookings_old'),
+             path('view_users/', views.view_users, name='view_users'),
 
 
              ]
