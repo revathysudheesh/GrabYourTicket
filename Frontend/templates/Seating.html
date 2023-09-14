@@ -77,6 +77,8 @@
                                     <img src="{% static seat_image %}" alt="seat">
                                             <span class="sit-num">{{i.SeatNumber}}</span>
                                     <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+                                    <input type="hidden" name="seat_img" value="{{seat_image}}">
+
                                     {% endwith %}
                                 </li>
                                 {% endfor %}
@@ -91,6 +93,8 @@
                                     {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
                                      <img src="{% static seat_image %}" alt="seat">
                                             <span class="sit-num">{{i.SeatNumber}}</span>
+                                                                        <input type="hidden" name="seat_img" value="{{seat_image}}">
+
                                     <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
 
                                     {% endwith %}
@@ -107,6 +111,8 @@
                                     {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
                             <img src="{% static seat_image %}" alt="seat">
                                             <span class="sit-num">{{i.SeatNumber}}</span>
+                                                                        <input type="hidden" name="seat_img" value="{{seat_image}}">
+
                                                                         <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
 
                                     {%endwith%}
@@ -123,6 +129,8 @@
                                     {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
                                     <img src="{% static seat_image %}" alt="seat">
                                             <span class="sit-num">{{i.SeatNumber}}</span>
+                                    <input type="hidden" name="seat_img" value="{{seat_image}}">
+
                                     <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
                                 {% endwith %}
 
@@ -143,6 +151,7 @@
                                 <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
                                     {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
                                     <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+                                    <input type="hidden" name="seat_img" value="{{seat_image}}">
 
                                             <img src="{% static seat_image %}" alt="seat">
                                             <span class="sit-num">{{i.SeatNumber}}</span>
@@ -161,6 +170,8 @@
                                             <img src="{% static seat_image %}" alt="seat">
                                             <span class="sit-num">{{i.SeatNumber}}</span>
                                     <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+                                                                        <input type="hidden" name="seat_img" value="{{seat_image}}">
+
 
 
                                     {%endwith %}
@@ -177,7 +188,9 @@
                                     {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
                                     <img src="{% static seat_image %}" alt="seat">
                                             <span class="sit-num">{{i.SeatNumber}}</span>
-                                                                        <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+                                    <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+                                                                        <input type="hidden" name="seat_img" value="{{seat_image}}">
+
 
                                     {% endwith %}
                                 </li>
@@ -193,7 +206,9 @@
                                             {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
                                             <img src="{% static seat_image %}" alt="seat">
                                             <span class="sit-num">{{i.SeatNumber}}</span>
-                                                                        <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+                                                                                                            <input type="hidden" name="seat_img" value="{{seat_image}}">
+
+                                    <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
 
                                     {%endwith%}
                                 </li>
@@ -209,6 +224,8 @@
                                     {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
                                     <img src="{% static seat_image %}" alt="seat">
                                             <span class="sit-num">{{i.SeatNumber}}</span>
+                                                                        <input type="hidden" name="seat_img" value="{{seat_image}}">
+
                                                                         <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
 
                                     {% endwith %}
@@ -225,6 +242,8 @@
                                     {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
                                     <img src="{% static seat_image %}" alt="seat">
                                             <span class="sit-num">{{i.SeatNumber}}</span>
+                                                                        <input type="hidden" name="seat_img" value="{{seat_image}}">
+
                                                                         <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
 
                                     {% endwith %}
@@ -241,6 +260,8 @@
                                     {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
                                     <img src="{% static seat_image %}" alt="seat">
                                             <span class="sit-num">{{i.SeatNumber}}</span>
+                                                                        <input type="hidden" name="seat_img" value="{{seat_image}}">
+
                                                                         <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
 
                                     {% endwith %}
@@ -257,6 +278,8 @@
                                     {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
                                             <img src="{% static seat_image %}" alt="seat">
                                             <span class="sit-num">{{i.SeatNumber}}</span>
+                                                                        <input type="hidden" name="seat_img" value="{{seat_image}}">
+
                                                                         <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
 
                                     {% endwith %}
@@ -274,6 +297,8 @@
                                     <img src="{% static seat_image %}" alt="seat">
                                             <span class="sit-num">{{i.SeatNumber}}</span>
                                     <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
+                                    <input type="hidden" name="seat_img" value="{{seat_image}}">
+
 
                                     {% endwith %}
                                 </li>
@@ -319,72 +344,157 @@
 
 
                     <div class="book-item">
-                        <button type="submit" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">Proceed</button>
+<!--                        <button type="submit" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">Proceed</button>-->
+                    <button type="submit" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);" onclick="proceedClicked()">Proceed</button>
+
                     </div>
                 </div>
             </div>
         </div>
         </form>
     </div>
+<script>
+    const seats = document.querySelectorAll('.single-seat');
+    const chosenSeatsElement = document.getElementById('chosen-seats');
+    const totalPriceElement = document.getElementById('total-price');
+    const finalPriceElement = document.getElementById('finalPrice');
+    const premiumPriceElement = document.getElementById('premium-price');
+    const standardPriceElement = document.getElementById('standard-price');
+    let totalPrice = 0;
+    let selectedSeats = [];
 
-    <script>
-        const seats = document.querySelectorAll('.single-seat');
-        const chosenSeatsElement = document.getElementById('chosen-seats');
-        const totalPriceElement = document.getElementById('total-price');
-        const finalPriceElement = document.getElementById('finalPrice');
+    // Function to update the UI with selected seats and total price
+    function updateUI() {
+        chosenSeatsElement.textContent = selectedSeats.map(seat => `${seat.seatNumber} (${seat.seatType})`).join(', ');
+        totalPriceElement.textContent = `₹${totalPrice}`;
+        document.getElementById("finalPrice").value = totalPrice;
+        document.getElementById("chosenTypes").value = selectedSeats.map(seat => seat.seatType);
+        document.getElementById("chosenSeats").value = selectedSeats.map(seat => `${seat.seatNumber} (${seat.seatType})`).join(', ');
+    }
 
-        const premiumPriceElement = document.getElementById('premium-price');
-        const standardPriceElement = document.getElementById('standard-price');
-        let totalPrice = 0;
-        let selectedSeats = [];
+    seats.forEach(seat => {
+        seat.addEventListener('click', function () {
+            const status = this.getAttribute('data-status');
+            const seatInfo = this.getAttribute('data-seat').split('-');
 
-        seats.forEach(seat => {
-            seat.addEventListener('click', function() {
-                const status = this.getAttribute('data-status');
-                const seatInfo = this.getAttribute('data-seat').split('-');
+            const seatNumber = seatInfo[0];
+            const seatType = seatInfo[1];
 
-                const seatNumber = seatInfo[0];
-                const seatType = seatInfo[1];
-
-                if (status === 'available') {
-                    this.setAttribute('data-status', 'selected');
-                    selectedSeats.push({ seatNumber, seatType });
-                    totalPrice += calculateSeatPrice(seatNumber, seatType);
-                } else if (status === 'selected') {
-                    this.setAttribute('data-status', 'available');
-                    const index = selectedSeats.findIndex(seat => seat.seatNumber === seatNumber && seat.seatType === seatType);
-                    if (index !== -1) {
-                        selectedSeats.splice(index, 1);
-                        totalPrice -= calculateSeatPrice(seatNumber, seatType);
-                    }
+            if (status === 'available') {
+                this.setAttribute('data-status', 'selected');
+                selectedSeats.push({ seatNumber, seatType });
+                totalPrice += calculateSeatPrice(seatNumber, seatType);
+            } else if (status === 'selected') {
+                this.setAttribute('data-status', 'available');
+                const index = selectedSeats.findIndex(seat => seat.seatNumber === seatNumber && seat.seatType === seatType);
+                if (index !== -1) {
+                    selectedSeats.splice(index, 1);
+                    totalPrice -= calculateSeatPrice(seatNumber, seatType);
                 }
+            }
 
-<!--                chosenSeatsElement.textContent = selectedSeats.map(seat => seat.seatNumber).join(', ');-->
-                    chosenSeatsElement.textContent = selectedSeats.map(seat => `${seat.seatNumber} (${seat.seatType})`).join(', ');
+            updateUI();
 
-                totalPriceElement.textContent = `₹${totalPrice}`;
-                document.getElementById("finalPrice").value = totalPrice;
-                 document.getElementById("chosenTypes").value= selectedSeats.map(seat => seat.seatType);
-                document.getElementById("chosenSeats").value = selectedSeats.map(seat => `${seat.seatNumber} (${seat.seatType})`).join(', ');
+            const img = this.querySelector('img');
+            img.src = img.src.replace(status, this.getAttribute('data-status'));
 
-
-                const img = this.querySelector('img');
-                img.src = img.src.replace(status, this.getAttribute('data-status'));
-
-                const input = this.querySelector('input[name="seats"]');
-                input.value = input.value.replace(/:(selected|available)$/, ':' + this.getAttribute('data-status'));
-            });
+            const input = this.querySelector('input[name="seats"]');
+            input.value = input.value.replace(/:(selected|available)$/, ':' + this.getAttribute('data-status'));
         });
+    });
 
-        function calculateSeatPrice(seatNumber, seatType) {
-            if (seatType === 'Premium') {
-        return parseFloat(premiumPriceElement.value); // Retrieve the premium price from the hidden input
-            } else {
-        return parseFloat(standardPriceElement.value); // Retrieve the standard price from the hidden input
-                    }
+    // Handle the beforeunload event to show the alert when leaving the page
+    window.onbeforeunload = function () {
+        if (selectedSeats.length > 0) {
+            return "You have selected seats. Are you sure you want to leave this page?";
         }
+    };
 
-    </script>
+    // Function to mark the user as leaving when the "Proceed" button is clicked
+    function proceedClicked() {
+        window.onbeforeunload = null; // Remove the event handler
+    }
+
+    // Calculate seat price function remains the same
+    function calculateSeatPrice(seatNumber, seatType) {
+        if (seatType === 'Premium') {
+            return parseFloat(premiumPriceElement.value);
+        } else {
+            return parseFloat(standardPriceElement.value);
+        }
+    }
+</script>
+
+
+<!-- <script>-->
+<!--    const seats = document.querySelectorAll('.single-seat');-->
+<!--    const chosenSeatsElement = document.getElementById('chosen-seats');-->
+<!--    const totalPriceElement = document.getElementById('total-price');-->
+<!--    const finalPriceElement = document.getElementById('finalPrice');-->
+<!--    const premiumPriceElement = document.getElementById('premium-price');-->
+<!--    const standardPriceElement = document.getElementById('standard-price');-->
+<!--    let totalPrice = 0;-->
+<!--    let selectedSeats = [];-->
+
+<!--    // Function to update the UI with selected seats and total price-->
+<!--    function updateUI() {-->
+<!--        chosenSeatsElement.textContent = selectedSeats.map(seat => `${seat.seatNumber} (${seat.seatType})`).join(', ');-->
+<!--        totalPriceElement.textContent = `₹${totalPrice}`;-->
+<!--        document.getElementById("finalPrice").value = totalPrice;-->
+<!--        document.getElementById("chosenTypes").value = selectedSeats.map(seat => seat.seatType);-->
+<!--        document.getElementById("chosenSeats").value = selectedSeats.map(seat => `${seat.seatNumber} (${seat.seatType})`).join(', ');-->
+<!--    }-->
+
+<!--    seats.forEach(seat => {-->
+<!--        seat.addEventListener('click', function () {-->
+<!--            const status = this.getAttribute('data-status');-->
+<!--            const seatInfo = this.getAttribute('data-seat').split('-');-->
+
+<!--            const seatNumber = seatInfo[0];-->
+<!--            const seatType = seatInfo[1];-->
+
+<!--            if (status === 'available') {-->
+<!--                this.setAttribute('data-status', 'selected');-->
+<!--                selectedSeats.push({ seatNumber, seatType });-->
+<!--                totalPrice += calculateSeatPrice(seatNumber, seatType);-->
+<!--            } else if (status === 'selected') {-->
+<!--                this.setAttribute('data-status', 'available');-->
+<!--                const index = selectedSeats.findIndex(seat => seat.seatNumber === seatNumber && seat.seatType === seatType);-->
+<!--                if (index !== -1) {-->
+<!--                    selectedSeats.splice(index, 1);-->
+<!--                    totalPrice -= calculateSeatPrice(seatNumber, seatType);-->
+<!--                }-->
+<!--            }-->
+
+<!--            updateUI();-->
+
+<!--            const img = this.querySelector('img');-->
+<!--            img.src = img.src.replace(status, this.getAttribute('data-status'));-->
+
+<!--            const input = this.querySelector('input[name="seats"]');-->
+<!--            input.value = input.value.replace(/:(selected|available)$/, ':' + this.getAttribute('data-status'));-->
+<!--        });-->
+<!--    });-->
+
+<!--    // Handle the beforeunload event to clear selected seats when leaving the page-->
+<!--    window.addEventListener('beforeunload', function (event) {-->
+<!--        if (selectedSeats.length > 0) {-->
+<!--            event.preventDefault(); // Cancel the event to show the confirmation dialog-->
+<!--            event.returnValue = ''; // For older browsers-->
+<!--        }-->
+<!--    });-->
+
+<!--    // Calculate seat price function remains the same-->
+<!--    function calculateSeatPrice(seatNumber, seatType) {-->
+<!--        if (seatType === 'Premium') {-->
+<!--            return parseFloat(premiumPriceElement.value);-->
+<!--        } else {-->
+<!--            return parseFloat(standardPriceElement.value);-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
+
+
 
 </body>
 </html>

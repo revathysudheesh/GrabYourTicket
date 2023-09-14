@@ -100,11 +100,13 @@
 <!--                        <p><a href="#0">Rate It</a></p>-->
 <!--                    </div>-->
 <!--                </div>-->
+                {% if movie.MovieStatus == "Now Showing" and request.session.UserName %}
                 <form action="{% url 'ticket_booking' data_id=movie.id %}" method="post">
                     {% csrf_token %}
                     <button type="submit" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">Book Tickets</button>
 
                 </form>
+                {% endif %}
             </div>
         </div>
     </section>
@@ -208,10 +210,11 @@
                                 <li class="active">
                                     summery
                                 </li>
+                                {% if movie.MovieStatus == "Now Showing" and request.session.UserName %}
+
                                 <li>
                                     user review <span>{{review_count}}</span>
                                 </li>
-                                 {% if request.session.UserName %}
                                 <li>
                                     add review
                                 </li>
@@ -390,11 +393,11 @@
                                     </div>
                                     {% endfor %}
 
-                                    <div class="load-more text-center">
-                                        <a href="#0" class="custom-button transparent">load more</a>
-                                    </div>
+<!--                                    <div class="load-more text-center">-->
+<!--                                        <a href="#0" class="custom-button transparent">load more</a>-->
+<!--                                    </div>-->
                                 </div>
-                                {% if request.session.UserName %}
+                                {% if movie.MovieStatus == "Now Showing" and request.session.UserName %}
                                 <div class="tab-item">
                                     <form class="contact-form" id="contact_form_submit" method="post" action="{% url 'post_review' movie_id=movie.id %}">
                                         {% csrf_token %}

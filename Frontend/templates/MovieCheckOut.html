@@ -51,136 +51,137 @@
     <!-- ==========Movie-Section========== -->
     <div class="movie-facility padding-bottom padding-top">
         <div class="container">
-            <form action="{% url 'confirm_booking' %}" method="post">
+            <form action="{% url 'confirm_booking' %}" method="post" onsubmit="return validateSignUpForm()">
                 {% csrf_token %}
                 <div class="row">
-                <div class="col-lg-8">
-
-                    <div class="checkout-widget checkout-contact">
-                        <h5 class="title">Share your Contact  Details </h5>
-                        <form class="checkout-contact-form">
-                            <div class="form-group">
-                                <input type="text" value="{{userName}}" readonly>
+                    <div class="col-lg-8">
+                            <div class="checkout-widget checkout-contact">
+                                <h5 class="title">Share your Contact  Details </h5>
+                                <div class="checkout-contact-form">
+                                    <div class="form-group">
+                                        <input type="text" value="{{userName}}" name="username"readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" value="{{userEmail}}" id="email" name="cemail">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" value="{{userContact}}" id="mobile"name="mobile">
+                                    </div>
+                                    </div>
                             </div>
-                            <div class="form-group">
-                                <input type="email" value="{{userEmail}}" readonly>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" value="{{userContact}}" readonly>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Continue" class="custom-button">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="checkout-widget checkout-contact">
-                        <h5 class="title">Promo Code </h5>
-                        <form class="checkout-contact-form">
-                            <div class="form-group">
-                                <input type="text" placeholder="Please enter promo code">
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Verify" class="custom-button">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="checkout-widget checkout-card mb-0">
-                        <h5 class="title">Payment Option </h5>
-                        <ul class="payment-option">
-                            <li class="active">
-                                <a href="#0">
-                                    <img src="{% static 'images/payment/card.png' %}" alt="payment">
-                                    <span>Credit Card</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#0">
-                                    <img src="{% static 'images/payment/card.png' %}" alt="payment">
-                                    <span>Debit Card</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#0">
-                                    <img src="{% static 'images/payment/paypal.png' %}" alt="payment">
-                                    <span>paypal</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <h6 class="subtitle">Enter Your Card Details </h6>
-                        <form class="payment-card-form">
-                            <div class="form-group w-100">
-                                <label for="card1">Card Details</label>
-                                <input type="text" id="card1">
-                                <div class="right-icon">
-                                    <i class="flaticon-lock"></i>
+                            <div class="checkout-widget checkout-card mb-0">
+                                <h5 class="title">Payment Option </h5>
+                                <ul class="payment-option">
+                                    <li class="active">
+                                        <a href="#0">
+                                            <img src="{% static 'images/payment/card.png' %}" alt="payment">
+                                            <span>Credit Card</span>
+                                        </a>
+                                    </li>
+        <!--                            <li>-->
+        <!--                                <a href="#0">-->
+        <!--                                    <img src="{% static 'images/payment/card.png' %}" alt="payment">-->
+        <!--                                    <span>Debit Card</span>-->
+        <!--                                </a>-->
+        <!--                            </li>-->
+        <!--                            <li>-->
+        <!--                                <a href="#0">-->
+        <!--                                    <img src="{% static 'images/payment/paypal.png' %}" alt="payment">-->
+        <!--                                    <span>paypal</span>-->
+        <!--                                </a>-->
+        <!--                            </li>-->
+                                </ul>
+                                <h6 class="subtitle">Enter Your Card Details </h6>
+                                <div class="payment-card-form">
+                                    <div class="form-group w-100">
+                                        <label for="card1">Card Details</label>
+                                        <input type="text" id="card1" name="carddet" required>
+                                        <div class="right-icon">
+                                            <i class="flaticon-lock"></i>
+                                        </div>
+                                    </div>
+                                    <div class="form-group w-100">
+                                        <label for="card2"> Name on the Card</label>
+                                        <input type="text" id="card2" name="cardname" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="card3">Expiration</label>
+                                        <input type="text" id="card3" placeholder="MM/YY" name="expmonth" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="card4">CVV</label>
+                                        <input type="text" id="card4" placeholder="CVV" name="cvv" required>
+                                    </div>
+                                    <div class="form-group check-group">
+                                        <input id="card5" type="checkbox" checked>
+                                        <label for="card5">
+                                            <span class="title">QuickPay</span>
+                                            <span class="info">Save this card information to my Raagam Cinemas  account and make faster payments.</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">Proceed</button>
+                                    </div>
                                 </div>
+                                <p class="notice">
+                                    By Clicking "Make Payment" you agree to the <a href="#0">terms and conditions</a>
+                                </p>
                             </div>
-                            <div class="form-group w-100">
-                                <label for="card2"> Name on the Card</label>
-                                <input type="text" id="card2">
-                            </div>
-                            <div class="form-group">
-                                <label for="card3">Expiration</label>
-                                <input type="text" id="card3" placeholder="MM/YY">
-                            </div>
-                            <div class="form-group">
-                                <label for="card4">CVV</label>
-                                <input type="text" id="card4" placeholder="CVV">
-                            </div>
-                            <div class="form-group check-group">
-                                <input id="card5" type="checkbox" checked>
-                                <label for="card5">
-                                    <span class="title">QuickPay</span>
-                                    <span class="info">Save this card information to my Boleto  account and make faster payments.</span>
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" class="custom-button" value="make payment">
-                            </div>
-                        </form>
-                        <p class="notice">
-                            By Clicking "Make Payment" you agree to the <a href="#0">terms and conditions</a>
-                        </p>
                     </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="booking-summery bg-one">
-                        <h4 class="title">booking summery</h4>
-                        <ul>
-                            <li>
-                                <h6 class="subtitle">{{movieName}}</h6>
-                                <span class="info">{{movieLang}}-{{movieType}}</span>
-                            </li>
-                            <li>
-                                <h6 class="subtitle"><span>{{screenName}}|{{showName}}</span><span>{{chosenSeats}}</span></h6>
-                                <div class="info"><span>{{selectedDate}}</span></div>
-                            </li>
-                            <li>
-                                <h6 class="subtitle mb-0"><span>Tickets  Price</span><span>{{finalPrice}}</span></h6>
-                            </li>
-                        </ul>
+                    <div class="col-lg-4">
+                        <div class="checkout-widget checkout-contact">
+                                <div class="booking-summery bg-one">
+                                <h4 class="title">booking summery</h4>
+                                <ul>
+                                    <li>
+                                        <h6 class="subtitle">{{movieName}}</h6>
+                                        <span class="info">{{movieLang}}-{{movieType}}</span>
+                                    </li>
+                                    <li>
+                                        <h6 class="subtitle"><span>{{screenName}}|{{showName}}</span><span>{{chosenSeats}}</span></h6>
+                                        <div class="info"><span>{{selectedDate}}</span></div>
+                                    </li>
+                                    <li>
+                                        <h6 class="subtitle mb-0"><span>Tickets  Price</span><span>{{finalPrice}}</span></h6>
+                                    </li>
+                                </ul>
 
+                            </div>
+                            <div class="proceed-area  text-center">
+                                <h6 class="subtitle"><span>Amount Payable</span><span>{{finalPrice}}</span></h6>
+                                <input type="hidden" name="selected_seats" value="{{selectedSeat}}">
+                                <input type="hidden" name="selected_seats_type" value="{{chosenSeats}}">
+                                <input type="hidden" name="selected_type" value="{{chosenTypes}}">
+                                <input type="hidden" name="movieName" value="{{movieName}}">
+                                <input type="hidden" name="showName" value="{{showName}}">
+                                <input type="hidden" name="screenName" value="{{screenName}}">
+                                <input type="hidden" name="selectedDate" value="{{selectedDate}}">
+                            </div>
+                            </div>
                     </div>
-                    <div class="proceed-area  text-center">
-                        <h6 class="subtitle"><span>Amount Payable</span><span>{{finalPrice}}</span></h6>
-                        <input type="hidden" name="selected_seats" value="{{selectedSeat}}">
-                        <input type="hidden" name="selected_seats_type" value="{{chosenSeats}}">
-                        <input type="hidden" name="selected_type" value="{{chosenTypes}}">
-                        <input type="hidden" name="movieName" value="{{movieName}}">
-                        <input type="hidden" name="showName" value="{{showName}}">
-                        <input type="hidden" name="screenName" value="{{screenName}}">
-                        <input type="hidden" name="selectedDate" value="{{selectedDate}}">
-                    <button type="submit" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">Proceed</button>
-                    </div>
+
                 </div>
-            </div>
             </form>
 
         </div>
     </div>
     <!-- ==========Movie-Section========== -->
+<script>
+    function validateSignUpForm() {
+    var email = document.getElementById("email").value;
+  var mobileNumber = document.getElementById("mobile").value;
+  if (email.trim() === "" || !emailIsValid(email)) {
+    alert("Please enter a valid email address.");
+    return false;
+  }
 
-
+  if (mobileNumber.trim() === "" || !mobileNumberIsValid(mobileNumber)) {
+    alert("Please enter a valid 10-digit mobile number.");
+    return false;
+  }
+  return true;
+}
+</script>
 </body>
 </html>
 {% endblock %}

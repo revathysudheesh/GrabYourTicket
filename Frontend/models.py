@@ -46,3 +46,12 @@ class SeatDB(models.Model):
     ShowTimeName = models.CharField(max_length=100)
     SeatType= models.CharField(max_length=5, null=True, blank=True)
     RowNumber= models.CharField(max_length=5, null=True, blank=True)
+
+class CheckOutDB(models.Model):
+    UserName=models.CharField(max_length=20, null=True, blank=True)
+    CardDetail=models.CharField(max_length=20, null=True, blank=True)
+    Email=models.EmailField(max_length=20, null=True, blank=True)
+    Contact=models.IntegerField(null=True, blank=True)
+    CardName=models.CharField(max_length=20, null=True, blank=True)
+    Expiry=models.CharField(max_length=20, null=True, blank=True)
+    Cvv=models.IntegerField(null=True, blank=True)

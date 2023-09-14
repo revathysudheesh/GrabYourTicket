@@ -174,7 +174,7 @@
                                 <span class="type">movie</span>
                                 <select class="select-bar" name="selected_movie">
                                     {% for i in now_movie %}
-                                        <option value="{{i.MovieName}}">{{i.MovieName}}</option>
+                                        <option value="{{i}}">{{i}}</option>
                                     {% endfor %}
 
                                 </select>
@@ -229,7 +229,7 @@
                                     </div>
                                     <div class="movie-content bg-one">
                                         <h5 class="title m-0">
-                                            <a href="#0">{{i.MovieName}}</a>
+                                            <a href="{% url 'movie_details' movie_id=i.id %}">{{i.MovieName}}</a>
                                         </h5>
 <!--                                        <ul class="movie-rating-percent">-->
 <!--                                            <li>-->
@@ -257,13 +257,13 @@
                             <div class="item">
                                 <div class="movie-grid">
                                     <div class="movie-thumb c-thumb">
-                                        <a href="#">
+                                       <a href="{% url 'movie_details' movie_id=i.id %}">
                                             <img src="{{i.MoviePoster.url}}" alt="movie">
                                         </a>
                                     </div>
                                     <div class="movie-content bg-one">
                                         <h5 class="title m-0">
-                                            <a href="#0">{{i.MovieName}}</a>
+                                            <a href="{% url 'movie_details' movie_id=i.id %}">{{i.MovieName}}</a>
                                         </h5>
 <!--                                        <ul class="movie-rating-percent">-->
 <!--                                            <li>-->

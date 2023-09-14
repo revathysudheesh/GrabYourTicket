@@ -6,20 +6,21 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.utils import timezone
+from django.db.models import Count
+
 # Create your views here.
 
 def admin_home(request):
     if request.user.is_authenticated:
         first_name=request.user.first_name
         profile_image=request.user.profile_image
+        current_datetime = timezone.now()
         users=UserDB.objects.all()
         user_count = users.count()
-        shows=ShowTimeDB.objects.all()
-        show_count=shows.count()
+        show_count= ShowTimeDB.objects.filter(Date__gte=current_datetime).aggregate(count=Count('id'))['count'] or 0
         movies=MovieDB.objects.filter(MovieStatus="Now Showing")
         movie_count=movies.count()
-        booking=UserBookingDB.objects.all()
-        booking_count=booking.count()
+        booking_count= UserBookingDB.objects.filter(SelectedDate__gte=current_datetime).aggregate(count=Count('id'))['count'] or 0
         return render(request, 'Dashboard.html',{'first_name':first_name, 'profile_image':profile_image,
                                                  'user_count':user_count, 'show_count':show_count,
                                                  'movie_count':movie_count, 'booking_count':booking_count})
@@ -561,6 +562,7 @@ def submit_show_time(request):
                          PriceStandard=ps, PricePremium=pp,TotalStandardTickets=std_cap,AvailableStandardTickets=std_cap,
                          TotalPremiumTickets=premium_cap,AvailablePremiumTickets=premium_cap, Status="Open")
             obj.save()
+            messages.success(request, "Showtime Added")
             return redirect('add_show_time')
     return redirect('add_show_time')
 
@@ -655,7 +657,7 @@ def view_bookings(request):
         profile_image = request.user.profile_image
         current_datetime = timezone.now()
 
-        bookings=UserBookingDB.objects.filter(SelectedDate__gte=current_datetime)
+        bookings=UserBookingDB.objects.filter(SelectedDate__gte=current_datetime, PaymentStatus="PaymentDone")
         return render(request, 'ViewBookings.html', {'first_name': first_name, 'profile_image': profile_image,'bookings': bookings})
     else:
         return redirect('login_reg')
@@ -665,7 +667,7 @@ def view_bookings_old(request):
         profile_image = request.user.profile_image
         current_datetime = timezone.now()
 
-        bookings=UserBookingDB.objects.filter(SelectedDate__lt=current_datetime)
+        bookings=UserBookingDB.objects.filter(SelectedDate__lt=current_datetime, PaymentStatus="PaymentDone")
         return render(request, 'ViewBookings.html', {'first_name': first_name, 'profile_image': profile_image,'bookings': bookings})
     else:
         return redirect('login_reg')

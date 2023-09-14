@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from datetime import datetime, timedelta
 from Backend.models import MovieDB, ShowTimeDB, TheatreDB
-from Frontend.models import UserDB, ReviewDB,UserMessagesDB,SeatDB, UserBookingDB
+from Frontend.models import UserDB, ReviewDB,UserMessagesDB,SeatDB, UserBookingDB, CheckOutDB
 from django.contrib import messages
 from django.urls import reverse
+from django.db.models import Q
 import ast
 from django.core.paginator import Paginator
 from reportlab.pdfgen import canvas
@@ -23,7 +24,8 @@ def index(request):
     next_three_days = [today + timedelta(days=i) for i in range(0, 4)]
     movies=MovieDB.objects.filter(MovieStatus="Now Showing")
     movieslist = MovieDB.objects.filter(MovieStatus="Coming Soon")
-    now_movie=ShowTimeDB.objects.all()
+    now_movie=ShowTimeDB.objects.all().values_list('MovieName',flat=True).distinct()
+    print(now_movie)
     return render(request, 'index.html', {'next_three_days': next_three_days, 'movies':movies, 'movieslist':movieslist, 'now_movie':now_movie})
 
 
@@ -157,6 +159,7 @@ def post_review(request, movie_id):
         im = request.POST.get('image')
         obj=ReviewDB(UserName=username, Review=review,Date=date,MovieName=moviename, UserImage=im)
         obj.save()
+        messages.success(request, "Review Posted Successfully...!")
         return redirect(nowshowing)
 
 def save_message(request):
@@ -201,50 +204,76 @@ def initialize_seat_statuses(selected_date, show_name):
 def seating_plan(request):
     selected_date = request.POST.get('selected_date')
     selected_movie = request.POST.get('selected_movie')
+    unpaid_bookings = UserBookingDB.objects.filter(PaymentStatus="UnderProcess")
+    print(unpaid_bookings)
+    for booking in unpaid_bookings:
+        # Parse the SeatNumberOnly field as a literal list
+        seat_numbers_str = ast.literal_eval(booking.SeatNumberOnly)
+        print(seat_numbers_str)
+        # Ensure that seat_numbers_str is a list
+        if isinstance(seat_numbers_str, list):
+            # Iterate over individual seat numbers
+            for seat_number in seat_numbers_str:
+                # Strip extra spaces and remove single quotes
+                seat_number = seat_number.strip().strip("'")
+                print(seat_number)
+
+                # Retrieve the corresponding seat from the SeatDB model
+                seat = SeatDB.objects.get(SeatNumber=seat_number, Date=booking.SelectedDate)
+
+                # Check if the seat status is "booked" before updating
+                if seat.SeatStatus == "selected":
+                    # Update the seat status to "available"
+                    seat.SeatStatus = "available"
+                    seat.save()
     ShowTimeNames = ShowTimeDB.objects.filter(MovieName=selected_movie, Date=selected_date).values_list('ShowTimeName', flat= True)
-    if 'UserName' in request.session:
-        for show_name in ShowTimeNames:
-            initialize_seat_statuses(selected_date, show_name)
-            seat_data = SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames)
-            seat_data_A=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="A")
-            seat_data_B=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="B")
-            seat_data_C=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="C")
-            seat_data_D=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="D")
-            seat_data_E=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="E")
-            seat_data_F=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="F")
-            seat_data_G=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="G")
-            seat_data_H=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="H")
-            seat_data_I=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="I")
-            seat_data_J=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="J")
-            seat_data_K=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Standard", RowNumber="K")
-            seat_data_L=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Standard", RowNumber="L")
-            seat_data_M=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Standard", RowNumber="M")
-            seat_data_N=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Standard", RowNumber="N")
-            seat_data_pre=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium")
-            show=ShowTimeDB.objects.filter(MovieName=selected_movie, Date=selected_date)
-            context={'selected_date':selected_date,
-                         'selected_movie':selected_movie,
-                         'show':show,
-                         'seat_data':seat_data,
-                         'seat_data_A':seat_data_A,
-                         'seat_data_B':seat_data_B,
-                         'seat_data_C':seat_data_C,
-                         'seat_data_D':seat_data_D,
-                         'seat_data_E':seat_data_E,
-                         'seat_data_F':seat_data_F,
-                         'seat_data_G':seat_data_G,
-                         'seat_data_H':seat_data_H,
-                         'seat_data_I':seat_data_I,
-                         'seat_data_J':seat_data_J,
-                         'seat_data_K':seat_data_K,
-                         'seat_data_L':seat_data_L,
-                         'seat_data_M':seat_data_M,
-                         'seat_data_N': seat_data_N,
-                         'seat_data_pre':seat_data_pre}
-        return render(request, 'Seating.html', context)
+    if ShowTimeNames:
+        if 'UserName' in request.session:
+            for show_name in ShowTimeNames:
+                initialize_seat_statuses(selected_date, show_name)
+                seat_data = SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames)
+                seat_data_A=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="A")
+                seat_data_B=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="B")
+                seat_data_C=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="C")
+                seat_data_D=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="D")
+                seat_data_E=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="E")
+                seat_data_F=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="F")
+                seat_data_G=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="G")
+                seat_data_H=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="H")
+                seat_data_I=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="I")
+                seat_data_J=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium", RowNumber="J")
+                seat_data_K=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Standard", RowNumber="K")
+                seat_data_L=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Standard", RowNumber="L")
+                seat_data_M=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Standard", RowNumber="M")
+                seat_data_N=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Standard", RowNumber="N")
+                seat_data_pre=SeatDB.objects.filter(Date=selected_date, ShowTimeName__in=ShowTimeNames, SeatType="Premium")
+                show=ShowTimeDB.objects.filter(MovieName=selected_movie, Date=selected_date)
+                context={'selected_date':selected_date,
+                             'selected_movie':selected_movie,
+                             'show':show,
+                             'seat_data':seat_data,
+                             'seat_data_A':seat_data_A,
+                             'seat_data_B':seat_data_B,
+                             'seat_data_C':seat_data_C,
+                             'seat_data_D':seat_data_D,
+                             'seat_data_E':seat_data_E,
+                             'seat_data_F':seat_data_F,
+                             'seat_data_G':seat_data_G,
+                             'seat_data_H':seat_data_H,
+                             'seat_data_I':seat_data_I,
+                             'seat_data_J':seat_data_J,
+                             'seat_data_K':seat_data_K,
+                             'seat_data_L':seat_data_L,
+                             'seat_data_M':seat_data_M,
+                             'seat_data_N': seat_data_N,
+                             'seat_data_pre':seat_data_pre}
+            return render(request, 'Seating.html', context)
+        else:
+            messages.error(request,"Please login first")
+            return redirect(login_signup)
     else:
-        messages.error(request,"Please login first")
-        return redirect(login_signup)
+        messages.error(request, "Movie still not scheduled")
+        return redirect(index)
 def submit_booking(request):
     if request.method == 'POST':
         na = request.POST.get('screenName')
@@ -256,6 +285,7 @@ def submit_booking(request):
         dt= request.POST.get('selectedDate')
         seats=request.POST.get('chosenSeats')
         types=request.POST.get('chosenTypes')
+        seatim=request.POST.get('seat_img')
         current_datetime = datetime.now()
         types_list = types.split(',')
         premium_count = types_list.count('Premium')
@@ -268,7 +298,7 @@ def submit_booking(request):
         selected_seats = [seat.split(':')[0] for seat in selected_seats_data if seat.split(':')[1] == 'selected']
         count=len(selected_seats)
 
-        if selected_seats:
+        if seats:
             SeatDB.objects.filter(SeatNumber__in=selected_seats).update(SeatStatus='selected')
             obj = UserBookingDB(UserName=un, MovieName=mn, ScreenName=na, ShowName=shn, SelectedDate=dt,StartTime=sht,AmountToBePaid=fp,
                                 NoOfSeats=count, SeatNumbers=seats,SeatNumberOnly=selected_seats, PaymentStatus="UnderProcess", BookedDate=current_datetime)
@@ -277,6 +307,7 @@ def submit_booking(request):
             url = reverse('movie_checkout') + f'?screenName={na}&selectedSeat={selected_seats}&showName={shn}&showStartTime={sht}&movieName={mn}&userName={un}&finalPrice={fp}&selectedDate={dt}&chosenSeats={seats}&chosenTypes={types}&count={count}'
             return redirect(url)
         else:
+            messages.error(request, "Select atleast one Seat")
             return redirect('index') #enter error message
 
 def movie_checkout(request):
@@ -339,6 +370,14 @@ def confirm_booking(request):
         typee= request.POST.get('selected_type')
         selected_seats_data= request.POST.getlist('selected_seats')
         selected_seats_data_type= request.POST.getlist('selected_seats_type')
+        newmail=request.POST.get('cemail')
+        newmob=request.POST.get('mobile')
+        cname=request.POST.get('cardname')
+        exmonth=request.POST.get('expmonth')
+        card=request.POST.get('carddet')
+
+        cvvno=request.POST.get('cvv')
+        uname=request.POST.get('username')
         print(selected_seats_data)
         print(selected_seats_data_type)
         if selected_seats_data:
@@ -346,7 +385,8 @@ def confirm_booking(request):
             # print(selected_seats_list)
             SeatDB.objects.filter(SeatNumber__in=selected_seats_list).update(SeatStatus='booked')
             UserBookingDB.objects.filter(SeatNumbers__in=selected_seats_data_type).update(PaymentStatus='PaymentDone')
-            booking=UserBookingDB.objects.filter()
+            obj=CheckOutDB(UserName=uname,Email=newmail,Contact=newmob,CardName=cname,Expiry=exmonth, Cvv=cvvno,CardDetail=card)
+            obj.save()
             types_list = typee.split(',')
             premium_count = types_list.count('Premium')
             standard_count = types_list.count('Standard')
@@ -354,7 +394,7 @@ def confirm_booking(request):
             showtime.AvailablePremiumTickets -= premium_count
             showtime.AvailableStandardTickets -= standard_count
             showtime.save()
-            if (showtime.TotalPremiumTickets==showtime.AvailablePremiumTickets) and (showtime.TotalStandardTickets == showtime.AvailableStandardTicketsTickets):
+            if (showtime.TotalPremiumTickets==showtime.AvailablePremiumTickets) and (showtime.TotalStandardTickets == showtime.AvailableStandardTickets):
                 showtime.status="Closed"
             messages.success(request,"Booked successfully")
             return redirect('index')
@@ -367,7 +407,7 @@ def confirm_booking(request):
 def booking_history(request):
     username=request.session['UserName']
     print(username)
-    bookings=UserBookingDB.objects.filter(UserName=username)
+    bookings = UserBookingDB.objects.filter(Q(UserName=username) & Q(PaymentStatus="PaymentDone"))
     return render(request, 'BookingHistory.html', {'bookings':bookings})
 def download_booking_pdf(request, booking_id):
     booking = get_object_or_404(UserBookingDB, id=booking_id)
