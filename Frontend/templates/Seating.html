@@ -340,6 +340,7 @@
                     <input type="hidden" id="finalPrice" name="finalPrice">
                     <input type="hidden" id="chosenSeats" name="chosenSeats">
                     <input type="hidden" id="chosenTypes" name="chosenTypes">
+                    <input type="hidden" id="chosenSeatOnly" name="chosenSeatOnly">
 
 
 
@@ -369,6 +370,7 @@
         totalPriceElement.textContent = `₹${totalPrice}`;
         document.getElementById("finalPrice").value = totalPrice;
         document.getElementById("chosenTypes").value = selectedSeats.map(seat => seat.seatType);
+        document.getElementById("chosenSeatOnly").value = selectedSeats.map(seat => seat.seatNumber);
         document.getElementById("chosenSeats").value = selectedSeats.map(seat => `${seat.seatNumber} (${seat.seatType})`).join(', ');
     }
 

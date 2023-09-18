@@ -37,6 +37,9 @@ class UserBookingDB(models.Model):
     StartTime= models.CharField(max_length=20,null=True, blank=True)
     AmountToBePaid= models.IntegerField(null=True, blank=True)
     PaymentStatus=models.CharField(max_length=5, null=True, blank=True)
+    TransactionId=models.CharField(max_length=20,null=True, blank=True)
+    OrderId=models.CharField(max_length=20,null=True, blank=True)
+
     BookedDate=models.DateField(null=True, blank=True)
 
 class SeatDB(models.Model):
@@ -49,9 +52,5 @@ class SeatDB(models.Model):
 
 class CheckOutDB(models.Model):
     UserName=models.CharField(max_length=20, null=True, blank=True)
-    CardDetail=models.CharField(max_length=20, null=True, blank=True)
     Email=models.EmailField(max_length=20, null=True, blank=True)
     Contact=models.IntegerField(null=True, blank=True)
-    CardName=models.CharField(max_length=20, null=True, blank=True)
-    Expiry=models.CharField(max_length=20, null=True, blank=True)
-    Cvv=models.IntegerField(null=True, blank=True)

@@ -1,622 +1,176 @@
-<div height="800px" class="stepper" id="stepper">
-  <div class="steps-container">
-    <div class="steps">
-      <div class="step" icon="fa fa-pencil-alt" id="1"></div>
-      <div class="step" icon="fa fa-pencil-alt" id="2"></div>
-      <div class="step" icon="fa fa-pencil-alt" id="3"></div>
-      <div class="step" icon="fa fa-pencil-alt" id="4"></div>
-    </div>
-  </div>
-  <div class="stepper-content-container">
-    <div class="stepper-content fade-in" stepper-label="1">
-      <div class="w-100 h-100" style="padding: 30px 10px; background: #f9f9f9;">
-        <div class="my-0 mx-auto" style="max-width: 500px;  border-radius: 10px; background: #f5f5f5;">
-            <div class="p-10 d-flex flex-col justify-content-center align-items-center">
-              <div class="text-center pt-20 pe-0 pb-10 ps-0 fw-bold" style="fontSize: 30px; color: #939393">
-              Step 1
-              </div>
-              <div class="p-10 d-flex flex-col justify-content-center align-items-center w-100">
-                <label class="text-muted mb-2">
-                        Username
-                      </label>
-                      <div class="cdb-form">
-                        <input type="text"
-                         class="form-control bg-light">
-                      </div>
-                      <label class="text-muted mb-2">
-                        Email
-                      </label>
-                      <div class="cdb-form">
-                        <input type="text"  class="form-control bg-light">
-                      </div>
-                      <label class="text-muted mb-2">
-                        Password
-                      </label>
-                      <div class="cdb-form">
-                        <input type="password" class="form-control bg-light">
-                      </div>
-                      <label class="text-muted mb-2">
-                        Confirm Password
-                      </label>
-                      <div class="cdb-form">
-                        <input type="password" class="form-control bg-light">
-                      </div>
-                      <div class="d-flex w-100 align-items-center justify-content-between">
-                        <button class="btn btn-dark btn-block mb-3 mt-5 ms-auto" onclick="stepper2.navigate('2')">
-                          Next
-                        </button>
-                      </div>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
-    <div class="stepper-content fade-in" stepper-label="2">
-      <div class="w-100 h-100" style="padding: 30px 10px; background: #f9f9f9;">
-        <div class="my-0 mx-auto" style="max-width: 500px;  border-radius: 10px; background: #f5f5f5;">
-            <div class="p-10 d-flex flex-col justify-content-center align-items-center">
-              <div class="text-center pt-20 pe-0 pb-10 ps-0 fw-bold" style="fontSize: 30px; color: #939393">
-              Step 2
-              </div>
-              <div class="p-10 d-flex flex-col justify-content-center align-items-center w-100">
-                <label class="text-muted mb-2">
-                        First Name
-                      </label>
-                      <div class="cdb-form">
-                        <input type="text"  class="form-control bg-light " />
-                      </div>
-                      <label class="text-muted mb-2">
-                        Last Name
-                      </label>
-                      <div class="cdb-form">
-                        <input type="email" class="form-control bg-light " />
-                      </div>
-                      <label class="text-muted mb-2">
-                        Phone Number
-                      </label>
-                      <div class="cdb-form">
-                        <input type="text"  class="form-control bg-light " />
-                      </div>
-                      <label class="text-muted mb-2">
-                        Address
-                      </label>
-                      <div class="cdb-form">
-                        <input type="email" class="form-control bg-light " />
-                      </div>
-                      <label class="text-muted mb-2">
-                        Country
-                      </label>
-                      <div class="cdb-form">
-                        <input type="text"  class="form-control bg-light " />
-                      </div>
-
-                      <div class="d-flex w-100 align-items-center justify-content-between">
-                        <button class="btn btn-dark btn-block mb-3 mt-5" onclick="stepper.navigate('1')">
-                          Previous
-                        </button>
-                        <button class="btn btn-dark btn-block mb-3 mt-5" onclick="stepper.navigate('3')">
-                          Next
-                        </button>
-                      </div>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
-    <div class="stepper-content fade-in" stepper-label="3">
-      <div class="w-100 h-100" style="padding: 30px 10px; background: #f9f9f9;">
-        <div class="my-0 mx-auto" style="max-width: 500px;  border-radius: 10px; background: #f5f5f5;">
-            <div class="p-10 d-flex flex-col justify-content-center align-items-center">
-              <div class="text-center pt-20 pe-0 pb-10 ps-0 fw-bold" style="fontSize: 30px; color: #939393">
-              Step 3
-              </div>
-              <div class="p-10 d-flex flex-col justify-content-center align-items-center w-100">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui dicta minus
-                  molestiae vel beatae natus eveniet ratione temporibus aperiam harum alias officiis
-                  assumenda officia quibusdam deleniti eos cupiditate dolore doloribus!
-                </p>
-                <p>
-                  Ad dolore dignissimos asperiores dicta facere optio quod commodi nam tempore
-                  recusandae. Rerum sed nulla eum vero expedita ex delectus voluptates rem at neque
-                  quos facere sequi unde optio aliquam!
-                </p>
-                <p>
-                  Ad dolore dignissimos asperiores dicta facere optio quod commodi nam tempore
-                  recusandae. Rerum sed nulla eum vero expedita ex delectus voluptates rem at neque
-                  quos facere sequi unde optio aliquam!
-                </p>
-                <p>
-                  Ad dolore dignissimos asperiores dicta facere optio quod commodi nam tempore
-                  recusandae. Rerum sed nulla eum vero expedita ex delectus voluptates rem at neque
-                  quos facere sequi unde optio aliquam!
-                </p>
-              </div>
-                      <div class="d-flex w-100 align-items-center justify-content-between">
-                         <button class="btn btn-dark btn-block mb-3 mt-5" onclick="stepper.navigate('2')">
-                          Previous
-                        </button>
-                        <button class="btn btn-dark btn-block mb-3 mt-5" onclick="stepper.navigate('4')">
-                          Next
-                        </button>
-                      </div>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
-    <div class="stepper-content fade-in" stepper-label="4">
-      <div class="w-100 h-100" style="padding: 30px 10px; background: #f9f9f9;">
-        <div class="my-0 mx-auto" style="max-width: 500px;  border-radius: 10px; background: #f5f5f5;">
-            <div class="p-10 d-flex flex-col justify-content-center align-items-center">
-              <div class="text-center pt-20 pe-0 pb-10 ps-0 fw-bold" style="fontSize: 30px; color: #939393">
-              Step 4
-              </div>
-              <div class="p-10 d-flex flex-col justify-content-center align-items-center w-100">
-                    <div class="text-center" style={{ fontSize: '25px', textAlign: 'center' }}>
-                      Congratulations! You have completed this process.
-                      <span style={{ fontSize: '50px', display: 'block' }} role="img" aria-label="image">
-                        🎉
-                      </span>
-                    </div>
-                    <div class="d-flex w-100 align-items-center justify-content-between">
-                      <button class="btn btn-dark btn-block mb-3 mt-5" onclick="stepper.navigate('3')">
-                      Previous
-                    </button>
-                    </div>
-              </div>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<section class="search-ticket-section padding-top pt-lg-0">
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<!-- ==========Banner-Section========== -->
+    <section class="details-banner hero-area bg_img seat-plan-banner" data-background="assets/images/banner/banner04.jpg">
         <div class="container">
-            <div class="search-tab bg_img" data-background="{% static 'images/ticket/ticket-bg.jpg' %}">
-                <div class="row align-items-center mb--20">
-                    <div class="col-lg-6 mb-20">
-                        <div class="search-ticket-header">
-<!--                            <h6 class="category">Welcome to Boleto </h6>-->
-<!--                            <h3 class="title">Make a Quick Book</h3>-->
-                        </div>
+            <div class="details-banner-wrapper">
+                <div class="details-banner-content style-two">
+                    <h3 class="title">{{movieName}}</h3>
+                    <div class="tags">
+                        <a href="#0">{{screenName}}</a>
+                        <a href="#0">{{movieLang}} - {{movieType}}</a>
                     </div>
-                    <div class="col-lg-6 mb-20">
-                        <ul class="tab-menu ticket-tab-menu">
-<!--                            <li class="active">-->
-<!--                                <div class="tab-thumb">-->
-<!--                                    <img src="{% static 'images/ticket/ticket-tab01.png' %}" alt="ticket">-->
-<!--                                </div>-->
-<!--                                <span>movie</span>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <div class="tab-thumb">-->
-<!--                                    <img src="{% static 'images/ticket/ticket-tab02.png' %}" alt="ticket">-->
-<!--                                </div>-->
-<!--                                <span>events</span>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <div class="tab-thumb">-->
-<!--                                    <img src="{% static 'images/ticket/ticket-tab03.png' %}" alt="ticket">-->
-<!--                                </div>-->
-<!--                                <span>sports</span>-->
-<!--                            </li>-->
-                        </ul>
-                    </div>
-                </div>
-                <div class="tab-area">
-                    <div>
-                        <form class="ticket-search-form" method="post" action="{% url 'seating_plan'%}">
-                            {% csrf_token %}
-
-                            <div class="form-group">
-                                <div class="thumb">
-                                    <img src="{% static 'images/ticket/date.png' %}" alt="ticket">
-                                </div>
-                                <span class="type">date</span>
-                                <select class="select-bar" name="selected_date">
-                                    {% for date in next_three_days %}
-                                        <option value="{{ date|date:"Y-m-d" }}">{{ date|date:"F j, Y" }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <div class="thumb">
-                                    <img src="{% static 'images/ticket/cinema.png' %}" alt="ticket">
-                                </div>
-                                <span class="type">{{movie_name}}</span>
-
-                            </div>
-                            <div class="form-group">
-                                <div class="thumb">
-                                    <img src="{% static 'images/ticket/cinema.png' %}" alt="ticket">
-                                </div>
-                                <span class="type">Show Time</span>
-                                <select class="select-bar" name="selected_movie">
-                                    {% for i in showtiming %}
-                                        <option value="{{i.MovieName}}">{{i.StartTime}}</option>
-                                    {% endfor %}
-
-                                </select>
-
-                            </div>
-
-
-                        </form>
-                        <div class="form-group">
-                        </div>
-
-                    </div>
-
                 </div>
             </div>
         </div>
     </section>
+    <!-- ==========Banner-Section========== -->
 
     <!-- ==========Page-Title========== -->
     <section class="page-title bg-one">
         <div class="container">
             <div class="page-title-area">
                 <div class="item md-order-1">
-                    <a href="{% url 'index' %}" class="custom-button back-button">
+                    <a href="movie-ticket-plan.html" class="custom-button back-button">
                         <i class="flaticon-double-right-arrows-angles"></i>back
                     </a>
                 </div>
-                <form method="post" action=" {% url 'submit_booking' %}">
-                {% csrf_token %}
                 <div class="item date-item">
-                    <span class="date">{{selected_date}}</span>
-                    <input type="hidden" value="{{selected_date}}" id="selectedDate" name="selectedDate">
-                    <input type="hidden" value="{{selected_movie}}" id="movieName" name="movieName">
-
-                    {% for i in show %}
+                    <span class="date">{{selectedDate}}</span>
                     <select class="select-bar">
-                        <option value="{{i.ShowTimeName}}|{{i.StartTime}}">{{i.ShowTimeName}}|{{i.StartTime}}</option>
-                        <input type="hidden" id="premium-price" value="{{ i.PricePremium }}">
-                        <input type="hidden" id="standard-price" value="{{ i.PriceStandard }}">
-                        <input type="hidden" value="{{i.ShowTimeName}}" id="showName" name="showName">
-                        <input type="hidden" value="{{i.StartTime}}" id="showStartTime" name="showStartTime">
-                        {% endfor %}
+                        <option value="showStartTime">{{showStartTime}}</option>
+
                     </select>
                 </div>
-
-
+<!--                <div class="item">-->
+<!--                    <h5 class="title">05:00</h5>-->
+<!--                    <p>Mins Left</p>-->
+<!--                </div>-->
             </div>
         </div>
     </section>
     <!-- ==========Page-Title========== -->
 
     <!-- ==========Movie-Section========== -->
-    <div class="seat-plan-section padding-bottom padding-top">
-
+    <div class="movie-facility padding-bottom padding-top">
         <div class="container">
-            <div class="screen-area">
-                 {% for i in show %}
-                <h4 class="screen">{{i.ScreenName}}</h4>
-                <input type="hidden" value="{{i.ScreenName}}" id="screenName" name="screenName">
-                {%endfor%}
-                <div class="screen-thumb">
-                    <img src="{% static 'images/movie/screen-thumb.png' %}" alt="movie">
-                </div>
-
-                <h5 class="subtitle">Standard</h5>
-                <div class="screen-wrapper">
-                    <ul class="seat-area">
-                        <li class="seat-line">
-                            <span>n</span>
-                            <ul class="seat--area">
-                                {% for i in seat_data_N %}
-                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
-                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
-                                    <img src="{% static seat_image %}" alt="seat">
-                                            <span class="sit-num">{{i.SeatNumber}}</span>
-                                    <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
-
-                                    {% endwith %}
-                                </li>
-                                {% endfor %}
-                            </ul>
-                            <span>n</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>m</span>
-                            <ul class="seat--area">
-                                {% for i in seat_data_M %}
-                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
-                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
-                                     <img src="{% static seat_image %}" alt="seat">
-                                            <span class="sit-num">{{i.SeatNumber}}</span>
-                                    <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
-
-                                    {% endwith %}
-                                </li>
-                                {% endfor %}
-                            </ul>
-                            <span>m</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>l</span>
-                            <ul class="seat--area">
-                                {% for i in seat_data_L %}
-                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
-                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
-                            <img src="{% static seat_image %}" alt="seat">
-                                            <span class="sit-num">{{i.SeatNumber}}</span>
-                                                                        <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
-
-                                    {%endwith%}
-                                </li>
-                                {% endfor %}
-                            </ul>
-                            <span>l</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>k</span>
-                            <ul class="seat--area">
-                                {% for i in seat_data_K %}
-                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
-                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
-                                    <img src="{% static seat_image %}" alt="seat">
-                                            <span class="sit-num">{{i.SeatNumber}}</span>
-                                    <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
-                                {% endwith %}
-
-                                </li>
-                                {% endfor %}
-                            </ul>
-                            <span>k</span>
-                        </li>
-                    </ul>
-                </div>
-                <h5 class="subtitle">Premium</h5>
-                <div class="screen-wrapper">
-                    <ul class="seat-area">
-                        <li class="seat-line">
-                            <span>j</span>
-                            <ul class="seat--area">
-                                {% for i in seat_data_J %}
-                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
-                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
-                                    <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
-
-                                            <img src="{% static seat_image %}" alt="seat">
-                                            <span class="sit-num">{{i.SeatNumber}}</span>
-                                    {% endwith %}
-                                </li>
-                                {% endfor %}
-                            </ul>
-                            <span>j</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>i</span>
-                            <ul class="seat--area" >
-                                {% for i in seat_data_I %}
-                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
-                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
-                                            <img src="{% static seat_image %}" alt="seat">
-                                            <span class="sit-num">{{i.SeatNumber}}</span>
-                                                                        <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
-
-                                    {%endwith %}
-                                </li>
-                                {% endfor %}
-                            </ul>
-                            <span>i</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>h</span>
-                            <ul class="seat--area">
-                                {% for i in seat_data_H %}
-                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
-                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
-                                    <img src="{% static seat_image %}" alt="seat">
-                                            <span class="sit-num">{{i.SeatNumber}}</span>
-                                                                        <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
-
-                                    {% endwith %}
-                                </li>
-                                {% endfor %}
-                            </ul>
-                            <span>h</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>g</span>
-                            <ul class="seat--area">
-                                {% for i in seat_data_G %}
-                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
-                                            {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
-                                            <img src="{% static seat_image %}" alt="seat">
-                                            <span class="sit-num">{{i.SeatNumber}}</span>
-                                                                        <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
-
-                                    {%endwith%}
-                                </li>
-                                {% endfor %}
-                            </ul>
-                            <span>g</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>f</span>
-                            <ul class="seat--area">
-                                {% for i in seat_data_F %}
-                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
-                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
-                                    <img src="{% static seat_image %}" alt="seat">
-                                            <span class="sit-num">{{i.SeatNumber}}</span>
-                                                                        <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
-
-                                    {% endwith %}
-                                </li>
-                                {% endfor %}
-                            </ul>
-                            <span>f</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>e</span>
-                            <ul class="seat--area">
-                                {% for i in seat_data_E %}
-                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
-                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
-                                    <img src="{% static seat_image %}" alt="seat">
-                                            <span class="sit-num">{{i.SeatNumber}}</span>
-                                                                        <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
-
-                                    {% endwith %}
-                                </li>
-                                {% endfor %}
-                            </ul>
-                            <span>E</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>d</span>
-                            <ul class="seat--area">
-                                {% for i in seat_data_D %}
-                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
-                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
-                                    <img src="{% static seat_image %}" alt="seat">
-                                            <span class="sit-num">{{i.SeatNumber}}</span>
-                                                                        <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
-
-                                    {% endwith %}
-                                </li>
-                                {% endfor %}
-                            </ul>
-                            <span>D</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>c</span>
-                            <ul class="seat--area">
-                                {% for i in seat_data_C %}
-                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
-                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
-                                            <img src="{% static seat_image %}" alt="seat">
-                                            <span class="sit-num">{{i.SeatNumber}}</span>
-                                                                        <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
-
-                                    {% endwith %}
-                                </li>
-                                {% endfor %}
-                            </ul>
-                            <span>C</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>a</span>
-                            <ul class="seat--area">
-                                {% for i in seat_data_B %}
-                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
-                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
-                                    <img src="{% static seat_image %}" alt="seat">
-                                            <span class="sit-num">{{i.SeatNumber}}</span>
-                                    <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
-
-                                    {% endwith %}
-                                </li>
-                                {% endfor %}
-                            </ul>
-                            <span>A</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>a</span>
-                            <ul class="seat--area">
-                                {% for i in seat_data_A %}
-                                <li class="single-seat" data-status="{{ i.SeatStatus }}" data-seat="{{ i.SeatNumber }}-{{ i.SeatType }}">
-                                    {% with seat_image='images/movie/seat01-'|add:i.SeatStatus|add:'.png' %}
-                                    <img src="{% static seat_image %}" alt="seat">
-                                            <span class="sit-num">{{i.SeatNumber}}</span>
-                                    <input type="hidden" name="seats" value="{{ i.SeatNumber }}:{{ i.SeatStatus }}">
-
-                                    {% endwith %}
-                                </li>
-                                {% endfor %}
-                            </ul>
-                            <span>A</span>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-            <div class="proceed-book bg_img" data-background="{% static 'images/movie/movie-bg-proceed.jpg' %}">
-                <div class="proceed-to-book">
-                    <div class="book-item">
-                        <span>You have Choosed Seat</span>
-                        <h3 class="title" id="chosen-seats"></h3>
+                <div class="row">
+                    <div class="col-lg-6">
+                            <div class="checkout-widget checkout-contact">
+                                <h5 class="title">Share your Contact  Details </h5>
+                                <div class="checkout-contact-form">
+                                    <div class="form-group">
+                                        <input type="text" value="{{userName}}" name="username"readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" value="{{userEmail}}" id="email" name="cemail">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" value="{{userContact}}" id="mobile"name="mobile">
+                                    </div>
+                                    </div>
+                            </div>
                     </div>
-                    <div class="book-item">
-                        <span>total price</span>
-                        <h3 class="title" id="total-price"></h3>
+                    <div class="col-lg-6">
+                        <div class="checkout-widget checkout-contact">
+                                <div class="booking-summery bg-one">
+                                <h4 class="title">booking summery</h4>
+                                <ul>
+                                    <li>
+                                        <h6 class="subtitle">{{movieName}}</h6>
+                                        <span class="info">{{movieLang}}-{{movieType}}</span>
+                                    </li>
+                                    <li>
+
+                                        <h6 class="subtitle"><span>{{screenName}}|{{showName}}</span><span>{{chosenSeats}}</span></h6>
+
+                                        <div class="info"><span>{{selectedDate}}</span></div>
+                                    </li>
+                                    <li>
+                                        <h6 class="subtitle mb-0"><span>Tickets  Price</span><span>{{finalPrice}}</span></h6>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <div class="proceed-area  text-center">
+                                <h6 class="subtitle"><span>Amount Payable</span><span>{{finalPrice}}</span></h6>
+                                <div class="form-group">
+                                        <button style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);" id="rzp-button1">PAY INR {{finalPrice}}</button>
+<!--                                        <button type="submit" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);" >PAY</button>-->
+                                   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                                    </div>
+                                <input type="hidden" name="selected_seats" value="{{selectedSeat}}">
+                                <input type="hidden" name="selected_seats_type" value="{{chosenSeats}}">
+                                <input type="hidden" name="selected_type" value="{{chosenTypes}}">
+                                <input type="hidden" name="movieName" value="{{movieName}}">
+                                <input type="hidden" name="showName" value="{{showName}}">
+                                <input type="hidden" name="screenName" value="{{screenName}}">
+                                <input type="hidden" name="selectedDate" value="{{selectedDate}}">
+                                <input type="hidden" name="finalPrice" value="{{finalPrice}}">
+                                <input type="hidden" name="userEmail" value="{{userEmail}">
+                            </div>
+                            </div>
                     </div>
-                    <input type="hidden" value="{{request.session.UserName}}" id="userName" name="userName">
-                    <input type="hidden" id="finalPrice" name="finalPrice">
-                    <input type="hidden" id="chosenSeats" name="chosenSeats">
-                    <input type="hidden" id="chosenTypes" name="chosenTypes">
 
-
-
-                    <div class="book-item">
-                        <button type="submit" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">Proceed</button>
-                    </div>
                 </div>
-            </div>
+
+
         </div>
-        </form>
     </div>
+    <!-- ==========Movie-Section========== -->
+<script>
+     var options = {
+            "key": "rzp_test_wZ1DvNhL7Ppzzm", // Enter the Key ID generated from the Dashboard
+            "amount":{{payment.amount}}*100,// Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "Raagam Cinemas", //your business name
+            "description": "Test Transaction",
+            "image": "{% static 'images/logo/favicon.png' %}",
+            "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response){
 
-    <script>
-        const seats = document.querySelectorAll('.single-seat');
-        const chosenSeatsElement = document.getElementById('chosen-seats');
-        const totalPriceElement = document.getElementById('total-price');
-        const finalPriceElement = document.getElementById('finalPrice');
+                console.log(response);
+                var chosenSeats = {{selectedSeat}};  // Replace with your actual list of chosen seats
+                var chosenSeatsString = chosenSeats.join(',');
+                //window.location.href = `http://127.0.0.1:8000/Frontend/razorpay_complete/?order_id=${response.razorpay_order_id}&transaction_id=${response.razorpay_payment_id}&username=${"{{userName}}"}userEmail=${"{{userEmail}}"}&selected_seats=${"{{selectedSeat}}"}&selected_type=${"{{chosenTypes}}"}&selected_seats_type=${"{{chosenSeats}}"}&movieName=${"{{movieName}}"}&screenName=${"{{screenName}}"}&selectedDate=${"{{selectedDate}}"}&showName=${"{{showName}}"}';                //alert(order_id);
+                  var redirectUrl = `http://127.0.0.1:8000/Frontend/razorpay_complete/`;
+        redirectUrl += `?order_id=${response.razorpay_order_id}`;
+        redirectUrl += `&transaction_id=${response.razorpay_payment_id}`;
+        redirectUrl += `&username={{ userName }}`;
+        redirectUrl += `&userEmail={{ userEmail }}`;
+        redirectUrl += `&movieName={{ movieName }}`;
+        redirectUrl += `&screenName={{ screenName }}`;
+        redirectUrl += `&selectedDate={{ selectedDate }}`;
+        redirectUrl += `&showName={{ showName }}`;
+        redirectUrl += `&selectedSeat={{ chosenSeatsString }}`;
+        redirectUrl += `&chosenTypes={{ chosenTypes }}`;
+        redirectUrl += `&chosenSeats={{ chosenSeats }}`;
 
-        const premiumPriceElement = document.getElementById('premium-price');
-        const standardPriceElement = document.getElementById('standard-price');
-        let totalPrice = 0;
-        let selectedSeats = [];
+        window.location.href=redirectUrl;
 
-        seats.forEach(seat => {
-            seat.addEventListener('click', function() {
-                const status = this.getAttribute('data-status');
-                const seatInfo = this.getAttribute('data-seat').split('-');
+            },
+            "prefill": {
+                "name": "Raji Nair", //your customer's name
+                "email": "revathysudheesh@gmail.com",
+                "contact": "9496634612"
+            },
 
-                const seatNumber = seatInfo[0];
-                const seatType = seatInfo[1];
-
-                if (status === 'available') {
-                    this.setAttribute('data-status', 'selected');
-                    selectedSeats.push({ seatNumber, seatType });
-                    totalPrice += calculateSeatPrice(seatNumber, seatType);
-                } else if (status === 'selected') {
-                    this.setAttribute('data-status', 'available');
-                    const index = selectedSeats.findIndex(seat => seat.seatNumber === seatNumber && seat.seatType === seatType);
-                    if (index !== -1) {
-                        selectedSeats.splice(index, 1);
-                        totalPrice -= calculateSeatPrice(seatNumber, seatType);
-                    }
-                }
-
-<!--                chosenSeatsElement.textContent = selectedSeats.map(seat => seat.seatNumber).join(', ');-->
-                    chosenSeatsElement.textContent = selectedSeats.map(seat => `${seat.seatNumber} (${seat.seatType})`).join(', ');
-
-                totalPriceElement.textContent = `₹${totalPrice}`;
-                document.getElementById("finalPrice").value = totalPrice;
-                 document.getElementById("chosenTypes").value= selectedSeats.map(seat => seat.seatType);
-                document.getElementById("chosenSeats").value = selectedSeats.map(seat => `${seat.seatNumber} (${seat.seatType})`).join(', ');
-
-
-                const img = this.querySelector('img');
-                img.src = img.src.replace(status, this.getAttribute('data-status'));
-
-                const input = this.querySelector('input[name="seats"]');
-                input.value = input.value.replace(/:(selected|available)$/, ':' + this.getAttribute('data-status'));
-            });
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.on('payment.failed', function (response){
+                alert(response.error.code);
+                //alert(response.error.description);
+                //alert(response.error.source);
+                //alert(response.error.step);
+                //alert(response.error.reason);
+                alert(response.error.metadata.order_id);
+                alert(response.error.metadata.payment_id);
         });
-
-        function calculateSeatPrice(seatNumber, seatType) {
-            if (seatType === 'Premium') {
-        return parseFloat(premiumPriceElement.value); // Retrieve the premium price from the hidden input
-            } else {
-        return parseFloat(standardPriceElement.value); // Retrieve the standard price from the hidden input
-                    }
+        document.getElementById('rzp-button1').onclick = function(e){
+            rzp1.open();
+            e.preventDefault();
         }
-
-    </script>
+</script>
+</body>
+</html>
+{% endblock %}

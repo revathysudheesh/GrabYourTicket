@@ -49,12 +49,10 @@
     <!-- ==========Page-Title========== -->
 
     <!-- ==========Movie-Section========== -->
-    <div class="movie-facility padding-bottom padding-top">
+1    <div class="movie-facility padding-bottom padding-top">
         <div class="container">
-            <form action="{% url 'confirm_booking' %}" method="post" onsubmit="return validateSignUpForm()">
-                {% csrf_token %}
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-6">
                             <div class="checkout-widget checkout-contact">
                                 <h5 class="title">Share your Contact  Details </h5>
                                 <div class="checkout-contact-form">
@@ -69,66 +67,8 @@
                                     </div>
                                     </div>
                             </div>
-                            <div class="checkout-widget checkout-card mb-0">
-                                <h5 class="title">Payment Option </h5>
-                                <ul class="payment-option">
-                                    <li class="active">
-                                        <a href="#0">
-                                            <img src="{% static 'images/payment/card.png' %}" alt="payment">
-                                            <span>Credit Card</span>
-                                        </a>
-                                    </li>
-        <!--                            <li>-->
-        <!--                                <a href="#0">-->
-        <!--                                    <img src="{% static 'images/payment/card.png' %}" alt="payment">-->
-        <!--                                    <span>Debit Card</span>-->
-        <!--                                </a>-->
-        <!--                            </li>-->
-        <!--                            <li>-->
-        <!--                                <a href="#0">-->
-        <!--                                    <img src="{% static 'images/payment/paypal.png' %}" alt="payment">-->
-        <!--                                    <span>paypal</span>-->
-        <!--                                </a>-->
-        <!--                            </li>-->
-                                </ul>
-                                <h6 class="subtitle">Enter Your Card Details </h6>
-                                <div class="payment-card-form">
-                                    <div class="form-group w-100">
-                                        <label for="card1">Card Details</label>
-                                        <input type="text" id="card1" name="carddet" required>
-                                        <div class="right-icon">
-                                            <i class="flaticon-lock"></i>
-                                        </div>
-                                    </div>
-                                    <div class="form-group w-100">
-                                        <label for="card2"> Name on the Card</label>
-                                        <input type="text" id="card2" name="cardname" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="card3">Expiration</label>
-                                        <input type="text" id="card3" placeholder="MM/YY" name="expmonth" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="card4">CVV</label>
-                                        <input type="text" id="card4" placeholder="CVV" name="cvv" required>
-                                    </div>
-                                    <div class="form-group check-group">
-                                        <input id="card5" type="checkbox" checked>
-                                        <label for="card5">
-                                            <span class="title">QuickPay</span>
-                                            <span class="info">Save this card information to my Raagam Cinemas  account and make faster payments.</span>
-                                        </label>
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">Proceed</button>
-                                    </div>
-                                </div>
-                                <p class="notice">
-                                    By Clicking "Make Payment" you agree to the <a href="#0">terms and conditions</a>
-                                </p>
-                            </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                         <div class="checkout-widget checkout-contact">
                                 <div class="booking-summery bg-one">
                                 <h4 class="title">booking summery</h4>
@@ -138,7 +78,9 @@
                                         <span class="info">{{movieLang}}-{{movieType}}</span>
                                     </li>
                                     <li>
+
                                         <h6 class="subtitle"><span>{{screenName}}|{{showName}}</span><span>{{chosenSeats}}</span></h6>
+
                                         <div class="info"><span>{{selectedDate}}</span></div>
                                     </li>
                                     <li>
@@ -148,38 +90,64 @@
 
                             </div>
                             <div class="proceed-area  text-center">
-                                <h6 class="subtitle"><span>Amount Payable</span><span>{{finalPrice}}</span></h6>
-                                <input type="hidden" name="selected_seats" value="{{selectedSeat}}">
-                                <input type="hidden" name="selected_seats_type" value="{{chosenSeats}}">
-                                <input type="hidden" name="selected_type" value="{{chosenTypes}}">
-                                <input type="hidden" name="movieName" value="{{movieName}}">
-                                <input type="hidden" name="showName" value="{{showName}}">
-                                <input type="hidden" name="screenName" value="{{screenName}}">
-                                <input type="hidden" name="selectedDate" value="{{selectedDate}}">
+                                <h6 class="subtitle"><span>Amount Payable</span><span>{{finalPrice}}{{selectedSeat}}</span></h6>
+                                <div class="form-group">
+                                        <button style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);" id="rzp-button1">PAY INR {{finalPrice}}</button>
+<!--                                        <button type="submit" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);" >PAY</button>-->
+                                   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                                    </div>
+<!--                                <input type="hidden" name="selected_seats" value="{{selectedSeat}}">-->
+<!--                                <input type="hidden" name="selected_seats_type" value="{{chosenSeats}}">-->
+<!--                                <input type="hidden" name="selected_type" value="{{chosenTypes}}">-->
+<!--                                <input type="hidden" name="movieName" value="{{movieName}}">-->
+<!--                                <input type="hidden" name="showName" value="{{showName}}">-->
+<!--                                <input type="hidden" name="screenName" value="{{screenName}}">-->
+<!--                                <input type="hidden" name="selectedDate" value="{{selectedDate}}">-->
+<!--                                <input type="hidden" name="finalPrice" value="{{finalPrice}}">-->
                             </div>
                             </div>
                     </div>
 
                 </div>
-            </form>
+
 
         </div>
     </div>
     <!-- ==========Movie-Section========== -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-    function validateSignUpForm() {
-    var email = document.getElementById("email").value;
-  var mobileNumber = document.getElementById("mobile").value;
-  if (email.trim() === "" || !emailIsValid(email)) {
-    alert("Please enter a valid email address.");
-    return false;
-  }
 
-  if (mobileNumber.trim() === "" || !mobileNumberIsValid(mobileNumber)) {
-    alert("Please enter a valid 10-digit mobile number.");
-    return false;
-  }
-  return true;
+</script>
+<script>
+var options = {
+    "key": "rzp_test_wZ1DvNhL7Ppzzm", // Enter the Key ID generated from the Dashboard
+    "amount": "100", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Raagam Cinemas", //your business name
+    "description": "Test Transaction",
+    "image": "{% static 'images/logo/favicon.png' %}",
+    "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "handler": function (response){
+                alert(response.razorpay_payment_id);
+                window.location.href = `http://127.0.0.1:8000/Frontend/razorpay_complete/?order_id=${response.razorpay_order_id}&transaction_id=${response.razorpay_payment_id}&userName={{userName}}&userEmail={{userEmail}}&movieName={{movieName}}&screenName={{screenName}}&seats={{seats}}&selectedDate={{selectedDate}}&showName={{showName}}&chosenSeatsString={{chosenSeats}}&chosenTypes={{chosenTypes}}&chosenSeats={{chosenSeats}}`;
+
+                //window.location.href = `http://127.0.0.1:8000/Frontend/razorpay_complete/?order_id=${response.razorpay_order_id}&transaction_id=${response.razorpay_payment_id}&userName={{userName}}&userEmail={{userEmail}}&movieName ={{movieName}}&screenName ={{screenName}}&selectedDate={{selectedDate}}&showName={{showName}}&chosenSeatsString={{chosenSeats}}&chosenTypes={{ chosenTypes }}&chosenSeats={{ chosenSeats }}`;                //alert(order_id);
+
+    },
+    "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
+        "name": "Raji Nair", //your customer's name
+        "email": "revathysudheesh@gmail.com",
+        "contact": "9496634612" //Provide the customer's phone number for better conversion rates
+    },
+
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
 }
 </script>
 </body>

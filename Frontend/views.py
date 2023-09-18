@@ -12,7 +12,11 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.core.files.storage import FileSystemStorage
 from django.utils.datastructures import MultiValueDictKeyError
-
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.shortcuts import render, redirect
+from django.conf import settings
+import razorpay
 
 
 from django.contrib.auth.decorators import login_required
@@ -296,6 +300,8 @@ def submit_booking(request):
         selected_seats_data = request.POST.getlist('seats')
         # print(selected_seats_data)
         selected_seats = [seat.split(':')[0] for seat in selected_seats_data if seat.split(':')[1] == 'selected']
+        print("hello")
+        print(selected_seats)
         count=len(selected_seats)
 
         if seats:
@@ -304,7 +310,7 @@ def submit_booking(request):
                                 NoOfSeats=count, SeatNumbers=seats,SeatNumberOnly=selected_seats, PaymentStatus="UnderProcess", BookedDate=current_datetime)
             obj.save()
 
-            url = reverse('movie_checkout') + f'?screenName={na}&selectedSeat={selected_seats}&showName={shn}&showStartTime={sht}&movieName={mn}&userName={un}&finalPrice={fp}&selectedDate={dt}&chosenSeats={seats}&chosenTypes={types}&count={count}'
+            url = reverse('movie_checkout') + f'?screenName={na}&seats={seats}&selectedSeat={selected_seats}&showName={shn}&showStartTime={sht}&movieName={mn}&userName={un}&finalPrice={fp}&selectedDate={dt}&chosenSeats={seats}&chosenTypes={types}&count={count}'
             return redirect(url)
         else:
             messages.error(request, "Select atleast one Seat")
@@ -324,12 +330,21 @@ def movie_checkout(request):
     print(userEmail)
     userContact=userdet[0].UserContact
     finalPrice = request.GET.get('finalPrice')
+    fp=int(finalPrice)
     selectedDate = request.GET.get('selectedDate')
     chosenSeats = request.GET.get('chosenSeats')
     chosenTypes = request.GET.get('chosenTypes')
     count = request.GET.get('count')
-    selectedSeat=request.GET.get('selectedSeat')
+    seats=request.GET.get('seats')
+    print(seats)
 
+    client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+    payment = client.order.create({
+        "amount": fp*100,
+        "currency": "INR",
+        'payment_capture': 1,
+    })
+    print(payment)
     # Render the "MovieCheckOut.html" template with the retrieved data
     return render(request, 'MovieCheckOut.html', {
         'screenName': screenName,
@@ -346,7 +361,8 @@ def movie_checkout(request):
         'chosenSeats': chosenSeats,
         'chosenTypes': chosenTypes,
         'count': count,
-        'selectedSeat':selectedSeat,
+        'seats':seats,
+        'payment':payment,
 
     })
 def ticket_booking(request, data_id):
@@ -359,51 +375,100 @@ def ticket_booking(request, data_id):
         return render(request, 'TicketBooking.html',{'next_three_days': next_three_days, 'movie_name': movie_name})
     else:
         return redirect('index')
+# def confirm_booking(request):
+#     if request.method == 'POST':
+#         # mn= request.POST.get('movieName')
+#         # na= request.POST.get('screenName')
+#         fp1= request.POST.get('finalPrice')
+#         fp2=int(fp1)
+#         fp=fp2*100
+#         # dt= request.POST.get('selectedDate')
+#         # shn= request.POST.get('showName')
+#         # typee= request.POST.get('selected_type')
+#         selected_seats_data= request.POST.getlist('selected_seats')
+#         selected_seats_data_type= request.POST.getlist('selected_seats_type')
+#         # print(selected_seats_data)
+#         # print(selected_seats_data_type)
+#         if selected_seats_data:
+#
+#             # selected_seats_list = ast.literal_eval(selected_seats_data[0])
+#             # # print(selected_seats_list)
+#             # SeatDB.objects.filter(SeatNumber__in=selected_seats_list).update(SeatStatus='booked')
+#             # UserBookingDB.objects.filter(SeatNumbers__in=selected_seats_data_type, UserName=uname).update(
+#             #     PaymentStatus='PaymentDone')
+#             # obj = CheckOutDB(UserName=uname, Email=newmail, Contact=newmob)
+#             # obj.save()
+#             # types_list = typee.split(',')
+#             # premium_count = types_list.count('Premium')
+#             # standard_count = types_list.count('Standard')
+#             # showtime = ShowTimeDB.objects.get(MovieName=mn, Date=dt, ScreenName=na, ShowTimeName=shn)
+#             # showtime.AvailablePremiumTickets -= premium_count
+#             # showtime.AvailableStandardTickets -= standard_count
+#             # showtime.save()
+#             # if (showtime.TotalPremiumTickets == showtime.AvailablePremiumTickets) and (
+#             #         showtime.TotalStandardTickets == showtime.AvailableStandardTickets):
+#             #     showtime.status = "Closed"
+#             # # messages.success(request, 'Success!')
+#             # subject = 'Raagam Cinemas'
+#             # message = f'Booking Confirmation\n\n' \
+#             #   f'Movie Name: {mn}\n' \
+#             #   f'Screen Name: {na}\n' \
+#             #   f'Selected Date: {dt}\n' \
+#             #   f'Selected Show: {shn}\n' \
+#             #   f'Selected Seats: {", ".join(selected_seats_list)}\n' \
+#             #   f'Payment Status: PaymentDone'
+#             #
+#             # send_mail(subject,
+#             #           message, settings.EMAIL_HOST_USER, [newmail], fail_silently=False)
+#             # messages.success(request,"Booked successfully")
+#             # return redirect('index')
+#         else:
+#             messages.error(request,"Booking Failed")
+#             return redirect('index')
+#     return redirect('index')
+def razorpay_complete(request):
+    order_number = request.GET.get("order_id")
+    payment_id = request.GET.get("transaction_id")
+    uname = request.GET.get("userName")
+    print(uname)
+    dt = request.GET.get('selectedDate')
+    shn = request.GET.get('showName')
+    mn = request.GET.get('movieName')
+    na = request.GET.get('screenName')
+    newmail = request.GET.get('userEmail')
+    typee = request.GET.get('chosenTypes')
+    SeatwithType = request.GET.get('seats')
+    # selected_seats_data = encoded_selected_seat.split(',')
+    print(SeatwithType)
+    seat_parts = [part.strip() for part in SeatwithType.split(",")]
+    selected_seats_list = [part.split("(")[0].strip() for part in seat_parts]
+    SeatDB.objects.filter(SeatNumber__in=selected_seats_list).update(SeatStatus='booked')
+    UserBookingDB.objects.filter(SeatNumbers=SeatwithType, UserName=uname).update(TransactionId=payment_id, OrderId=order_number,PaymentStatus='PaymentDone')
 
+    types_list = typee.split(',')
+    premium_count = types_list.count('Premium')
+    standard_count = types_list.count('Standard')
+    showtime = ShowTimeDB.objects.get(MovieName=mn, Date=dt, ScreenName=na, ShowTimeName=shn)
+    showtime.AvailablePremiumTickets -= premium_count
+    showtime.AvailableStandardTickets -= standard_count
+    showtime.save()
+    if (showtime.TotalPremiumTickets == showtime.AvailablePremiumTickets) and (
+            showtime.TotalStandardTickets == showtime.AvailableStandardTickets):
+        showtime.status = "Closed"
+    # messages.success(request, 'Success!')
+    subject = 'Raagam Cinemas'
+    message = f'Booking Confirmation\n\n' \
+              f'Movie Name: {mn}\n' \
+              f'Screen Name: {na}\n' \
+              f'Selected Date: {dt}\n' \
+              f'Selected Show: {shn}\n' \
+              f'Selected Seats: {", ".join(selected_seats_list)}\n' \
+              f'Payment Status: PaymentDone'
 
-def confirm_booking(request):
-    if request.method == 'POST':
-        mn= request.POST.get('movieName')
-        na= request.POST.get('screenName')
-        dt= request.POST.get('selectedDate')
-        shn= request.POST.get('showName')
-        typee= request.POST.get('selected_type')
-        selected_seats_data= request.POST.getlist('selected_seats')
-        selected_seats_data_type= request.POST.getlist('selected_seats_type')
-        newmail=request.POST.get('cemail')
-        newmob=request.POST.get('mobile')
-        cname=request.POST.get('cardname')
-        exmonth=request.POST.get('expmonth')
-        card=request.POST.get('carddet')
-
-        cvvno=request.POST.get('cvv')
-        uname=request.POST.get('username')
-        print(selected_seats_data)
-        print(selected_seats_data_type)
-        if selected_seats_data:
-            selected_seats_list = ast.literal_eval(selected_seats_data[0])
-            # print(selected_seats_list)
-            SeatDB.objects.filter(SeatNumber__in=selected_seats_list).update(SeatStatus='booked')
-            UserBookingDB.objects.filter(SeatNumbers__in=selected_seats_data_type).update(PaymentStatus='PaymentDone')
-            obj=CheckOutDB(UserName=uname,Email=newmail,Contact=newmob,CardName=cname,Expiry=exmonth, Cvv=cvvno,CardDetail=card)
-            obj.save()
-            types_list = typee.split(',')
-            premium_count = types_list.count('Premium')
-            standard_count = types_list.count('Standard')
-            showtime = ShowTimeDB.objects.get(MovieName=mn, Date=dt, ScreenName=na, ShowTimeName=shn)
-            showtime.AvailablePremiumTickets -= premium_count
-            showtime.AvailableStandardTickets -= standard_count
-            showtime.save()
-            if (showtime.TotalPremiumTickets==showtime.AvailablePremiumTickets) and (showtime.TotalStandardTickets == showtime.AvailableStandardTickets):
-                showtime.status="Closed"
-            messages.success(request,"Booked successfully")
-            return redirect('index')
-        else:
-            messages.error(request,"Booking Failed")
-            return redirect('index')
+    send_mail(subject,
+              message, settings.EMAIL_HOST_USER, [newmail], fail_silently=False)
+    messages.success(request, "Booked successfully")
     return redirect('index')
-
-
 def booking_history(request):
     username=request.session['UserName']
     print(username)

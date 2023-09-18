@@ -1,39 +1,35 @@
-<form method="post" action="{% url 'your_submit_url_name' %}">
-    {% csrf_token %}
-    <ul class="seat-layout">
-        {% for row in seat_data_stand|dictsort:"RowName" %}
-            <li class="seat-line">
-                <span>{{ row.RowName }}</span>
-                <ul class="seat--area">
-                    {% for seat in row.value %}
-                        <li class="single-seat" data-status="{{ seat.Status }}" data-seat="{{ seat.SeatNumber }}">
-                            <img src="{% static 'images/movie/seat01-{{ seat.Status }}.png' %}" alt="seat">
-                            <span class="sit-num">{{ seat.SeatNumber }}</span>
-                        </li>
-                    {% endfor %}
-                </ul>
-                <span>{{ row.RowName }}N</span>
-            </li>
-        {% endfor %}
-    </ul>
-    <button type="submit">Submit</button>
-</form>
+def submit_booking(request):
+    if request.method == 'POST':
+        na = request.POST.get('screenName')
+        shn = request.POST.get('showName')
+        sht = request.POST.get('showStartTime')
+        mn = request.POST.get('movieName')
+        un = request.POST.get('userName')
+        fp = request.POST.get('finalPrice')
+        dt= request.POST.get('selectedDate')
+        seats=request.POST.get('chosenSeats')
+        types=request.POST.get('chosenTypes')
+        seatim=request.POST.get('seat_img')
+        current_datetime = datetime.now()
+        types_list = types.split(',')
+        premium_count = types_list.count('Premium')
+        standard_count = types_list.count('Standard')
+        count_types=len(types)
 
-<script>
-    const seats = document.querySelectorAll('.single-seat');
+        # print(na,shn,mn,fp,un)
+        selected_seats_data = request.POST.getlist('seats')
+        # print(selected_seats_data)
+        selected_seats = [seat.split(':')[0] for seat in selected_seats_data if seat.split(':')[1] == 'selected']
+        count=len(selected_seats)
 
-    seats.forEach(seat => {
-        seat.addEventListener('click', function() {
-            const status = this.getAttribute('data-status');
+        if seats:
+            SeatDB.objects.filter(SeatNumber__in=selected_seats).update(SeatStatus='selected')
+            obj = UserBookingDB(UserName=un, MovieName=mn, ScreenName=na, ShowName=shn, SelectedDate=dt,StartTime=sht,AmountToBePaid=fp,
+                                NoOfSeats=count, SeatNumbers=seats,SeatNumberOnly=selected_seats, PaymentStatus="UnderProcess", BookedDate=current_datetime)
+            obj.save()
 
-            if (status === 'available') {
-                this.setAttribute('data-status', 'selected');
-            } else if (status === 'selected') {
-                this.setAttribute('data-status', 'available');
-            }
-
-            const img = this.querySelector('img');
-            img.src = img.src.replace(status, this.getAttribute('data-status'));
-        });
-    });
-</script>
+            url = reverse('movie_checkout') + f'?screenName={na}&selectedSeat={selected_seats}&showName={shn}&showStartTime={sht}&movieName={mn}&userName={un}&finalPrice={fp}&selectedDate={dt}&chosenSeats={seats}&chosenTypes={types}&count={count}'
+            return redirect(url)
+        else:
+            messages.error(request, "Select atleast one Seat")
+            return redirect('index') #enter error message

@@ -130,3 +130,12 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'revathyrnair123@gmail.com'
+EMAIL_HOST_PASSWORD = 'gmahujwkzzilkftu'
+
+RAZORPAY_KEY_ID='rzp_test_wZ1DvNhL7Ppzzm'
+RAZORPAY_KEY_SECRET='J2Si7NGvWqc7cBANgTfgEjQR'
