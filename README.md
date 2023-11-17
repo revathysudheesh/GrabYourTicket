@@ -1,6 +1,7 @@
 # GrabYourTicket
-An online movie ticket booking system for a single Theatre! 🎬💻
+An online movie ticket booking system for a single Theatre! 
 Features:
+
 User Side:
 1. User Login and Registration
 2 Browse Movies
@@ -10,6 +11,7 @@ User Side:
 6. Payment Integration(using Razor pay)
 7 Profile Management
 8 Reviews and Contact Form
+
 Admin Side:
 1. Dash Board
 2. Movie Management
